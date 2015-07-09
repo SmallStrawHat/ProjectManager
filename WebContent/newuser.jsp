@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Detail Admin - User list</title>
+	<title>ProjectZZY - Home</title>
     
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
@@ -12,19 +12,23 @@
     <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
     <link href="css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
 
+    <!-- libraries -->
+    <link href="css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
+
     <!-- global styles -->
     <link rel="stylesheet" type="text/css" href="css/layout.css" />
     <link rel="stylesheet" type="text/css" href="css/elements.css" />
     <link rel="stylesheet" type="text/css" href="css/icons.css" />
 
-    <!-- libraries -->
-    <link href="css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
-    
     <!-- this page specific styles -->
-    <link rel="stylesheet" href="css/compiled/user-list.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" />    
 
     <!-- open sans font -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+
+    <!-- lato font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -168,7 +172,7 @@
                     <div class="arrow"></div>
                     <div class="arrow_border"></div>
                 </div>
-                <a href="index.html">
+                <a href="index.jsp">
                     <i class="icon-home"></i>
                     <span>首页</span>
                 </a>
@@ -186,7 +190,7 @@
                 </a>
             </li>
             <li>
-                <a href="user-list.html">
+                <a href="contacts.jsp">
                     <i class="icon-group"></i>
                     <span>联系人</span>
                 </a>
@@ -198,7 +202,7 @@
                 </a>
             </li>         
              <li>
-                <a href=#">
+                <a href="#">
                     <i class="icon-user"></i>
                     <span>用户管理</span>
                 </a>
@@ -288,7 +292,7 @@
         </ul>
     </div>
     <!-- end sidebar -->
-    
+
 
 	<!-- main container -->
     <div class="content">
@@ -304,256 +308,246 @@
         </div>
         
         <div class="container-fluid">
-            <div id="pad-wrapper" class="users-list">
+            <div id="pad-wrapper" class="new-user">
                 <div class="row-fluid header">
-                    <h3>Users</h3>
-                    <div class="span10 pull-right">
-                        <input type="text" class="span5 search" placeholder="Type a user's name..." />
-                        
-                        <!-- custom popup filter -->
-                        <!-- styles are located in css/elements.css -->
-                        <!-- script that enables this dropdown is located in js/theme.js -->
-                        <div class="ui-dropdown">
-                            <div class="head" data-toggle="tooltip" title="Click me!">
-                                Filter users
-                                <i class="arrow-down"></i>
-                            </div>  
-                            <div class="dialog">
-                                <div class="pointer">
-                                    <div class="arrow"></div>
-                                    <div class="arrow_border"></div>
+                    <h3>Create a new user</h3>
+                </div>
+
+                <div class="row-fluid form-wrapper">
+                    <!-- left column -->
+                    <div class="span9 with-sidebar">
+                        <div class="container">
+                            <form class="new_user_form inline-input" />
+                                <div class="span12 field-box">
+                                    <label>Name:</label>
+                                    <input class="span9" type="text" />
                                 </div>
-                                <div class="body">
-                                    <p class="title">
-                                        Show users where:
-                                    </p>
-                                    <div class="form">
+                                <div class="span12 field-box">
+                                    <label>State:</label>
+                                    <div class="ui-select span5">
                                         <select>
-                                            <option />Name
-                                            <option />Email
-                                            <option />Number of orders
-                                            <option />Signed up
-                                            <option />Last seen
+                                            <option value="AK" />Alaska
+                                            <option value="HI" />Hawaii
+                                            <option value="CA" />California
+                                            <option value="NV" />Nevada
+                                            <option value="OR" />Oregon
+                                            <option value="WA" />Washington
+                                            <option value="AZ" />Arizona
                                         </select>
-                                        <select>
-                                            <option />is equal to
-                                            <option />is not equal to
-                                            <option />is greater than
-                                            <option />starts with
-                                            <option />contains
-                                        </select>
-                                        <input type="text" />
-                                        <a class="btn-flat small">Add filter</a>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="span12 field-box">
+                                    <label>Company:</label>
+                                    <input class="span9" type="text" />
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Email:</label>
+                                    <input class="span9" type="text" />
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Phone:</label>
+                                    <input class="span9" type="text" />
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Website:</label>
+                                    <input class="span9" type="text" />
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Address:</label>
+                                    <div class="address-fields">
+                                        <input class="span12" type="text" placeholder="Street address" />
+                                        <input class="span12 small" type="text" placeholder="City" />
+                                        <input class="span12 small" type="text" placeholder="State" />
+                                        <input class="span12 small last" type="text" placeholder="Postal Code" />
+                                    </div>
+                                </div>
+                                <div class="span12 field-box textarea">
+                                    <label>Notes:</label>
+                                    <textarea class="span9"></textarea>
+                                    <span class="charactersleft">90 characters remaining. Field limited to 100 characters</span>
+                                </div>
+                                <div class="span11 field-box actions">
+                                    <input type="button" class="btn-glow primary" value="Create user" />
+                                    <span>OR</span>
+                                    <input type="reset" value="Cancel" class="reset" />
+                                </div>
+                            </form>
                         </div>
+                    </div>
 
-                        <a href="new-user.html" class="btn-flat success pull-right">
-                            <span>&#43;</span>
-                            NEW USER
-                        </a>
+                    <!-- side right column -->
+                    <div class="span3 form-sidebar pull-right">
+                        <div class="btn-group toggle-inputs hidden-tablet">
+                            <button class="glow left active" data-input="inline">INLINE INPUTS</button>
+                            <button class="glow right" data-input="normal">NORMAL INPUTS</button>
+                        </div>
+                        <div class="alert alert-info hidden-tablet">
+                            <i class="icon-lightbulb pull-left"></i>
+                            Click above to see difference between inline and normal inputs on a form
+                        </div>                        
+                        <h6>Sidebar text for instructions</h6>
+                        <p>Add multiple users at once</p>
+                        <p>Choose one of the following file types:</p>
+                        <ul>
+                            <li><a href="#">Upload a vCard file</a></li>
+                            <li><a href="#">Import from a CSV file</a></li>
+                            <li><a href="#">Import from an Excel file</a></li>
+                        </ul>
                     </div>
                 </div>
-
-                <!-- Users table -->
-                <div class="row-fluid table">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="span4 sortable">
-                                    Name
-                                </th>
-                                <th class="span3 sortable">
-                                    <span class="line"></span>Signed up
-                                </th>
-                                <th class="span2 sortable">
-                                    <span class="line"></span>Total spent
-                                </th>
-                                <th class="span3 sortable align-right">
-                                    <span class="line"></span>Email
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <!-- row -->
-                        <tr class="first">
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Mar 13, 2012
-                            </td>
-                            <td>
-                                $ 4,500.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img2.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Jun 03, 2012
-                            </td>
-                            <td>
-                                $ 549.99
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Mar 01, 2014
-                            </td>
-                            <td>
-                                $ 30.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img2.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Jan 28, 2012
-                            </td>
-                            <td>
-                                $ 1,320.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                May 16, 2012
-                            </td>
-                            <td>
-                                $ 89.99
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img2.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Sep 06, 2012
-                            </td>
-                            <td>
-                                $ 344.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Jul 13, 2012
-                            </td>
-                            <td>
-                                $ 800.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img2.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Feb 13, 2014
-                            </td>
-                            <td>
-                                $ 250.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Feb 27, 2014
-                            </td>
-                            <td>
-                                $ 1,300.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="pagination pull-right">
-                    <ul>
-                        <li><a href="#">&#8249;</a></li>
-                        <li><a class="active" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&#8250;</a></li>
-                    </ul>
-                </div>
-                <!-- end users table -->
             </div>
         </div>
     </div>
     <!-- end main container -->
 
 
+
 	<!-- scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
+    <!-- knob -->
+    <script src="js/jquery.knob.js"></script>
+    <!-- flot charts -->
+    <script src="js/jquery.flot.js"></script>
+    <script src="js/jquery.flot.stack.js"></script>
+    <script src="js/jquery.flot.resize.js"></script>
     <script src="js/theme.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            // jQuery Knobs
+            $(".knob").knob();
+
+
+
+            // jQuery UI Sliders
+            $(".slider-sample1").slider({
+                value: 100,
+                min: 1,
+                max: 500
+            });
+            $(".slider-sample2").slider({
+                range: "min",
+                value: 130,
+                min: 1,
+                max: 500
+            });
+            $(".slider-sample3").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 40, 170 ],
+            });
+
+            
+
+            // jQuery Flot Chart
+            var visits = [[1, 50], [2, 40], [3, 45], [4, 23],[5, 55],[6, 65],[7, 61],[8, 70],[9, 65],[10, 75],[11, 57],[12, 59]];
+            var visitors = [[1, 25], [2, 50], [3, 23], [4, 48],[5, 38],[6, 40],[7, 47],[8, 55],[9, 43],[10,50],[11,47],[12, 39]];
+
+            var plot = $.plot($("#statsChart"),
+                [ { data: visits, label: "Signups"},
+                 { data: visitors, label: "Visits" }], {
+                    series: {
+                        lines: { show: true,
+                                lineWidth: 1,
+                                fill: true, 
+                                fillColor: { colors: [ { opacity: 0.1 }, { opacity: 0.13 } ] }
+                             },
+                        points: { show: true, 
+                                 lineWidth: 2,
+                                 radius: 3
+                             },
+                        shadowSize: 0,
+                        stack: true
+                    },
+                    grid: { hoverable: true, 
+                           clickable: true, 
+                           tickColor: "#f9f9f9",
+                           borderWidth: 0
+                        },
+                    legend: {
+                            // show: false
+                            labelBoxBorderColor: "#fff"
+                        },  
+                    colors: ["#a7b5c5", "#30a0eb"],
+                    xaxis: {
+                        ticks: [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4,"APR"], [5,"MAY"], [6,"JUN"], 
+                               [7,"JUL"], [8,"AUG"], [9,"SEP"], [10,"OCT"], [11,"NOV"], [12,"DEC"]],
+                        font: {
+                            size: 12,
+                            family: "Open Sans, Arial",
+                            variant: "small-caps",
+                            color: "#697695"
+                        }
+                    },
+                    yaxis: {
+                        ticks:3, 
+                        tickDecimals: 0,
+                        font: {size:12, color: "#9da3a9"}
+                    }
+                 });
+
+            function showTooltip(x, y, contents) {
+                $('<div id="tooltip">' + contents + '</div>').css( {
+                    position: 'absolute',
+                    display: 'none',
+                    top: y - 30,
+                    left: x - 50,
+                    color: "#fff",
+                    padding: '2px 5px',
+                    'border-radius': '6px',
+                    'background-color': '#000',
+                    opacity: 0.80
+                }).appendTo("body").fadeIn(200);
+            }
+
+            var previousPoint = null;
+            $("#statsChart").bind("plothover", function (event, pos, item) {
+                if (item) {
+                    if (previousPoint != item.dataIndex) {
+                        previousPoint = item.dataIndex;
+
+                        $("#tooltip").remove();
+                        var x = item.datapoint[0].toFixed(0),
+                            y = item.datapoint[1].toFixed(0);
+
+                        var month = item.series.xaxis.ticks[item.dataIndex].label;
+
+                        showTooltip(item.pageX, item.pageY,
+                                    item.series.label + " of " + month + ": " + y);
+                    }
+                }
+                else {
+                    $("#tooltip").remove();
+                    previousPoint = null;
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            // toggle form between inline and normal inputs
+            var $buttons = $(".toggle-inputs button");
+            var $form = $("form.new_user_form");
+
+            $buttons.click(function () {
+                var mode = $(this).data("input");
+                $buttons.removeClass("active");
+                $(this).addClass("active");
+
+                if (mode === "inline") {
+                    $form.addClass("inline-input");
+                } else {
+                    $form.removeClass("inline-input");
+                }
+            });
+        });
+    </script>
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

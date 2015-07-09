@@ -65,3 +65,26 @@
   .ui-dropdown .dialog .body .form a {
     margin-top: 10px;
     margin-left: 18px; } }
+    
+    
+    
+    /*table actions*/
+     .table-products .table ul.actions {
+    margin: 5px 0 0 0;
+    padding: 0;
+    float: right; }
+    .table-products .table ul.actions li {
+      display: inline;
+      border-right: 1px solid #d0dde9;
+      padding: 5px 6px 0px 3px; }
+      .table-products .table ul.actions li.last {
+        border: 0 none; }
+    .table-products .table ul.actions i {
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity .1s linear;
+      -moz-transition: opacity .1s linear;
+      -webkit-transition: opacity .1s linear;
+      -o-transition: opacity .1s linear; }
+      .table-products .table ul.actions i:hover {
+        opacity: 1; }

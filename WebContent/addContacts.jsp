@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="css/icons.css" />
 
     <!-- this page specific styles -->
-    <link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" />    
+    <link rel="stylesheet" href="css/compiled/user-list.css" type="text/css" media="screen" />    
 
     <!-- open sans font -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
@@ -36,7 +36,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 
-    <!-- navbar -->
+   <!-- navbar -->
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
@@ -293,23 +293,116 @@
     </div>
     <!-- end sidebar -->
 
-
 	<!-- main container -->
     <div class="content">
-
+        
         <!-- settings changer -->
         <div class="skins-nav">
             <a href="#" class="skin first_nav selected">
-                <span class="icon"></span><span class="text">Default skin</span>
+                <span class="icon"></span><span class="text">Default</span>
             </a>
             <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
                 <span class="icon"></span><span class="text">Dark skin</span>
             </a>
         </div>
-
         
+        <div class="container-fluid">
+            <div id="pad-wrapper" class="users-list">
+                <div class="row-fluid header">
+                    <h3>添加联系人</h3>
+                    <div class="span10 pull-right">
+                        <input type="text" class="span5 search" placeholder="输入联系人的名字..." />
+                        
+                        <!-- custom popup filter -->
+                        <!-- styles are located in css/elements.css -->
+                        <!-- script that enables this dropdown is located in js/theme.js -->
+                        <div class="ui-dropdown">
+                            <div class="head" data-toggle="tooltip" title="Click me!">
+                               	选择条件
+                                <i class="arrow-down"></i>
+                            </div>  
+                            <div class="dialog">
+                                <div class="pointer">
+                                    <div class="arrow"></div>
+                                    <div class="arrow_border"></div>
+                                </div>
+                                <div class="body">
+                                    <p class="title">
+                                        Show users where:
+                                    </p>
+                                    <div class="form">
+                                        <select>
+                                            <option />Name
+                                            <option />Email
+                                            <option />Number of orders
+                                            <option />Signed up
+                                            <option />Last seen
+                                        </select>
+                                        <select>
+                                            <option />is equal to
+                                            <option />is not equal to
+                                            <option />is greater than
+                                            <option />starts with
+                                            <option />contains
+                                        </select>
+                                        <input type="text" />
+                                        <a class="btn-flat small">Add filter</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                    </div>
+                </div>
+
+                <!-- Users table -->
+                <div class="row-fluid table">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="span4 sortable">
+                                  Name
+                                </th>
+                                <th class="span3 sortable">
+                                    <span class="line"></span>UserID
+                                </th>
+                                <th class="span2 sortable">
+                                    <span class="line"></span>Phone
+                                </th>
+                                <th class="span3 sortable align-right">
+                                    <span class="line"></span>Email
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <!-- row -->
+                        <tr class="first">
+                            <td>
+                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
+                                <a class="name">Alejandra Galvan Castillo</a>
+                                <span class="subtext">Graphic Design</span>
+                            </td>
+                            <td>
+                                Mar 13, 2012
+                            </td>
+                            <td>
+                                $ 4,500.00
+                            </td>
+                            <td class="align-right">
+                                <a href="#">alejandra@canvas.com</a>
+                            </td>
+                        </tr>
+                       
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- end users table -->
+            </div>
+        </div>
     </div>
-	<!-- end main container -->
+    <!-- end main container -->
 
 	<!-- scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
