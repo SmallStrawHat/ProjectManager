@@ -1,40 +1,12 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Detail Admin - Code Editor</title>
-    
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-    <!-- bootstrap -->
-    <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
-    <link href="css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
-
-    <!-- libraries -->
-    <link href="css/lib/bootstrap-wysihtml5.css" type="text/css" rel="stylesheet" />
-    <link href="css/lib/uniform.default.css" type="text/css" rel="stylesheet" />
-    <link href="css/lib/select2.css" type="text/css" rel="stylesheet" />
-    <link href="css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet" />
-    <link href="css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
-
-    <!-- global styles -->
-    <link rel="stylesheet" type="text/css" href="css/layout.css" />
-    <link rel="stylesheet" type="text/css" href="css/elements.css" />
-    <link rel="stylesheet" type="text/css" href="css/icons.css" />
-    
-    <!-- this page specific styles -->
-    <link rel="stylesheet" type="text/css" href="css/code-editor.css" />
-
-    <!-- open sans font -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
-
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+</head>
 <body>
-
-    <!-- navbar -->
+  <!-- navbar -->
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
@@ -135,22 +107,23 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
-                        Your account
+                        我的账户
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="personal-info.html">Personal info</a></li>
-                        <li><a href="#">Account settings</a></li>
+                        <li><a href="personal-info.html">个人信息</a></li>
+                        <li><a href="user-list.html">联系人</a></li>
+                        <!--<li><a href="#">Account settings</a></li>
                         <li><a href="#">Billing</a></li>
                         <li><a href="#">Export your data</a></li>
-                        <li><a href="#">Send feedback</a></li>
+                        <li><a href="#">Send feedback</a></li>-->
                     </ul>
                 </li>
-                <li class="settings hidden-phone">
+                <!--<li class="settings hidden-phone">
                     <a href="personal-info.html" role="button">
                         <i class="icon-cog"></i>
                     </a>
-                </li>
+                </li>-->
                 <li class="settings hidden-phone">
                     <a href="signin.html" role="button">
                         <i class="icon-share-alt"></i>
@@ -164,32 +137,88 @@
     <!-- sidebar -->
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
-            <li>                
-                <a href="index.html">
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a href="index.jsp">
                     <i class="icon-home"></i>
-                    <span>Home</span>
+                    <span>首页</span>
                 </a>
-            </li>            
+            </li>   
             <li>
-                <a href="chart-showcase.html">                    
-                    <i class="icon-signal"></i>
-                    <span>Charts</span>
+                <a href=#">
+                    <i class="icon-th-large"></i>
+                    <span>项目</span>
                 </a>
             </li>
             <li>
-                <a class="dropdown-toggle" href="#">
+                <a href=#">
+                    <i class="icon-tasks"></i>
+                    <span>任务</span>
+                </a>
+            </li>
+            <li>
+                <a href="contacts.jsp">
                     <i class="icon-group"></i>
-                    <span>Users</span>
+                    <span>联系人</span>
+                </a>
+            </li>
+            <li>
+                <a href="calendar.html">
+                    <i class="icon-calendar-empty"></i>
+                    <span>日程表</span>
+                </a>
+            </li>     
+            
+            <li>
+                <a class="dropdown-toggle" >
+                    <i class="icon-user"></i>
+                    <span>用户管理</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="user-list.html">User list</a></li>
-                    <li><a href="new-user.html">New user form</a></li>
+                	<li><a href="userManager.jsp">查看用户</a></li>
+                    <li><a href="newuser.jsp">添加用户</a></li>
+                </ul>
+            </li>    
+            <li>
+                <a href="personal-info.html">
+                    <i class="icon-cog"></i>
+                    <span>系统管理</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="signin.html">
+                    <i class="icon-share-alt"></i>
+                    <span>退出</span>
+                </a>
+            </li>
+            
+            <!-- <li>
+                <a href="chart-showcase.html">
+                    <i class="icon-signal"></i>
+                    <span>Charts</span>
+                </a>
+            </li> -->
+            
+            <!-- <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>联系人</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="user-list.html">联系人列表</a></li>
+                    <li><a href="new-user.html">添加联系人</a></li>
+                    
                     <li><a href="user-profile.html">User profile</a></li>
                 </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">                    
+            </li> -->
+            <!-- <li>
+                <a class="dropdown-toggle" href="#">
                     <i class="icon-edit"></i>
                     <span>Forms</span>
                     <i class="icon-chevron-down"></i>
@@ -205,12 +234,7 @@
                     <span>Gallery</span>
                 </a>
             </li>
-            <li>
-                <a href="calendar.html">                    
-                    <i class="icon-calendar-empty"></i>
-                    <span>Calendar</span>
-                </a>
-            </li>
+            
             <li>
                 <a href="tables.html">
                     <i class="icon-th-large"></i>
@@ -227,97 +251,22 @@
                     <li><a href="ui-elements.html">UI Elements</a></li>
                     <li><a href="icons.html">Icons</a></li>
                 </ul>
-            </li>
-            <li>
-                <a href="personal-info.html">
-                    <i class="icon-cog"></i>
-                    <span>My Info</span>
-                </a>
-            </li>
-            <li class="active">
+            </li> -->
+            
+            <!-- <li>
                 <a class="dropdown-toggle" href="#">
-                    <div class="pointer">
-                        <div class="arrow"></div>
-                        <div class="arrow_border"></div>
-                    </div>
                     <i class="icon-share-alt"></i>
                     <span>Extras</span>
                     <i class="icon-chevron-down"></i>
                 </a>
-                <ul class="active submenu">
-                    <li><a href="code-editor.html" class="active">Code editor</a></li>
-                    <li><a href="grids.html">Grids</a></li>                    
+                <ul class="submenu">
+                    <li><a href="code-editor.html">Code editor</a></li>
+                    <li><a href="grids.html">Grids</a></li>
                     <li><a href="signin.html">Sign in</a></li>
-                    <li><a href="signup.html">Sign up</a></li>
                 </ul>
-            </li>
+            </li> -->
         </ul>
     </div>
     <!-- end sidebar -->
-
-
-	<!-- main container -->
-    <div class="content">
-        
-        <!-- settings changer -->
-        <div class="skins-nav">
-            <a href="#" class="skin first_nav selected">
-                <span class="icon"></span><span class="text">Default</span>
-            </a>
-            <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
-                <span class="icon"></span><span class="text">Dark skin</span>
-            </a>
-        </div>
-        
-        <div class="container-fluid">
-            <div id="pad-wrapper">
-                <div class="row-fluid editor-header">
-                    <div class="span12">
-                        <h4>Ace Code Editor</h4>
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12">
-                        <div id="editor">/**
- * In fact, you're looking at ACE right now. Go ahead and play with it!
- *
- * We are currently showing off the JavaScript mode. ACE has support for 45
- * language modes and 24 color themes!
- */
-
-function add(x, y) {
-    var resultString = "Hello, ACE! The result of your math is: ";
-    var result = x + y;
-    return resultString + result;
-}
-
-var addResult = add(3, 2);
-console.log(addResult);
-
-// build all tooltips from data-attributes
-$("[data-toggle='tooltip']").each(function (index, el) {
-    $(el).tooltip({
-        placement: $(this).data("placement") || 'top'
-    });
-});</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end main container -->
-
-	<!-- scripts for this page -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/theme.js"></script>
-    <script src="http://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-
-    <script type="text/javascript">
-        var editor = ace.edit("editor");
-        // editor.setTheme("ace/theme/github");
-        editor.getSession().setMode("ace/mode/javascript");
-    </script>
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
