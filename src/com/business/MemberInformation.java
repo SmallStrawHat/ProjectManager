@@ -4,106 +4,130 @@ import java.util.Vector;
 import com.database.*;
 
 public class MemberInformation {
-	private Vector userList;
-	private int staffNum;
+	private static Vector userList;
+	private static int staffNum;
 	
 	
-	/*
-	 * public User(int userID,String name,String phone,String email,
-			String userRole,String password,int userState,String logPath)
-	 * */
+
 	public MemberInformation()
 	{
-		this.userList = new Vector(10,6);
-		this.staffNum = 0;
+		
+	}
+	
+	public static void init()
+	{
+		MemberInformation.userList = new Vector(10,6);
+		
 		Vector userTemp = Myuser.searchAll();
 		for(int i=0;i<userTemp.size();i++)
 		{
 			Myuser tempMyuser = (Myuser)userTemp.get(i);
+			//System.out.println(tempMyuser.getUserRole());
 			User temp = new User(tempMyuser.getUserID(),tempMyuser.getName(),tempMyuser.getPhone(),tempMyuser.getEmail(),
 					tempMyuser.getUserRole(),tempMyuser.getPassword(),tempMyuser.getUserState(),
 					tempMyuser.getUserLogPath(),tempMyuser.getSummary());
-			this.userList.add(userTemp.get(i));
+			//System.out.println(temp.getUserRole());
+			MemberInformation.userList.add(temp);
 		}
+		//System.out.println("init database successfully!");
+		MemberInformation.staffNum = userTemp.size();
 	}
 	
-	public Vector getUserList()
+	public static Vector getUserList()
 	{
-		return this.userList;
+		return MemberInformation.userList;
 	}
 	
 	public int addUser(User temp)
 	{
-		this.userList.add(temp);
+		MemberInformation.userList.add(temp);
 		return 1;
 	}
 	
-	public int deleteUser(int userID)
+	public static int deleteUser(int userID)
 	{
 		int i;
-		for(i=0;i<this.userList.size();i++)
+		for(i=0;i<MemberInformation.userList.size();i++)
 		{
-			int tempUserID = ((User)this.userList.get(i)).getUserID();
+			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
 			if(tempUserID == userID)
 			{
-				this.userList.remove(i);
+				MemberInformation.userList.remove(i);
 				return 1;
 			}
 		}
 		return 0;
 	}
 	
-	public int startUser(int userID)
+	public static int startUser(int userID)
 	{
 		int i;
-		for(i=0;i<this.userList.size();i++)
+		for(i=0;i<MemberInformation.userList.size();i++)
 		{
-			int tempUserID = ((User)this.userList.get(i)).getUserID();
+			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
 			if(tempUserID == userID)
 			{
-				((User)this.userList.get(i)).setUserState(1);
+				((User)MemberInformation.userList.get(i)).setUserState(1);
 				return 1;
 			}
 		}
 		return 0;
 	}
 	
-	public int pauseUser(int userID)
+	public static int pauseUser(int userID)
 	{
 		int i;
-		for(i=0;i<this.userList.size();i++)
+		for(i=0;i<MemberInformation.userList.size();i++)
 		{
-			int tempUserID = ((User)this.userList.get(i)).getUserID();
+			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
 			if(tempUserID == userID)
 			{
-				((User)this.userList.get(i)).setUserState(0);
+				((User)MemberInformation.userList.get(i)).setUserState(0);
 				return 1;
 			}
 		}
 		return 0;
 	}
 	
-	public int editUser(int userID,String name,String phone,String email,
+	public static int editUser(int userID,String name,String phone,String email,
 			String userRole,String password,int userState)
 	{
 		int i;
-		for(i=0;i<this.userList.size();i++)
+		for(i=0;i<MemberInformation.userList.size();i++)
 		{
-			int tempUserID = ((User)this.userList.get(i)).getUserID();
+			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
 			if(tempUserID == userID)
 			{
-				((User)this.userList.get(i)).setUserInformation(name, phone, email, userRole, password, userState);
+				((User)MemberInformation.userList.get(i)).setUserInformation(name, phone, email, userRole, password, userState);
 				return 1;
 			}
 		}
 		return 0;
 	}
 	
-	public int searchUserLog(String logPath)
+	public static int searchUserLog(String logPath)
 	{
 		//通过路径，直接读取数据库。
 		return 1;
 	}
+	
+	/*public static void main(String arg[])
+	{
+		MemberInformation.init();
+    	Vector user = MemberInformation.getUserList();
+    	for(int i=0;i<user.size();i++)
+    	{
+    		User tempUser = (User)user.get(i);
+    		if(tempUser.getUserRole() != null)
+    		{
+    			System.out.println(tempUser.getUserRole());
+    		}
+    	}
+    		
+    	
+    	System.out.println(user.size());
+	}
+	*/
 	
 	
 }

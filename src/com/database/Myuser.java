@@ -99,6 +99,7 @@ public class Myuser {
 				findRes = new Myuser(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),
 						res.getString(6),res.getInt(7),res.getString(8),res.getString(9));
 				resVec.add(findRes);
+				//System.out.print(res.getString(6));
 			}
 			res.close();
 			
@@ -172,11 +173,13 @@ public class Myuser {
 	}
 		
 	
-	/*public static void main(String arg[])
+/*	public static void main(String arg[])
 	{
 		Myuser temp = new Myuser();
-    	Myuser res = temp.search(Integer.parseInt("112001"));
-    	System.out.println(res.getPassword());
+    	Vector res = temp.searchAll();
+    	temp = (Myuser)res.get(0);
+    	System.out.println(res.size());
+    	System.out.println(temp.getUserRole());
 	}*/
 	
 }

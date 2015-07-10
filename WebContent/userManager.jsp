@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.business.*,java.util.Vector" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,6 +80,9 @@
                                         <span class="line"></span>UserRole
                                     </th>
                                     <th class="span2">
+                                        <span class="line"></span>Phone
+                                    </th>
+                                    <th class="span2">
                                         <span class="line"></span>Status
                                     </th>
                                     
@@ -86,20 +90,29 @@
                                 </tr>
                             </thead>
                             
-                            <% %>
+                            <% MemberInformation.init();
+                            	Vector user = MemberInformation.getUserList();
+                            	for(int i=0;i<user.size();i++)
+                            	{
+                            		User tempUser = (User)user.get(i);
+                            %>
                             <tbody>
                                 <!-- row -->
                                 <tr class="first">
                                     <td>
                                         <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                        <a href="userProfile.jsp" class="name">Alejandra Galvan Castillo</a>
-                                        <span class="subtext">Graphic Design</span>
+                                        <a href="userProfile.jsp" class="name">
+                                        <%=tempUser.getName()%></a>
+                                        <span class="subtext"><%=tempUser.getEmail()%></span>
                                     </td>
                                     <td>
-                                        1121201
+                                        <%=tempUser.getUserID()%>
                                     </td>
                                     <td>
-                                        	项目经理
+                                        <%=tempUser.getUserRole()%>
+                                    </td>
+                                    <td>
+                                        <%=tempUser.getPhone()%>
                                     </td>
                                     <td>
                                         <span class="label label-success">Active</span>
@@ -110,7 +123,7 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            <% %>
+                            <% }%>
                             
                             
                         </table>

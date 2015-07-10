@@ -3,7 +3,6 @@ package com.business;
 import java.util.Vector;
 
 public class User extends Userpublic{
-	private String userRole;
 	private Vector contact;//save contacts list
 	private String password;
 	private int userState;
@@ -13,7 +12,6 @@ public class User extends Userpublic{
 	public User()
 	{
 		super();
-		this.userRole = "";
 		this.contact = new Vector(10,6);
 		this.password = "";
 		this.userState = -1;
@@ -21,11 +19,17 @@ public class User extends Userpublic{
 		this.summary = "";
 	}
 	
+	/*
+	 * User temp = new User(tempMyuser.getUserID(),tempMyuser.getName(),tempMyuser.getPhone(),tempMyuser.getEmail(),
+					tempMyuser.getUserRole(),tempMyuser.getPassword(),tempMyuser.getUserState(),
+					tempMyuser.getUserLogPath(),tempMyuser.getSummary());
+	 * */
+	
 	public User(int userID,String name,String phone,String email,
 			String userRole,String password,int userState,String logPath,String summary)
 	{
-		super(userID,name,phone,email);
-		this.userRole = userRole;
+		super(userID,name,phone,email,userRole);
+
 		this.contact = new Vector(10,6);
 		this.password = password;
 		this.userState = userState;
@@ -33,10 +37,6 @@ public class User extends Userpublic{
 		this.summary = summary;
 	}
 	
-	public String getUserRole()
-	{
-		return this.userRole;
-	}
 	
 	public int setUserState(int sign)
 	{
@@ -47,8 +47,8 @@ public class User extends Userpublic{
 	public int setUserInformation(String name,String phone,String email,
 			String userRole,String password,int userState)
 	{
-		this.setUserPublicInformation(name, phone, email);
-		this.userRole = userRole;
+		this.setUserPublicInformation(name, phone, email,userRole);
+
 		this.password = password;
 		this.userState = userState;
 		return 1;
