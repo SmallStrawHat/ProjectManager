@@ -3,6 +3,7 @@ package com.database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 
@@ -15,7 +16,7 @@ public class Myuser {
 	private String userRole;
 	private int userState;
 	private String userLogPath;
-	private int contactsID;
+	private String summary;
 	
 	public Myuser()
 	{
@@ -27,11 +28,11 @@ public class Myuser {
 		this.userRole = null;
 		this.userState = 0;
 		this.userLogPath = null;
-		this.contactsID = -1;
+		this.summary = null;
 	}
 	
 	public Myuser(int userID,String name,String phone,String email,String password,String userRole,
-			int userState,String userLogPath,int contactsID)
+			int userState,String userLogPath,String summary)
 	{
 		this.userID =userID;
 		this.name = name;
@@ -41,10 +42,10 @@ public class Myuser {
 		this.userRole = userRole;
 		this.userState = userState;
 		this.userLogPath = userLogPath;
-		this.contactsID = contactsID;
+		this.summary = summary;
 	}
 	
-	public Myuser search(int account)
+	public static Myuser search(int account)
 	{
 		Myuser findRes = null;
 		Connection conn =null;
@@ -58,7 +59,7 @@ public class Myuser {
 			while(res.next())
 			{
 				findRes = new Myuser(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),
-						res.getString(6),res.getInt(7),res.getString(8),res.getInt(9));
+						res.getString(6),res.getInt(7),res.getString(8),res.getString(9));
 			}
 			res.close();
 		}
@@ -81,15 +82,93 @@ public class Myuser {
 		return findRes;
 	}
 	
-	public void getUserID()
-	{}
+	public static Vector searchAll()
+	{
+		Vector resVec = new Vector(10,6);
+		Myuser findRes = null;
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			String sql = "select * from myuser";
+			ResultSet res = stm.executeQuery(sql);
+			while(res.next())
+			{
+				findRes = new Myuser(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),
+						res.getString(6),res.getInt(7),res.getString(8),res.getString(9));
+				resVec.add(findRes);
+			}
+			res.close();
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		return resVec;
+	}
+	
+
+	
+	public int getUserID()
+	{
+		return this.userID;
+	}
 	
 	public void setUserID()
 	{}
 	
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public String getPhone()
+	{
+		return this.phone;
+	}
+	
+	public String getEmail()
+	{
+		return this.email;
+	}
+	
 	public String getPassword()
 	{
 		return this.password;
+	}
+	
+	public String getUserRole()
+	{
+		return this.userRole;
+	}
+	
+	public int getUserState()
+	{
+		return this.userState;
+	}
+	
+	public String getUserLogPath()
+	{
+		return this.userLogPath;
+	}
+	
+	public String getSummary()
+	{
+		return this.summary;
 	}
 		
 	

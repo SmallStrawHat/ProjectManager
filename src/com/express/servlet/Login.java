@@ -36,23 +36,32 @@ public class Login extends HttpServlet {
     	String password = request.getParameter("password");
     	System.out.println(account+":"+password);
     	
-    	
-    	Myuser temp = new Myuser();
-    	Myuser res = temp.search(Integer.parseInt(account));
-    	if(password.equals(res.getPassword()))
-    	{
-    		HttpSession session = request.getSession(false);
-    		session.setAttribute("account", account);
-    		RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
-			dispatch.forward(request, response);
-			return ;
-    	}
-    	else
+    	if(account == null || password == null)
     	{
     		RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
 			dispatch.forward(request, response);
 			return ;
     	}
+    	else
+    	{
+        	Myuser res = Myuser.search(Integer.parseInt(account));
+        	if(password.equals(res.getPassword()))
+        	{
+        		HttpSession session = request.getSession(false);
+        		session.setAttribute("account", account);
+        		RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
+    			dispatch.forward(request, response);
+    			return ;
+        	}
+        	else
+        	{
+        		RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
+    			dispatch.forward(request, response);
+    			return ;
+        	}
+    	}
+    	
+    	
     	
     }
 

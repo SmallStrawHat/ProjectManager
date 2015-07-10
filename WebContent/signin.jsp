@@ -62,7 +62,7 @@
 
 
     <div class="row-fluid login-wrapper">
-        <a href="index.html">
+        <a href="index.jsp">
             <img class="logo" src="img/logo-white.png" />
         </a>
 

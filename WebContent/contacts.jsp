@@ -144,7 +144,7 @@
                                 $ 4,500.00
                             </td>
                             <td >
-                                <a href="#">alejandra@canvas.com</a>
+                                <a >alejandra@canvas.com</a>
                             </td>
                             <td class=" align-right">
                                 <button type="button" class="btn btn-danger" title="Delete user"><i class="icon-trash"></i></button>

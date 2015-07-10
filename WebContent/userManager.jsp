@@ -85,6 +85,8 @@
                                     
                                 </tr>
                             </thead>
+                            
+                            <% %>
                             <tbody>
                                 <!-- row -->
                                 <tr class="first">
@@ -107,10 +109,10 @@
                                         </ul>
                                     </td>
                                 </tr>
-                               
-                               
-                                
                             </tbody>
+                            <% %>
+                            
+                            
                         </table>
                     </div>
                 </div>
