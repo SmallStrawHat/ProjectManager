@@ -34,7 +34,7 @@
 <body>
 
 <%@ include file="boot.jsp" %>
-
+<%! int tempID=-1; %>
 	<!-- main container -->
     <div class="content">
         
@@ -82,7 +82,7 @@
                                     <th class="span2">
                                         <span class="line"></span>Phone
                                     </th>
-                                    <th class="span2">
+                                    <th class="span3">
                                         <span class="line"></span>Status
                                     </th>
                                     
@@ -101,7 +101,7 @@
                                 <tr class="first">
                                     <td>
                                         <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                        <a href="userProfile.jsp" class="name">
+                                        <a href=<%="userProfile.jsp?targetID="+tempUser.getUserID()%> class="name">
                                         <%=tempUser.getName()%></a>
                                         <span class="subtext"><%=tempUser.getEmail()%></span>
                                     </td>
@@ -114,13 +114,31 @@
                                     <td>
                                         <%=tempUser.getPhone()%>
                                     </td>
+                                    <% int state = tempUser.getUserState();
+                                    	if(state == 1)
+                                    	{
+                                    %>
                                     <td>
                                         <span class="label label-success">Active</span>
                                         <ul class="actions">
-                                            <li><a href="#">暂停用户</a></li>
-                                            <li class="last"><a href="#">删除用户</a></li>
+                                            <li><a href=<%="UserManager?function=purseUser&accountID="+tempUser.getUserID() %>>暂停用户</a></li>
+                                            <%tempID = tempUser.getUserID();  %>
+                                            <li class="last"><a data-toggle="modal" data-target="#myModal"  href="">删除用户</a></li>
                                         </ul>
                                     </td>
+                                    <%}else
+                                    	{
+                                    %>
+                                    
+                                    <td>
+                                        <span class="label label-info">Standby</span>
+                                        <ul class="actions">
+                                            <li><a href=<%="UserManager?function=startUser&accountID="+tempUser.getUserID() %>>开启用户</a></li>
+                                            <%tempID = tempUser.getUserID();  %>
+                                            <li class="last"><a data-toggle="modal" data-target="#myModal"  href="" >删除用户</a></li>
+                                        </ul>
+                                    </td>
+                                    <%} %>
                                 </tr>
                             </tbody>
                             <% }%>
@@ -414,6 +432,27 @@
         </div>
     </div>
     <!-- end main container -->
+    
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">删除用户</h4>
+      </div>
+      <div class="modal-body">    
+       		这个操作将会删除用户的所有信息，真的要删除这个用户吗？
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <a href=<%="UserManager?function=deleteUser&accountID="+tempID %> ><button type="button" class="btn btn-danger">确定</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end Modal-->
 
 	<!-- scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>

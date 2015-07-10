@@ -10,9 +10,10 @@ public class Contacts {
 		this.staffList = new Vector(10,6);
 	}
 	
-	public int addStaff(Userpublic staff)
+	public static int addStaff(int userID,Vector userIDList)
 	{
-		this.staffList.add(staff);
+		MemberInformation.init();
+		//staffList.add(staff);
 		return 1;
 	}
 	

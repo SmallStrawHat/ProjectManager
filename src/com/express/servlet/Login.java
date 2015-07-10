@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.database.*;
+import com.business.*;
 
 /**
  * Servlet implementation class Login
@@ -32,11 +33,18 @@ public class Login extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+    	HttpSession session = request.getSession(false);
+		if(session == null )
+		{
+			RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
+			dispatch.forward(request, response);
+			return ;
+		}
     	String account = request.getParameter("account");
     	String password = request.getParameter("password");
     	System.out.println(account+":"+password);
     	
-    	if(account == null || password == null )
+    	if(account.equals("")|| password.equals("") )
     	{
     		RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
 			dispatch.forward(request, response);
@@ -47,13 +55,6 @@ public class Login extends HttpServlet {
         	Myuser res = Myuser.search(Integer.parseInt(account));
         	if(password.equals(res.getPassword()))
         	{
-        		HttpSession session = request.getSession(false);
-        		if(session == null)
-        		{
-        			RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
-        			dispatch.forward(request, response);
-        			return ;
-        		}
         		session.setAttribute("account", account);
         		RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
     			dispatch.forward(request, response);

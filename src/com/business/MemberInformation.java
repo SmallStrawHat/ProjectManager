@@ -38,10 +38,17 @@ public class MemberInformation {
 		return MemberInformation.userList;
 	}
 	
-	public int addUser(User temp)
+	public static int addUser(String name,String phone,String email,
+			String userRole,String password,int userState,String summary)
 	{
-		MemberInformation.userList.add(temp);
-		return 1;
+		if(Myuser.insert(name, phone, email, userRole, password, userState, summary)!=-1)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 	public static int deleteUser(int userID)
@@ -52,8 +59,16 @@ public class MemberInformation {
 			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
 			if(tempUserID == userID)
 			{
-				MemberInformation.userList.remove(i);
-				return 1;
+				if(Myuser.delete(userID)==1)
+				{
+					MemberInformation.userList.remove(i);
+					return 1;
+				}
+				else
+				{
+					System.out.println("date fail!");
+					return 0;
+				}
 			}
 		}
 		return 0;
@@ -67,8 +82,12 @@ public class MemberInformation {
 			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
 			if(tempUserID == userID)
 			{
-				((User)MemberInformation.userList.get(i)).setUserState(1);
-				return 1;
+				if(Myuser.update(userID,1)==1)
+				{
+					((User)MemberInformation.userList.get(i)).setUserState(1);
+					return 1;
+				}
+				
 			}
 		}
 		return 0;
@@ -82,11 +101,31 @@ public class MemberInformation {
 			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
 			if(tempUserID == userID)
 			{
-				((User)MemberInformation.userList.get(i)).setUserState(0);
-				return 1;
+				if(Myuser.update(userID,0)==1)
+				{
+					((User)MemberInformation.userList.get(i)).setUserState(0);
+					return 1;
+				}
+				
 			}
 		}
 		return 0;
+	}
+	
+	public static User seachUser(int userID)
+	{
+		User res = null;
+		int i;
+		for(i=0;i<MemberInformation.userList.size();i++)
+		{
+			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
+			if(tempUserID == userID)
+			{
+				return (User)MemberInformation.userList.get(i);
+			}
+			
+		}
+		return res;
 	}
 	
 	public static int editUser(int userID,String name,String phone,String email,
@@ -107,7 +146,7 @@ public class MemberInformation {
 	
 	public static int searchUserLog(String logPath)
 	{
-		//Í¨¹ýÂ·¾¶£¬Ö±½Ó¶ÁÈ¡Êý¾Ý¿â¡£
+		//Í¨ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó¶ï¿½È¡ï¿½ï¿½ï¿½Ý¿â¡£
 		return 1;
 	}
 	

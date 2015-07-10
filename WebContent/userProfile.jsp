@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="com.business.*,java.util.Vector" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,13 @@
     <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
-
+<% MemberInformation.init();
+   User localUser = MemberInformation.seachUser(Integer.parseInt(request.getParameter("targetID")));
+   if(localUser == null)
+   {
+	   response.sendRedirect("index.jsp");
+   }
+%>
 <%@ include file="boot.jsp" %>
 
 
@@ -40,14 +47,14 @@
     <div class="content">
         
         <!-- settings changer -->
-        <div class="skins-nav">
+        <!-- <div class="skins-nav">
             <a href="#" class="skin first_nav selected">
                 <span class="icon"></span><span class="text">Default</span>
             </a>
             <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
                 <span class="icon"></span><span class="text">Dark skin</span>
             </a>
-        </div>
+        </div> -->
         
         <div class="container-fluid">
             <div id="pad-wrapper" class="user-profile">
@@ -55,10 +62,10 @@
                 <div class="row-fluid header">
                     <div class="span8">
                         <img src="img/contact-profile.png" class="avatar img-circle" />
-                        <h3 class="name">Alejandra Galván Castillo</h3>
-                        <span class="area">Graphic Designer</span>
+                        <h3 class="name"><%=localUser.getName()%></h3>
+                        <span class="area"><%=localUser.getEmail()%></span>
                     </div>
-                    <a class="btn-flat icon pull-right delete-user" data-toggle="tooltip" title="Delete user" data-placement="top">
+                    <a class="btn-flat icon pull-right delete-user" data-toggle="modal" data-target="#myModal" title="Delete user" data-placement="top">
                         <i class="icon-trash"></i>
                     </a>
                      <a class="btn-flat icon large pull-right edit">
@@ -73,7 +80,7 @@
                             <!-- biography -->
                             <div class="span12 section">
                                 <h6>简介</h6>
-                                <p>There are many variations of passages of Lorem Ipsum available but the majority have humour suffered alteration in believable some formhumour , by injected humour, or randomised words which don't look even slightly believable. </p>
+                                <p><%=localUser.getSummary()%></p>
                             </div>
 
                             <h6>正在参与的任务</h6>
@@ -211,7 +218,7 @@
                     <!-- side address column -->
                     <div class="span3 address pull-right">
                         <h6>Address</h6>
-                        <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
+                        
                         <ul>
                             <li>2301 East Lamar Blvd. Suite 140. </li>
                             <li>City, Arlington. United States,</li>
@@ -232,6 +239,27 @@
     </div>
     <!-- end main container -->
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">删除用户</h4>
+      </div>
+      <div class="modal-body">    
+       		这个操作将会删除用户的所有信息，真的要删除这个用户吗？
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <a href=<%="UserManager?function=deleteUser&accountID="+localUser.getUserID() %> ><button type="button" class="btn btn-danger">确定</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end Modal-->
 
 	<!-- scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>

@@ -63,28 +63,24 @@
                     <!-- left column -->
                     <div class="span9 with-sidebar">
                         <div class="container">
-                            <form class="new_user_form inline-input" />
+                            <form class="new_user_form inline-input" action="UserManager"/>
+                            	<input name="function" value="addUser" type="hidden" />
                                 <div class="span12 field-box">
                                     <label>用户名:</label>
-                                    <input class="span9" type="text" />
+                                    <input name="userName" class="span9" type="text" />
                                 </div>
                                 <div class="span12 field-box">
                                     <label>用户类型:</label>
                                     <div class="ui-select span5">
-                                        <select>
-                                            <option value="AK" />Alaska
-                                            <option value="HI" />Hawaii
-                                            <option value="CA" />California
-                                            <option value="NV" />Nevada
-                                            <option value="OR" />Oregon
-                                            <option value="WA" />Washington
-                                            <option value="AZ" />Arizona
+                                        <select name="selectRole">
+                                            <option value="OP" />项目经理
+                                            <option value="OO" />项目成员
                                         </select>
                                     </div>
                                 </div>
                                 <div class="span12 field-box">
                                     <label>密码:</label>
-                                    <input class="span9" type="password" />
+                                    <input name="userPassword" class="span9" type="password" />
                                 </div>
                                 <div class="span12 field-box">
                                     <label>确认密码:</label>
@@ -93,7 +89,7 @@
                                  <div class="span12 field-box">
                                     <label>用户状态:</label>
                                     <div class="ui-select span5">
-                                        <select>
+                                        <select name="selectState">
                                             <option value="AC" />开启
                                             <option value="PU" />暂停
                                         </select>
@@ -101,20 +97,25 @@
                                 </div>
                                 <div class="span12 field-box">
                                     <label>联系方式:</label>
-                                    <input class="span9" type="text" />
+                                    <input name="userPhone" class="span9" type="text" />
                                 </div>
                                 <div class="span12 field-box">
                                     <label>Email:</label>
-                                    <input class="span9" type="text" />
+                                    <input name="userEmail" class="span9" type="text" />
                                 </div>
-                                
+                                <div class="span12 field-box textarea">
+                                    <label>简介:</label>
+                                    <textarea name="userSummary" class="span9"></textarea>
+                                    <span class="charactersleft">个人简介最多不超过250个字符！</span>
+                                </div>
                                 
                                 <div class="span11 field-box actions">
-                                    <input type="button" class="btn-glow primary" value="Create user" />
-                                    <span>OR</span>
-                                    <input type="reset" value="Cancel" class="reset" />
+                                    <input type="submit" class="btn-glow primary" value="创建用户" />
                                 </div>
                             </form>
+                            
+                            
+                            
                         </div>
                     </div>
 

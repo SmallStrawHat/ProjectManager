@@ -44,6 +44,11 @@ public class User extends Userpublic{
 		return 1;
 	}
 	
+	public int getUserState()
+	{
+		return this.userState;
+	}
+	
 	public int setUserInformation(String name,String phone,String email,
 			String userRole,String password,int userState)
 	{
@@ -52,6 +57,11 @@ public class User extends Userpublic{
 		this.password = password;
 		this.userState = userState;
 		return 1;
+	}
+	
+	public String getSummary()
+	{
+		return this.summary;
 	}
 	
 

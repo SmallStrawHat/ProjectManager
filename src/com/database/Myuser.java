@@ -122,7 +122,119 @@ public class Myuser {
 		return resVec;
 	}
 	
+	public static int delete(int account)
+	{
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			String sql = "delete from myuser where user_id="+account+";";
+			stm.execute(sql);
+			return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+	}
 
+	public static int update(int account,int lag)
+	{
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			String sql;
+			if(lag==1)
+			{
+				sql = "update myuser set user_state=1 where user_id="+account+";";
+			}
+			else
+			{
+				sql = "update myuser set user_state=0 where user_id="+account+";";
+			}
+			stm.execute(sql);
+			return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+	}
+	
+	public static int insert(String name,String phone,String email,
+			String userRole,String password,int userState,String summary)
+	{
+	
+		Myuser findRes = null;
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			String sqlID = "select max(user_id) from myuser";
+			ResultSet res = stm.executeQuery(sqlID);
+			int bigID=-1;
+			while(res.next())
+			{
+				bigID = res.getInt(1);
+			}
+			bigID+=1;
+			String sql = "insert into myuser values("+bigID+",'"+name+"','"+phone+"','"+email+"','"+password+"','"+userRole+"',"+userState+",'','"+summary+"');";
+			stm.execute(sql);
+			res.close();
+			return bigID;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		return -1;
+	}
 	
 	public int getUserID()
 	{
@@ -180,6 +292,7 @@ public class Myuser {
     	temp = (Myuser)res.get(0);
     	System.out.println(res.size());
     	System.out.println(temp.getUserRole());
+		Myuser.insert("发的发顺丰", "156", "afa", "affd", "afaf", 1, "案发当时");
 	}*/
 	
 }
