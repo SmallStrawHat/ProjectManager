@@ -33,7 +33,7 @@
     <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
-<% MemberInformation.init();
+<% 
    User localUser = MemberInformation.seachUser(Integer.parseInt(request.getParameter("targetID")));
    if(localUser == null)
    {
@@ -68,8 +68,8 @@
                     <a class="btn-flat icon pull-right delete-user" data-toggle="modal" data-target="#myModal" title="Delete user" data-placement="top">
                         <i class="icon-trash"></i>
                     </a>
-                     <a class="btn-flat icon large pull-right edit">
-                        Edit this person
+                     <a class="btn-flat icon large pull-right edit" href=<%="editUserDetail.jsp?actionID="+localUser.getUserID()%> >
+                        	编辑用户信息
                     </a>
                 </div>
 
@@ -254,7 +254,7 @@
       <div class="modal-footer">
       
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <a href=<%="UserManager?function=deleteUser&accountID="+localUser.getUserID() %> ><button type="button" class="btn btn-danger">确定</button></a>
+        <a href=<%="UserManager?functionMy=deleteUser&accountID="+localUser.getUserID() %> ><button type="button" class="btn btn-danger">确定</button></a>
       </div>
     </div>
   </div>

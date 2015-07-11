@@ -129,20 +129,29 @@ public class MemberInformation {
 	}
 	
 	public static int editUser(int userID,String name,String phone,String email,
-			String userRole,String password,int userState)
+			String userRole,String password,int userState,String summary)
 	{
+		
 		int i;
 		for(i=0;i<MemberInformation.userList.size();i++)
 		{
-			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
-			if(tempUserID == userID)
+			User searchUser = ((User)MemberInformation.userList.get(i));
+			if(searchUser.getUserID() == userID)
 			{
-				((User)MemberInformation.userList.get(i)).setUserInformation(name, phone, email, userRole, password, userState);
-				return 1;
+				searchUser.setUserInformation(name, phone, email, userRole, password, userState,summary);
+				if(Myuser.updateAll(userID, searchUser)==1)
+				{
+					return 1;
+				}
+				return 0;
 			}
 		}
+		
 		return 0;
+		
+		
 	}
+	
 	
 	public static int searchUserLog(String logPath)
 	{

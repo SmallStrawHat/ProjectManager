@@ -121,9 +121,9 @@
                                     <td>
                                         <span class="label label-success">Active</span>
                                         <ul class="actions">
-                                            <li><a href=<%="UserManager?function=purseUser&accountID="+tempUser.getUserID() %>>暂停用户</a></li>
-                                            <%tempID = tempUser.getUserID();  %>
-                                            <li class="last"><a data-toggle="modal" data-target="#myModal"  href="">删除用户</a></li>
+                                            <li><a href=<%="UserManager?functionMy=purseUser&accountID="+tempUser.getUserID() %>>暂停用户</a></li>
+                                            
+                                            <li class="last"><a data-toggle="modal" data-target="#myModal" href="" onclick="odd(<%=tempUser.getUserID()%>)">删除用户</a></li>
                                         </ul>
                                     </td>
                                     <%}else
@@ -133,9 +133,9 @@
                                     <td>
                                         <span class="label label-info">Standby</span>
                                         <ul class="actions">
-                                            <li><a href=<%="UserManager?function=startUser&accountID="+tempUser.getUserID() %>>开启用户</a></li>
-                                            <%tempID = tempUser.getUserID();  %>
-                                            <li class="last"><a data-toggle="modal" data-target="#myModal"  href="" >删除用户</a></li>
+                                            <li><a href=<%="UserManager?functionMy=startUser&accountID="+tempUser.getUserID() %>>开启用户</a></li>
+
+                                            <li class="last"><a data-toggle="modal" data-target="#myModal"  href="" onclick="odd(<%=tempUser.getUserID()%>)">删除用户</a></li>
                                         </ul>
                                     </td>
                                     <%} %>
@@ -149,284 +149,9 @@
                 </div>
                 <!-- end users table -->
                 
-                <!-- products table-->
-                <!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
-                <div class="table-wrapper products-table section">
-                    <div class="row-fluid head">
-                        <div class="span12">
-                            <h4>用户管理</h4>
-                        </div>
-                    </div>
+               
 
-                    <div class="row-fluid filter-block">
-                        <div class="pull-right">
-                            <div class="ui-select">
-                                <select>
-                                  <option />Filter users
-                                  <option />Signed last 30 days
-                                  <option />Active users
-                                </select>
-                            </div>
-                            <input type="text" class="search" />
-                            <a class="btn-flat success new-product" href="newuser.jsp">+ 添加用户</a>
-                        </div>
-                    </div>
-
-                    <div class="row-fluid">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="span3">
-                                        <input type="checkbox" />
-                                        Product
-                                    </th>
-                                    <th class="span3">
-                                        <span class="line"></span>Description
-                                    </th>
-                                    <th class="span3">
-                                        <span class="line"></span>Status
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- row -->
-                                <tr class="first">
-                                    <td>
-                                        <input type="checkbox" />
-                                        <div class="img">
-                                            <img src="img/table-img.png" />
-                                        </div>
-                                        <a href="#" class="name">Generate Lorem </a>
-                                    </td>
-                                    <td class="description">
-                                        if you are going to use a passage of Lorem Ipsum.
-                                    </td>
-                                    <td>
-                                        <span class="label label-success">Active</span>
-                                        <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <!-- row -->
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" />
-                                        <div class="img">
-                                            <img src="img/table-img.png" />
-                                        </div>
-                                        <a href="#" class="name">Internet tend</a>
-                                    </td>
-                                    <td class="description">
-                                        There are many variations of passages.
-                                    </td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <!-- row -->
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" />
-                                        <div class="img">
-                                            <img src="img/table-img.png" />
-                                        </div>
-                                        <a href="#" class="name">Generate Lorem </a>
-                                    </td>
-                                    <td class="description">
-                                        if you are going to use a passage of Lorem Ipsum.
-                                    </td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <!-- row -->
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" />
-                                        <div class="img">
-                                            <img src="img/table-img.png" />
-                                        </div>
-                                        <a href="#" class="name">Internet tend</a>
-                                    </td>
-                                    <td class="description">
-                                        There are many variations of passages.
-                                    </td>
-                                    <td>
-                                        <span class="label label-info">Standby</span>
-                                        <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" />
-                                        <div class="img">
-                                            <img src="img/table-img.png" />
-                                        </div>
-                                        <a href="#" class="name">Generate Lorem </a>
-                                    </td>
-                                    <td class="description">
-                                        if you are going to use a passage of Lorem Ipsum.
-                                    </td>
-                                    <td>
-                                        <span class="label label-success">Active</span>
-                                        <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- end products table -->
-
-                <!-- orders table -->
-                <div class="table-wrapper orders-table section">
-                    <div class="row-fluid head">
-                        <div class="span12">
-                            <h4>Orders</h4>
-                        </div>
-                    </div>
-
-                    <div class="row-fluid filter-block">
-                        <div class="pull-right">
-                            <div class="btn-group pull-right">
-                                <button class="glow left large">All</button>
-                                <button class="glow middle large">Pending</button>
-                                <button class="glow right large">Completed</button>
-                            </div>
-                            <input type="text" class="search order-search" placeholder="Search for an order.." />
-                        </div>
-                    </div>
-
-                    <div class="row-fluid">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="span2">
-                                        Order ID
-                                    </th>
-                                    <th class="span3">
-                                        Date
-                                    </th>
-                                    <th class="span3">
-                                        <span class="line"></span>
-                                        Name
-                                    </th>
-                                    <th class="span3">
-                                        <span class="line"></span>
-                                        Status
-                                    </th>
-                                    <th class="span3">
-                                        <span class="line"></span>
-                                        Items
-                                    </th>
-                                    <th class="span3">
-                                        <span class="line"></span>
-                                        Total amount
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- row -->
-                                <tr class="first">
-                                    <td>
-                                        <a href="#">#459</a>
-                                    </td>
-                                    <td>
-                                        Jan 03, 2014
-                                    </td>
-                                    <td>
-                                        <a href="#">John Smith</a>
-                                    </td>
-                                    <td>
-                                        <span class="label label-success">Completed</span>
-                                    </td>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        $ 3,500.00
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">#510</a>
-                                    </td>
-                                    <td>
-                                        Feb 22, 2014
-                                    </td>
-                                    <td>
-                                        <a href="#">Anna Richards</a>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info">Pending</span>
-                                    </td>
-                                    <td>
-                                        5
-                                    </td>
-                                    <td>
-                                        $ 800.00
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">#590</a>
-                                    </td>
-                                    <td>
-                                        Mar 03, 2014
-                                    </td>
-                                    <td>
-                                        <a href="#">Steven McFly</a>
-                                    </td>
-                                    <td>
-                                        <span class="label label-success">Completed</span>
-                                    </td>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>
-                                        $ 1,350.00
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">#618</a>
-                                    </td>
-                                    <td>
-                                        Jan 03, 2014
-                                    </td>
-                                    <td>
-                                        <a href="#">George Williams</a>
-                                    </td>
-                                    <td>
-                                        <span class="label">Canceled</span>
-                                    </td>
-                                    <td>
-                                        8
-                                    </td>
-                                    <td>
-                                        $ 3,499.99
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- end orders table -->
-
+               
              
             </div>
         </div>
@@ -447,7 +172,7 @@
       <div class="modal-footer">
       
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <a href=<%="UserManager?function=deleteUser&accountID="+tempID %> ><button type="button" class="btn btn-danger">确定</button></a>
+        <button type="button" class="btn btn-danger" onclick="select()">确定</button>
       </div>
     </div>
   </div>
@@ -455,6 +180,22 @@
 <!--  end Modal-->
 
 	<!-- scripts -->
+	
+	<script type="text/javascript">
+	 var userJsID = -1;
+        function select()
+        {
+            //alert('Contacts?function=deleteContacts&accountID='+userID);
+            window.location.href="http://localhost:8080/ProjectManager/UserManager?functionMy=deleteUser&accountID="+userJsID;
+        }
+        
+        function odd(id)
+        {
+        	
+        	userJsID = id;
+        }
+    </script>
+    
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>

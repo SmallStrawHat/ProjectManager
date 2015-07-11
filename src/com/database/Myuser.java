@@ -7,6 +7,8 @@ import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 
+import com.business.User;
+
 public class Myuser {
 	private int userID;
 	private String name;
@@ -153,6 +155,49 @@ public class Myuser {
 		
 		return 0;
 	}
+	
+	public static int updateAll(int dealID,User user)
+	{
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			
+			int userID = user.getUserID();
+			String name = user.getName();
+			String phone = user.getPhone();
+			String userRole = user.getUserRole();
+			String email = user.getEmail();
+			String password = user.getPassword();
+			int userState = user.getUserState();
+			String summary = user.getSummary();
+			
+			String sql = "update myuser set name='"+name+"',phone='"+phone+"',email='"+email+"',password='"+password+"',user_role='"+userRole+"',user_state="+userState+",summary='"+summary+"' where user_id="+userID+";";
+			stm.execute(sql);
+			
+			
+			stm.close();
+			return 1;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		return 0;
+	}
 
 	public static int update(int account,int lag)
 	{
@@ -197,8 +242,6 @@ public class Myuser {
 	public static int insert(String name,String phone,String email,
 			String userRole,String password,int userState,String summary)
 	{
-	
-		Myuser findRes = null;
 		Connection conn =null;
 		try
 		{

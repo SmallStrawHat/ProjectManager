@@ -56,6 +56,7 @@ public class Login extends HttpServlet {
         	if(password.equals(res.getPassword()))
         	{
         		session.setAttribute("account", account);
+        		MemberInformation.init();
         		RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
     			dispatch.forward(request, response);
     			return ;

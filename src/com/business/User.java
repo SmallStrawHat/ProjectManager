@@ -37,6 +37,16 @@ public class User extends Userpublic{
 		this.summary = summary;
 	}
 	
+	public Vector getContact()
+	{
+		return this.contact;
+	}
+	
+	public int addContacts(Userpublic userPub)
+	{
+		this.contact.add(userPub);
+		return 1;
+	}
 	
 	public int setUserState(int sign)
 	{
@@ -50,13 +60,19 @@ public class User extends Userpublic{
 	}
 	
 	public int setUserInformation(String name,String phone,String email,
-			String userRole,String password,int userState)
+			String userRole,String password,int userState,String summary)
 	{
 		this.setUserPublicInformation(name, phone, email,userRole);
 
 		this.password = password;
 		this.userState = userState;
+		this.summary = summary;
 		return 1;
+	}
+	
+	public String getPassword()
+	{
+		return this.password;
 	}
 	
 	public String getSummary()

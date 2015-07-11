@@ -2,33 +2,50 @@ package com.business;
 
 import java.util.Vector;
 
+import com.database.DataContacts;
+
 public class Contacts {
-	private Vector staffList;//save userpublic object
 	
 	public Contacts()
 	{
-		this.staffList = new Vector(10,6);
+	}
+	
+	public static Vector serachContact(int userID)
+	{
+		return DataContacts.search(userID);
 	}
 	
 	public static int addStaff(int userID,Vector userIDList)
 	{
-		MemberInformation.init();
-		//staffList.add(staff);
-		return 1;
-	}
-	
-	public int deleteStaff(int userID)
-	{
+		Vector newContacts = new Vector(10,6);
+
 		int i;
-		for(i=0;i<this.staffList.size();i++)
+		for(i=0;i<userIDList.size();i++)
 		{
-			int tempUserID = ((Userpublic)this.staffList.get(i)).getUserID();
-			if(tempUserID == userID)
+			User temp = MemberInformation.seachUser(((Integer)userIDList.get(i)).intValue());
+			if(temp != null)
 			{
-				this.staffList.remove(i);
-				return 1;
+				System.out.println(((Integer)userIDList.get(i)).intValue());
+				//int userID,String name,String phone,String email,String userRole
+				Userpublic tempPublic = new Userpublic(temp.getUserID(),temp.getName(),temp.getPhone(),temp.getEmail(),temp.getUserRole());
+				newContacts.add(tempPublic);
 			}
 		}
+		if(DataContacts.add(userID, newContacts)==1)
+		{
+			return 1;
+		}
+		
+		return 0;
+	}
+	
+	public static int deleteStaff(int userID,int deleteID)
+	{
+		if(DataContacts.delete(userID, deleteID)==1)
+		{
+			return 1;
+		}
+		
 		return 0;
 	}
 	

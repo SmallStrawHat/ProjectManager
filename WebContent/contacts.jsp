@@ -1,3 +1,4 @@
+<%@ page import="com.business.*,java.util.Vector" %>
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
@@ -39,7 +40,6 @@
 <body>
 
 <%@ include file="boot.jsp" %>
-    
 
 	<!-- main container -->
     <div class="content">
@@ -118,11 +118,11 @@
                                 <th class="span2 sortable">
                                     <span class="line"></span>UserID
                                 </th>
-                                <th class="span2 sortable">
+                                <th class="span3 sortable">
                                     <span class="line"></span>Phone
                                 </th>
                                 <th class="span3 sortable">
-                                    <span class="line "></span>Email
+                                    <span class="line "></span>UserRole
                                 </th>
                                 <th class="span1 sortable">
                                     
@@ -130,164 +130,36 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <%
+                        Vector contactList = Contacts.serachContact(Integer.parseInt((String)session.getAttribute("account")));
+                        for(int i=0;i<contactList.size();i++)
+                        {
+                        	User tempUser = MemberInformation.seachUser(((Integer)contactList.get(i)).intValue());
+                       
+                        %>
                         <!-- row -->
                         <tr class="first">
                             <td>
                                 <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
+                                <a class="name"><%=tempUser.getName()%></a>
+                                <span class="subtext"><%=tempUser.getEmail()%></span>
                             </td>
                             <td>
-                                Mar 13, 2012
+                                <%=tempUser.getUserID()%>
                             </td>
                             <td>
-                                $ 4,500.00
+                                <%=tempUser.getPhone()%>
                             </td>
                             <td >
-                                <a >alejandra@canvas.com</a>
+                                <%=tempUser.getUserRole()%>
                             </td>
                             <td class=" align-right">
-                                <button type="button" class="btn btn-danger" title="Delete user"><i class="icon-trash"></i></button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="odd(<%=tempUser.getUserID()%>)"><i class="icon-trash"></i></button>
                             </td>
                             
+                            
                         </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img2.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Jun 03, 2012
-                            </td>
-                            <td>
-                                $ 549.99
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                               
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Mar 01, 2014
-                            </td>
-                            <td>
-                                $ 30.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img2.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Jan 28, 2012
-                            </td>
-                            <td>
-                                $ 1,320.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                May 16, 2012
-                            </td>
-                            <td>
-                                $ 89.99
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img2.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Sep 06, 2012
-                            </td>
-                            <td>
-                                $ 344.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Jul 13, 2012
-                            </td>
-                            <td>
-                                $ 800.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img2.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Feb 13, 2014
-                            </td>
-                            <td>
-                                $ 250.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
-                        <!-- row -->
-                        <tr>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                <span class="subtext">Graphic Design</span>
-                            </td>
-                            <td>
-                                Feb 27, 2014
-                            </td>
-                            <td>
-                                $ 1,300.00
-                            </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
-                            </td>
-                        </tr>
+                        <%} %>
                         </tbody>
                     </table>
                 </div>
@@ -308,8 +180,46 @@
     </div>
     <!-- end main container -->
 
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">删除联系人</h4>
+      </div>
+      <div class="modal-body">    
+       		这个操作将会删除该联系人，真的要删除吗？
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger" onclick="select()">确定</button>
+        <%-- <a href=<%="Contacts?functionMy=deleteContacts&accountID="+selectID %> ><button type="button" class="btn btn-danger" onclick="select()">确定</button></a> --%>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end Modal-->
+
 
 	<!-- scripts -->
+	
+	 <script type="text/javascript">
+	 var userID = -1;
+        function select()
+        {
+            //alert('Contacts?function=deleteContacts&accountID='+userID);
+            window.location.href='http://localhost:8080/ProjectManager/Contacts?functionMy=deleteContacts&accountID='+userID;
+        }
+        
+        function odd(id)
+        {
+        	
+        	userID = id;
+        }
+    </script>
+	
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-ui-1.10.2.custom.min.js"></script>

@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.business.*,java.util.Vector" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,61 +57,99 @@
         <div class="container-fluid">
             <div id="pad-wrapper" class="new-user">
                 <div class="row-fluid header">
-                    <h3>创建新用户</h3>
+                    <h3>编辑用户信息</h3>
                 </div>
+                
+                <%
+                	int editID = Integer.parseInt((String)request.getParameter("actionID"));
+                	User editUser = MemberInformation.seachUser(editID);
+                %>
 
                 <div class="row-fluid form-wrapper">
                     <!-- left column -->
                     <div class="span9 with-sidebar">
                         <div class="container">
                             <form class="new_user_form inline-input" action="UserManager" method="post"/>
-                            	<input name="functionMy" value="addUser" type="hidden" />
+                            	<input name="functionMy" value="editUser" type="hidden" />
+                                <div class="span12 field-box">
+                                    <label>员工号:</label>
+                                    <input name="userID" class="span9" type="text" readonly="readonly" value=<%=editUser.getUserID()%> />
+                                </div>
                                 <div class="span12 field-box">
                                     <label>用户名:</label>
-                                    <input name="userName" class="span9" type="text" />
+                                    <input name="userName" class="span9" type="text" value=<%=editUser.getName()%> />
                                 </div>
                                 <div class="span12 field-box">
                                     <label>用户类型:</label>
                                     <div class="ui-select span5">
                                         <select name="selectRole">
-                                            <option value="OP" />项目经理
+                                        <% 
+                                        	if(editUser.getUserRole().equals("项目经理"))
+                                        	{
+                                        %>
+                                        	<option value="OP" selected="selected" />项目经理
                                             <option value="OO" />项目成员
+                                        <% 
+                                        	}
+                                        	else
+                                        	{
+                                        %>
+                                        	 <option value="OP"  />项目经理
+                                            <option value="OO" selected="selected" />项目成员
+                                        <%
+                                        	}
+                                        %>
+                                            
                                         </select>
                                     </div>
                                 </div>
                                 <div class="span12 field-box">
                                     <label>密码:</label>
-                                    <input name="userPassword" class="span9" type="password" />
+                                    <input name="userPassword" class="span9" type="password" value=<%=editUser.getPassword()%> />
                                 </div>
                                 <div class="span12 field-box">
                                     <label>确认密码:</label>
-                                    <input class="span9" type="password" />
+                                    <input class="span9" type="password" value=<%=editUser.getPassword()%> />
                                 </div>
                                  <div class="span12 field-box">
                                     <label>用户状态:</label>
                                     <div class="ui-select span5">
                                         <select name="selectState">
-                                            <option value="AC" />开启
+                                        <% 
+                                        	if(editUser.getUserState() == 1)
+                                        	{
+                                        %>
+                                            <option value="AC" selected="selected" />开启
                                             <option value="PU" />暂停
+                                        <% 
+                                        	}
+                                        	else
+                                        	{
+                                        %>
+                                        	 <option value="AC" />开启
+                                            <option value="PU" selected="selected" />暂停
+                                        <%
+                                        	}
+                                        %>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="span12 field-box">
                                     <label>联系方式:</label>
-                                    <input name="userPhone" class="span9" type="text" />
+                                    <input name="userPhone" class="span9" type="text" value=<%=editUser.getPhone()%> />
                                 </div>
                                 <div class="span12 field-box">
                                     <label>Email:</label>
-                                    <input name="userEmail" class="span9" type="text" />
+                                    <input name="userEmail" class="span9" type="text" value=<%=editUser.getEmail()%> />
                                 </div>
                                 <div class="span12 field-box textarea">
                                     <label>简介:</label>
-                                    <textarea name="userSummary" class="span9"></textarea>
+                                    <textarea name="userSummary" class="span9"  ><%=editUser.getSummary()%></textarea>
                                     <span class="charactersleft">个人简介最多不超过250个字符！</span>
                                 </div>
                                 
                                 <div class="span11 field-box actions">
-                                    <input type="submit" class="btn-glow primary" value="创建用户" />
+                                    <input type="submit" class="btn-glow primary" value="保存修改" />
                                 </div>
                             </form>
                             

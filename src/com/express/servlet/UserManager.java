@@ -39,7 +39,7 @@ public class UserManager extends HttpServlet {
 			return ;
 		}
     	
-    	String function = request.getParameter("function");
+    	String function = request.getParameter("functionMy");
     	
     	if(function.equals("deleteUser"))
     	{
@@ -96,6 +96,49 @@ public class UserManager extends HttpServlet {
     			//
     			//RequestDispatcher dispatch = request.getRequestDispatcher("error.jsp");
     			//dispatch.forward(request, response);
+    			response.sendRedirect("error.jsp");
+    			return ;
+    		}
+    	}
+    	
+    	
+    	if(function.equals("editUser"))
+    	{
+    		int userID = Integer.parseInt(request.getParameter("userID"));
+    		String userName = new String(request.getParameter("userName").getBytes("ISO-8859-1"),"utf-8");
+    		String selectRole = request.getParameter("selectRole");
+    		if(selectRole.equals("OP"))
+    		{
+    			selectRole="项目经理";
+    		}
+    		else
+    		{
+    			selectRole="项目成员";
+    		}
+    		String userPassword = request.getParameter("userPassword");
+    		String selectState = request.getParameter("selectState");
+    		int state=-1;
+    		if(selectState.equals("AC"))
+    		{
+    			state = 1;
+    		}
+    		else
+    		{
+    			state = 0;
+    		}
+    		String userPhone = request.getParameter("userPhone");
+    		String userEmail = request.getParameter("userEmail");
+    		String userSummary = new String(request.getParameter("userSummary").getBytes("ISO-8859-1"),"utf-8");
+
+    		if(MemberInformation.editUser(userID,userName, userPhone, userEmail, selectRole, userPassword, state, userSummary)==1)
+    		{
+    			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
+    			//dispatch.forward(request, response);
+    			response.sendRedirect("editUserDetail.jsp?actionID="+userID);
+    			return ;
+    		}
+    		else
+    		{
     			response.sendRedirect("error.jsp");
     			return ;
     		}
