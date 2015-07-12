@@ -111,8 +111,8 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="personal-info.html">个人信息</a></li>
-                        <li><a href="user-list.html">联系人</a></li>
+                        <li><a href=<%="editUserDetail.jsp?actionID="+session.getAttribute("account") %>>个人信息</a></li>
+                        <li><a href="contacts.jsp">联系人</a></li>
                         <!--<li><a href="#">Account settings</a></li>
                         <li><a href="#">Billing</a></li>
                         <li><a href="#">Export your data</a></li>
@@ -148,16 +148,30 @@
                 </a>
             </li>   
             <li>
-                <a href=#">
-                    <i class="icon-th-large"></i>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
                     <span>项目</span>
+                    <i class="icon-chevron-down"></i>
                 </a>
+                <ul class="submenu">
+                	<li><a href="newproject.jsp"> </i>新建项目</a></li>
+                    <li><a href="displayProject.jsp">查看项目</a></li>
+                </ul>
             </li>
             <li>
-                <a href=#">
+                <a class="dropdown-toggle" href="#">
                     <i class="icon-tasks"></i>
                     <span>任务</span>
+                    <i class="icon-chevron-down"></i>
                 </a>
+                <ul class="submenu">
+                	<li><a href="newTask.jsp">创建任务</a></li>
+                    <li><a href="displayTask.jsp">查看任务</a></li>
+                    <li><a href="createTasklog.jsp">创建任务日志</a></li>
+                    <li><a href="displayTask.jsp">创建问题跟踪单</a></li>
+                    <li><a href="problemloglist.jsp">查看问题跟踪单</a></li>
+                    <li><a href="displayDealwithProblemlog.jsp">查看处理问题跟踪单</a></li>
+                </ul>
             </li>
             <li>
                 <a href="contacts.jsp">
@@ -165,13 +179,12 @@
                     <span>联系人</span>
                 </a>
             </li>
-            <li>
-                <a href="calendar.html">
+             <li>
+                <a href="calendar.jsp">
                     <i class="icon-calendar-empty"></i>
                     <span>日程表</span>
                 </a>
-            </li>     
-            
+            </li>    
             <li>
                 <a class="dropdown-toggle" >
                     <i class="icon-user"></i>
@@ -183,15 +196,23 @@
                     <li><a href="newuser.jsp">添加用户</a></li>
                 </ul>
             </li>    
-            <li>
-                <a href="personal-info.html">
-                    <i class="icon-cog"></i>
-                    <span>系统管理</span>
-                </a>
-            </li>
             
             <li>
-                <a href="signin.html">
+            	
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-cog"></i>
+                    <span>系统管理</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                	<li><a href="setworktime.jsp">设定工时数据</a></li>
+                    <li><a href="roleeditor.jsp">角色管理</a></li>
+                </ul>
+            </li>
+            
+            
+            <li>
+                <a href="#">
                     <i class="icon-share-alt"></i>
                     <span>退出</span>
                 </a>

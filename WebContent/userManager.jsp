@@ -34,7 +34,6 @@
 <body>
 
 <%@ include file="boot.jsp" %>
-<%! int tempID=-1; %>
 	<!-- main container -->
     <div class="content">
         
