@@ -63,7 +63,7 @@
                     <!-- left column -->
                     
                         <div class="container">
-                        <form class="new_user_form inline-input" action="RoleManager"/>
+                        		<form class="new_user_form inline-input" action="RoleManager"/>
                             	<input name="operation" value="addUserRole" type="hidden" />        
                                 <div>
                                     <label>角色名称:</label>

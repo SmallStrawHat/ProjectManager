@@ -52,8 +52,8 @@ public class RoleInfomation {
 	{
 		int i,num;
 
-//		num = RoleInfomation.userRoleList.size();
-		num = 9;
+		num = RoleInfomation.userRoleList.size();
+
 		for(i=0;i<num;i++)
 		{
 			String tempRole = ((Role)RoleInfomation.userRoleList.get(i)).getUserRole();
@@ -74,99 +74,6 @@ public class RoleInfomation {
 		return 0;
 	}
 	
-	public static int startUser(int userID)
-	{
-		int i;
-		for(i=0;i<RoleInfomation.userRoleList.size();i++)
-		{
-			int tempUserID = ((User)RoleInfomation.userRoleList.get(i)).getUserID();
-			if(tempUserID == userID)
-			{
-				if(Myuser.update(userID,1)==1)
-				{
-					((User)RoleInfomation.userRoleList.get(i)).setUserState(1);
-					return 1;
-				}
-				
-			}
-		}
-		return 0;
-	}
-	
-	public static int pauseUser(int userID)
-	{
-		int i;
-		for(i=0;i<RoleInfomation.userRoleList.size();i++)
-		{
-			int tempUserID = ((User)RoleInfomation.userRoleList.get(i)).getUserID();
-			if(tempUserID == userID)
-			{
-				if(Myuser.update(userID,0)==1)
-				{
-					((User)RoleInfomation.userRoleList.get(i)).setUserState(0);
-					return 1;
-				}
-				
-			}
-		}
-		return 0;
-	}
-	
-	public static User seachUser(int userID)
-	{
-		User res = null;
-		int i;
-		for(i=0;i<RoleInfomation.userRoleList.size();i++)
-		{
-			int tempUserID = ((User)RoleInfomation.userRoleList.get(i)).getUserID();
-			if(tempUserID == userID)
-			{
-				return (User)RoleInfomation.userRoleList.get(i);
-			}
-			
-		}
-		return res;
-	}
-	
-	public static int editUser(int userID,String name,String phone,String email,
-			String userRole,String password,int userState)
-	{
-		int i;
-		for(i=0;i<RoleInfomation.userRoleList.size();i++)
-		{
-			int tempUserID = ((User)RoleInfomation.userRoleList.get(i)).getUserID();
-			if(tempUserID == userID)
-			{
-				((User)RoleInfomation.userRoleList.get(i)).setUserInformation(name, phone, email, userRole, password, userState);
-				return 1;
-			}
-		}
-		return 0;
-	}
-	
-	public static int searchUserLog(String logPath)
-	{
-		//ͨ��·����ֱ�Ӷ�ȡ���ݿ⡣
-		return 1;
-	}
-	
-	/*public static void main(String arg[])
-	{
-		MemberInformation.init();
-    	Vector user = MemberInformation.getUserList();
-    	for(int i=0;i<user.size();i++)
-    	{
-    		User tempUser = (User)user.get(i);
-    		if(tempUser.getUserRole() != null)
-    		{
-    			System.out.println(tempUser.getUserRole());
-    		}
-    	}
-    		
-    	
-    	System.out.println(user.size());
-	}
-	*/
-	
+
 	
 }

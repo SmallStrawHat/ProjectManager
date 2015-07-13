@@ -23,45 +23,6 @@ public class Role {
 		this.Authorization = authorization;
 	}
 	
-	/*
-	public static Role search(int account)
-	{
-		Myuser findRes = null;
-		Connection conn =null;
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
-			Statement stm = conn.createStatement();
-			String sql = "select * from role where user_id="+account+";";
-			ResultSet res = stm.executeQuery(sql);
-			while(res.next())
-			{
-				findRes = new Myuser(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),
-						res.getString(6),res.getInt(7),res.getString(8),res.getString(9));
-			}
-			res.close();
-		}
-		catch(Exception e)
-		{
-			System.out.println(e.getMessage());
-		}
-		finally{
-			try
-			{
-				if(conn != null)
-					conn.close();
-			}
-			catch(Exception e)
-			{
-				System.out.println(e.getMessage());
-			}
-		}
-		
-		return findRes;
-	}
-	*/
-	
 	public static Vector searchAll()
 	{
 		Vector resVec = new Vector(10,6);

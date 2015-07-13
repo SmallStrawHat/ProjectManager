@@ -90,54 +90,8 @@
                                     </th>
                                 </tr>
                             </thead>
-                           <!-- <tbody>
-                                <!-- row -->
-                                <!-- <tr class="first">
-                                    <td>
-                                        <a href="#" class="name">管理员 </a>
-                                    </td>
-                                    <td class="description">
-                                    	拥有本系统的最大管理权限，可以对系统内所有项目进行管理。
-                                    </td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li><a href="#">修改</a></li>
-                                            <li class="last"><a href="#">删除</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <!--
-                                <tr>
-                                    <td>
-                                        <a href="#" class="name">项目经理</a>
-                                    </td>
-                                    <td class="description">
-                                    	拥有其参与具体项目的最大管理权限。
-                                    </td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li><a href="#">修改</a></li>
-                                            <li class="last"><a href="#">删除</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <!--
-                                <tr>
-                                    <td>
-                                        <a href="#" class="name">项目人员</a>
-                                    </td>
-                                    <td class="description">
-                                    	 拥有其参与具体项目的部分管理权限。
-                                    </td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li><a href="#">修改</a></li>
-                                            <li class="last"><a href="#">删除</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>-->
-                                
-                         <!--    </tbody>-->
+                          
+
                          <% RoleInfomation.init();
                             	Vector role = RoleInfomation.getUserList();
                             	for(int i=0;i<role.size();i++)
