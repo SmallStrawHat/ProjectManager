@@ -2,6 +2,8 @@ package com.business;
 
 import java.util.*;
 import com.database.DataProject;
+import com.database.DataTask;
+import com.database.DataUserTask;
 
 public class ProjectManagement {
 	private static Vector projectlist;
@@ -15,9 +17,21 @@ public class ProjectManagement {
 		for(int i=0;i<DataProject.allProject().size();i++)
 		{
 			DataProject temp=(DataProject)(DataProject.allProject().get(i));
-			Vector tasklist=new Vector();
-//记得处理任务列表  未完成！！！！！！！！！！！！！！！！！！！！！！！！！
-
+			Vector tasklist=DataTask.searchProjectTask(temp.getId());
+			for(int j=0;j<tasklist.size();j++)
+			{
+				Task tempTask = (Task)tasklist.get(j);
+				Vector userList = DataUserTask.searchUserIDList(tempTask.getTaskID());
+				for(int k=0;k<userList.size();k++)
+				{
+					int userID = ((Integer)userList.get(k)).intValue();
+					User tempUser = MemberInformation.seachUser(userID);
+					///可能有问题？？？？？？？
+					(tempTask.getUserList()).add(tempUser);
+				}
+			}
+			
+			
 			Project pro=new Project(temp.getId(),temp.getName(),temp.getStarttime(),temp.getExpectendtime(),
 					temp.getActualendtime(),temp.getBudget(),temp.getManagerid(),temp.getState(),temp.getPriority(),
 					temp.getSchedule(),temp.getWorkedtime(),temp.getPlantime(),temp.getActualtime(),
@@ -28,6 +42,9 @@ public class ProjectManagement {
 		return 1;
 		
 	}
+	
+	
+	
 	public static int createProject(String name,String start,String end,float budget,int managerid,
 			String state,int priority,float plantime,String summary)
 	{

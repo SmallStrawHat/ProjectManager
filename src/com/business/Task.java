@@ -55,6 +55,11 @@ public class Task {
 		this.userList = new Vector(10,6);;
 	}
 	
+	public Vector getUserList()
+	{
+		return this.userList;
+	}
+	
 	public int addUser(User temp)
 	{
 		this.userList.add(temp);

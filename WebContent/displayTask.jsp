@@ -118,7 +118,7 @@
                     				 <!-- row -->
                                 <tr class="first">
                                     <td>
-                                    	<a href="taskdetail.jsp" class="name"><%=tempTask.getTaskName()%></a>
+                                    	<a href=<%="taskdetail.jsp?taskID="+tempTask.getTaskID()+"&projName="+tempPro.getName()%> class="name"><%=tempTask.getTaskName()%></a>
                                     </td>
                                     <td>
                                         <%=tempTask.getStartTime()%>
@@ -127,7 +127,7 @@
                                         <%=tempTask.getPlanEndtime()%>
                                     </td>
                                     <td>
-                                        <a href="#"><%=tempPro.getName()%></a>
+                                        <a href=<%="projectdetail.jsp?targetID="+tempPro.getId()%>><%=tempPro.getName()%></a>
                                     </td>
                                     <td>
                                         <%=tempTask.getRate()%>%

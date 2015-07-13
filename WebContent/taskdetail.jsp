@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.business.*,java.util.Vector" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,33 +54,79 @@
                 <div class="row-fluid form-wrapper">
                     <!-- left column -->
                     <div class="span8 column">
+                    
+                    <%
+                    	int taskID = Integer.parseInt(request.getParameter("taskID"));
+                    	String projectName = new String(request.getParameter("projName").getBytes("ISO-8859-1"),"utf-8");
+                    	Task detailTask = TaskManager.searchTask(taskID);
+                    	
+                    	
+                    %>
                         <form />
                         	<div class="field-box">
                                 <label>所属项目:</label>
-                                <input class="span8 inline-input" type="text" readonly="readonly" value="时间管理项目" />
+                                <input class="span8 inline-input" type="text" readonly="readonly"  value=<%=projectName %> />
                             </div>
                             <div class="field-box">
                                 <label>任务名称:</label>
-                                <input class="span8 inline-input" type="text" readonly="readonly" value="计划书编写" />
+                                <input class="span8 inline-input" type="text" readonly="readonly" value=<%=detailTask.getTaskName()%> />
                             </div>
                         	
                             
                             <div class="span12 field-box">
                             	<label>任务状态:</label>
-                            	<span class="label label-success">Completed</span>
+                            	<%
+                                    		if(detailTask.getState().equals("进行中的"))
+                                    		{
+                                    			%>
+                                    			<span class="label label-info">Progress</span>
+                                    			<%
+                                    		}
+                                    		if(detailTask.getState().equals("已经完成"))
+                                			{
+                                    			%>
+                                    			<span class="label label-success">Completed</span>
+                                    			<%
+                                			}
+                                    		if(detailTask.getState().equals("出现问题"))
+                                    		{
+                                    			%>
+                                    			<span class="label label-warning">Warning</span>
+                                    			<%
+                                    		}
+                                    		
+                                    	%>
                             </div>
                             <div class="span12 field-box">
                                     <label>是否是里程碑:</label>
                                     <div class="row ctrls">
 	                            		<div class="slider-frame primary">
-                                			<span data-on-text="YES" data-off-text="NO" class="slider-button">NO</span>
+	                            			<%
+                                    		if(detailTask.getMilepost() ==1)
+                                    		{
+                                    			%>
+                                    			<span data-on-text="YES" data-off-text="NO" class="slider-button">YES</span>
+                                    			<%
+                                    		}
+                                    		else
+                                    		{
+                                    			%>
+                                    			<span data-on-text="YES" data-off-text="NO" class="slider-button">NO</span>
+                                    			<%
+                                    		}
+                                    		
+                                    	%>
+                                			
                             			</div>
                         			</div>    
                             </div>
                             <div class="field-box">
                                 <label>任务进度:</label>
                                     <div class="progress progress-striped active">
-      									<div class="bar" style="width: 40%;"></div>
+                                    <%
+                                    	int rateDis = (int)detailTask.getRate();
+                                    %>
+      									<div class="bar" style="width: <%=rateDis%>%;"></div>
     								</div>
                             </div>
                             <ul class="nav nav-list">
@@ -96,34 +143,56 @@
                 			<div class="span12 field-box">
                             	
                                 <label >任务优先级:</label>
-                                <input class="span2 inline-input" type="text" readonly="readonly" value="正常" />
+                                <%
+                                    		if(detailTask.getLevel() ==1)
+                                    		{
+                                    			%>
+                                    			<input class="span2 inline-input" type="text" readonly="readonly" value="正常" />
+                                    			<%
+                                    		}
+                                    		else
+                                    		{
+                                    			%>
+                                    			<input class="span2 inline-input" type="text" readonly="readonly" value="最高" />
+                                    			<%
+                                    		}
+                                    		
+                                    	%>
                             </div>
                             <div class="field-box">
                                 <label>开始时间:</label>
-                                <input class="span3 " type="text" readonly="readonly" value="03/09/2015" />
+                                <input class="span3 " type="text" readonly="readonly" value=<%=detailTask.getStartTime()%> />
                             </div>
                             <div class="field-box">
                                 <label>预期结束时间:</label>
-                                <input class="span3 " type="text" readonly="readonly" value="03/09/2015" />
+                                <input class="span3 " type="text" readonly="readonly" value=<%=detailTask.getPlanEndtime()%> />
                             </div>
                              <div class="field-box">
                                 <label>父任务名称:</label>
-                                <input class="span8 " type="text" readonly="readonly" value="发生法发达" />
+                                <input class="span8 " type="text" readonly="readonly" value="无" />
                             </div>
                             <div class="field-box">
                                 <label>预算指标:</label>
                                 <div class="input-append">
-                                    <input class="input-large" type="text" readonly="readonly" placeholder="0" />
+                                    <input class="input-large" type="text" readonly="readonly" value=<%=detailTask.getBudget()%> />
                                     <span class="add-on">万元</span>
                                 </div>
                             </div>
                             <div class="field-box">
                                 <label>人力资源:</label>
-                                <input class="span8 " type="text" readonly="readonly" value="发生法发达" />
+                                <%
+                                	String userList = "";
+                                	Vector list = detailTask.getUserList();
+                                	for(int i=0;i<list.size();i++)
+                                	{
+                                		userList += ((User)list.get(i)).getName()+",";
+                                	}
+                                %>
+                                <input class="span8 " type="text" readonly="readonly" value=<%=userList %> />
                             </div>
                             <div class="field-box">
                                 <label>简介:</label>
-                                <textarea class="span9" rows="4"></textarea>
+                                <textarea class="span9" rows="4"><%=detailTask.getSummary() %></textarea>
                             </div>
                             
                     </div>

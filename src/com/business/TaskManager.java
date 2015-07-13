@@ -70,5 +70,28 @@ public class TaskManager {
 		}
 		return resTask;
 	}
+	
+
+	
+	public static Task searchTask(int taskID)
+	{
+		Task resTask = null;
+		Vector projecList = ProjectManagement.getAllProjectList();
+		for(int i=0;i<projecList.size();i++)
+		{
+			Project tempPro = (Project)projecList.get(i);
+			Vector taskList = tempPro.getTaskList();
+			for(int j=0;j<taskList.size();j++)
+			{
+				Task tempTask = (Task)taskList.get(j);
+				if(tempTask.getTaskID() == taskID)
+				{
+					resTask = tempTask;
+					return resTask;
+				}
+			}
+		}
+		return resTask;
+	}
 
 }

@@ -57,7 +57,6 @@
 			<div id="pad-wrapper" class="user-profile">
 				<!-- header -->
 				<%  
-	              ProjectManagement.init();  
 				String str=request.getParameter("targetID");
 
 	              Project p=ProjectManagement.searchProject(Integer.parseInt(str));
