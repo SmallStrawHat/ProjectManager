@@ -50,7 +50,7 @@
                 <div class="table-wrapper orders-table section">
                     <div class="row-fluid head">
                         <div class="span12">
-                            <h3>查看问题跟踪单</h3>
+                            <h3>处理问题跟踪单</h3>
                         </div>
                     </div>
 

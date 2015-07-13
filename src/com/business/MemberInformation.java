@@ -128,6 +128,22 @@ public class MemberInformation {
 		return res;
 	}
 	
+	public static Vector seachUserToRole(String role)
+	{
+		Vector res = new Vector(10,6);
+		int i;
+		for(i=0;i<MemberInformation.userList.size();i++)
+		{
+			String tempUserRole = ((User)MemberInformation.userList.get(i)).getUserRole();
+			if(tempUserRole.equals(role))
+			{
+				res.add((User)MemberInformation.userList.get(i));
+			}
+			
+		}
+		return res;
+	}
+	
 	public static int editUser(int userID,String name,String phone,String email,
 			String userRole,String password,int userState,String summary)
 	{

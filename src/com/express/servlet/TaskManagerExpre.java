@@ -39,6 +39,38 @@ public class TaskManagerExpre extends HttpServlet {
     	
     	String function = request.getParameter("functionMy");
     	
+    	
+    	if(function.equals("createProblemLog"))
+    	{
+    		int status = 1;
+    		String problemDescreption = new String(request.getParameter("problemDescreption").getBytes("ISO-8859-1"),"utf-8");
+    		int taskID = Integer.parseInt(request.getParameter("taskID"));
+    		int dealUserID = Integer.parseInt(request.getParameter("dealUserID"));
+    		int createUserID = Integer.parseInt(request.getParameter("createUserID"));
+    		String createTime = request.getParameter("createTime");
+
+    		String[] tempTime = createTime.split("/");
+    		createTime = tempTime[0]+" "+tempTime[1];
+    
+
+    		if(com.business.TaskManager.createProblemLog(taskID,createTime,createUserID,dealUserID,
+    				status,problemDescreption)==1)
+    		{
+    			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
+    			//dispatch.forward(request, response);
+    			response.sendRedirect("displayTask.jsp");
+    			return ;
+    		}
+    		else
+    		{
+    			//
+    			//RequestDispatcher dispatch = request.getRequestDispatcher("error.jsp");
+    			//dispatch.forward(request, response);
+    			response.sendRedirect("error.jsp");
+    			return ;
+    		}
+    	}
+    	
     	if(function.equals("createTask"))
     	{
     		String taskName = new String(request.getParameter("taskName").getBytes("ISO-8859-1"),"utf-8");

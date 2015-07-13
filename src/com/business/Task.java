@@ -17,6 +17,7 @@ public class Task {
 	private String planEndtime;
 	private String tasklogPath;
 	private Vector userList;
+	private Vector problemlist;
 	
 	public Task()
 	{
@@ -34,6 +35,7 @@ public class Task {
 		this.planEndtime = "";
 		this.tasklogPath = "";
 		this.userList = new Vector(10,6);
+		this.problemlist = new Vector(10,6);
 	}
 	
 	public Task(int taskID,String taskName,String state,float rate,int level,int milepost,float budget,int fathertaskID,
@@ -52,7 +54,18 @@ public class Task {
 		this.endTime = endTime;
 		this.planEndtime = planEndtime;
 		this.tasklogPath = tasklogPath;
-		this.userList = new Vector(10,6);;
+		this.userList = new Vector(10,6);
+		this.problemlist = new Vector(10,6);
+	}
+	
+	public void addProblemLog(ProblemLog problem)
+	{
+		this.problemlist.add(problem);
+	}
+	
+	public Vector getProblemList()
+	{
+		return this.problemlist;
 	}
 	
 	public Vector getUserList()
@@ -77,7 +90,7 @@ public class Task {
 	}
 	
 	public String getStartTime()
-	{
+	{ 
 		return this.startTime;
 	}
 	

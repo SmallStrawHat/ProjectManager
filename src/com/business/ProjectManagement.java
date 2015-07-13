@@ -1,6 +1,8 @@
 package com.business;
 
 import java.util.*;
+
+import com.database.DataProblemLog;
 import com.database.DataProject;
 import com.database.DataTask;
 import com.database.DataUserTask;
@@ -28,6 +30,12 @@ public class ProjectManagement {
 					User tempUser = MemberInformation.seachUser(userID);
 					///可能有问题？？？？？？？
 					(tempTask.getUserList()).add(tempUser);
+				}
+				Vector problemList = DataProblemLog.search(tempTask.getTaskID());
+				for(int k=0;k<problemList.size();k++)
+				{
+					ProblemLog tempPro = (ProblemLog)problemList.get(k);
+					tempTask.addProblemLog(tempPro);
 				}
 			}
 			

@@ -158,8 +158,8 @@
                                     </td>
                                     
                                     <td>
-                                        <a href="createProblemlog.jsp" class="name">创建跟踪单</a>    
-                                		<a href="dealwithProblemlog.jsp" class="name">处理跟踪单</a>
+                                        <a href=<%="createProblemlog.jsp?taskID="+tempTask.getTaskID() %> class="name">创建跟踪单</a>    
+
                                     </td>
                                 </tr>
                     				

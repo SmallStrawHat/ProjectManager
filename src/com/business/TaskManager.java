@@ -2,6 +2,7 @@ package com.business;
 import java.util.Vector;
 
 import com.business.*;
+import com.database.DataProblemLog;
 import com.database.DataTask;
 import com.database.DataUserTask;
 
@@ -9,6 +10,27 @@ public class TaskManager {
 	
 	public TaskManager()
 	{}
+	
+	public static int createProblemLog(int taskID,String createTime,int createUserID,int dealUserID,
+			int status,String problemDescreption)
+	{
+		Task tempTask = TaskManager.searchTask(taskID);
+		if(tempTask != null)
+		{
+			int problemID = DataProblemLog.insert(taskID, createTime, createUserID, dealUserID, status, problemDescreption, "");
+			if(problemID!=0)
+			{
+				//插入内存
+				/*int problemID,int taskID,String createTime,int createUserID,int dealUserID,
+				int status,String problemDescreption,String logpath*/
+				ProblemLog tempProblem = new ProblemLog(problemID,taskID,createTime,createUserID,
+						dealUserID,status,problemDescreption,"");
+				tempTask.addProblemLog(tempProblem);
+				return 1;
+			}
+		}
+		return 0;
+	}
 	
 	public static int createTask(int projectID,Task addTask,String[] userList)
 	{
@@ -69,6 +91,29 @@ public class TaskManager {
 			}
 		}
 		return resTask;
+	}
+	
+	public static Vector searchAllProblem()
+	{
+		Vector resProblem = new Vector(10,6);
+		Vector projecList = ProjectManagement.getAllProjectList();
+		for(int i=0;i<projecList.size();i++)
+		{
+			Project tempPro = (Project)projecList.get(i);
+			Vector taskList = tempPro.getTaskList();
+			for(int j=0;j<taskList.size();j++)
+			{
+				Task tempTask = (Task)taskList.get(j);
+				Vector tempProblem = tempTask.getProblemList();
+				for(int k=0;k<tempProblem.size();k++)
+				{
+					ProblemLog problem = (ProblemLog)tempProblem.get(k);
+					resProblem.add(problem);
+				}
+				
+			}
+		}
+		return resProblem;
 	}
 	
 

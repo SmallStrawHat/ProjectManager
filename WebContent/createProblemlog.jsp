@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.business.*,java.util.Date,java.util.Vector,java.util.Calendar,java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,49 +64,52 @@
                     <!-- left column -->
                     <div class="span9 with-sidebar">
                         <div class="container">
-                            <form class="new_user_form inline-input" />
-                            
-                            <div class="span12 field-box">
-                                    <label>问题单ID:</label>
-                                    <input class="span9" type="text" />
-                                </div>
+                            <form class="new_user_form inline-input" action="TaskManagerExpre" method="post" />
+                            	<input name="functionMy" value="createProblemLog" type="hidden" />
+                                    <%
+                                    Date date=new Date();
+                                    SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    String realDate = format.format(date); 
+                                    String[] temp = realDate.split(" ");
+                                    realDate = temp[0]+"/"+temp[1];
+                                    %>
+                                    <input name="createTime" class="span9" type="hidden"  value=<%=realDate %> />
+                                    <input name="taskID" class="span9" type="hidden"  value=<%=request.getParameter("taskID") %> />
+
                                 <div class="span12 field-box">
-                                    <label>问题单路径:</label>
-                                     <input class="span9" type="text" />                                  
+                                    <label>创建人:</label>
+                                    <%  int userID = Integer.parseInt((String)session.getAttribute("account"));
+                                    	String userName = MemberInformation.seachUser(userID).getName();
+                                    %>
+                                    <input name="createUserID" class="span9" type="hidden"  value=<%="'"+userID+"'"%>/>
+                                    <input  class="span9" type="text" readonly="readonly" value=<%=userName %> />
                                 </div>
-                                <div class="span12 field-box">
-                                    <label>处理人ID:</label>
-                                    <div class="dropdown"> 
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">                                     
-                                        选择处理人 
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">选择1</a></li>
-                                        <li><a href="#">选择2</a></li> 
-                                        <li><a href="#">选择3</a></li>  
-                                        <li><a href="#">Separated link</a></li> 
-                                    </ul>
-                                </div>
-                                </div>
-                                 <div class="span12 field-box">
-                                    <label>创建人ID:</label>
-                                    <input class="span9" type="text" /> 
-                                </div>
-                                <div class="span12 field-box">
-                                    <label>任务ID:</label>
-                                     <input class="span8 inline-input" type="text" readonly="readonly" value="匹配任务ID（只读）" />
-                                </div>      
+                                
+                                  <div class="span12 field-box">
+                                    <label>选择处理人:</label>
+                                    <div class="ui-select span5">
+                                        <select name="dealUserID" >
+                                        <%Vector userList = MemberInformation.seachUserToRole("项目经理"); 
+                                        	for(int i=0;i<userList.size();i++)
+                                        	{
+                                        		User tempUser = (User)userList.get(i);
+                                        		
+                                        %>
+                                            <option value=<%="'"+tempUser.getUserID()+"'" %> /><%=tempUser.getName() %>
+                                            
+                                            <%} %>
+                                        </select>
+                                    </div>
+                                  </div>
+
                                 <div class="field-box">
                                 <label>问题概述:</label>
-                                <textarea class="span8" type="text"></textarea>    
+                                <textarea name="problemDescreption" class="span8" type="text"></textarea>    
                                  </div>  
                                 
                                                                
                                 <div class="span11 field-box actions">
-                                    <input type="button" class="btn-glow primary" value="提交" />
-                                    <span>OR</span>
-                                    <input type="reset" value="Cancel" class="reset" />
+                                    <input type="submit" class="btn-glow primary" value="确定创建" />
                                 </div>
                             
                             </form>

@@ -167,10 +167,8 @@
                 <ul class="submenu">
                 	<li><a href="newTask.jsp">创建任务</a></li>
                     <li><a href="displayTask.jsp">查看任务</a></li>
-                    <li><a href="createTasklog.jsp">创建任务日志</a></li>
-                    <li><a href="displayTask.jsp">创建问题跟踪单</a></li>
                     <li><a href="problemloglist.jsp">查看问题跟踪单</a></li>
-                    <li><a href="displayDealwithProblemlog.jsp">查看处理问题跟踪单</a></li>
+                    <li><a href="dealProblemlog.jsp">处理问题跟踪单</a></li>
                 </ul>
             </li>
             <li>
