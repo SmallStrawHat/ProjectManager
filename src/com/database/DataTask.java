@@ -132,7 +132,7 @@ public class DataTask {
 			
 			
 			stm.close();
-			return 1;
+			return taskID;
 		}
 		catch(Exception e)
 		{
@@ -153,9 +153,9 @@ public class DataTask {
 	}
 	
 	
-	/*public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		DataTask.add("test","wenti",50.23,1,1,1,20.23,-1,"zongjie",,String endTime,String planEndtime,String tasklogPath);
 	}*/
 
 }

@@ -82,7 +82,7 @@
 						</thead>
 
 						<% Vector p=new Vector();
-						    p=ProjectManagement.init();                       
+						    p=ProjectManagement.getAllProjectList();                       
 							                 
 							    for(int i=0;i<p.size();i++)                       
 							    {                       	

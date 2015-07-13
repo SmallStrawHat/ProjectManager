@@ -1,5 +1,7 @@
 package com.business;
 
+import java.util.Vector;
+
 public class Task {
 	private int taskID;
 	private String taskName;
@@ -14,6 +16,7 @@ public class Task {
 	private String endTime;
 	private String planEndtime;
 	private String tasklogPath;
+	private Vector userList;
 	
 	public Task()
 	{
@@ -30,6 +33,7 @@ public class Task {
 		this.endTime = "";
 		this.planEndtime = "";
 		this.tasklogPath = "";
+		this.userList = new Vector(10,6);
 	}
 	
 	public Task(int taskID,String taskName,String state,float rate,int level,int milepost,float budget,int fathertaskID,
@@ -48,15 +52,14 @@ public class Task {
 		this.endTime = endTime;
 		this.planEndtime = planEndtime;
 		this.tasklogPath = tasklogPath;
+		this.userList = new Vector(10,6);;
 	}
 	
-	/*
-
-
-	private String startTime;
-	private String endTime;
-	private String planEndtime;
-	private String tasklogPath;*/
+	public int addUser(User temp)
+	{
+		this.userList.add(temp);
+		return 1;
+	}
 	
 	public String getTasklogPath()
 	{

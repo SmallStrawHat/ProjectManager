@@ -46,6 +46,11 @@ public class Project {
     	
     }
     
+    public Vector getTaskList()
+    {
+    	return this.taskList;
+    }
+    
 	public int getId() {
 		return id;
 	}
@@ -134,7 +139,7 @@ public class Project {
 	public int addTask(Task task)
     {
 		this.taskList.add(task);
-    	return 0;
+    	return 1;
     }
 	
 	/*public static void init(){

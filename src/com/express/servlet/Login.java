@@ -56,7 +56,11 @@ public class Login extends HttpServlet {
         	if(password.equals(res.getPassword()))
         	{
         		session.setAttribute("account", account);
+        		
+        		/*初始化数据到内存*/
         		MemberInformation.init();
+        		ProjectManagement.init();
+        		
         		RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
     			dispatch.forward(request, response);
     			return ;

@@ -1,13 +1,16 @@
 package com.business;
+import java.util.Vector;
+
 import com.business.*;
 import com.database.DataTask;
+import com.database.DataUserTask;
 
 public class TaskManager {
 	
 	public TaskManager()
 	{}
 	
-	public static int createTask(int projectID,Task addTask)
+	public static int createTask(int projectID,Task addTask,String[] userList)
 	{
 		Project project = ProjectManagement.searchProject(projectID);
 		if(project != null)
@@ -28,9 +31,19 @@ public class TaskManager {
 				String planEndtime = addTask.getPlanEndtime();
 				String tasklogPath = addTask.getTasklogPath();
 				
-				if(DataTask.add(taskName, state, rate, level, projectID, milepost, budget, fathertaskID, summary, startTime, endTime, planEndtime, tasklogPath)==1)
+				int taskID = DataTask.add(taskName, state, rate, level, projectID, milepost, budget, fathertaskID, summary, startTime, endTime, planEndtime, tasklogPath);
+				if(taskID !=0)
 				{
-					return 1;
+					if(DataUserTask.insert(taskID, userList)==1)
+					{
+						for(int i=0;i<userList.length;i++)
+						{
+							int userID = Integer.parseInt(userList[i]);
+							User temp = MemberInformation.seachUser(userID);
+							addTask.addUser(temp);
+						}
+						return 1;
+					}
 				}				
 			}
 			else
@@ -39,6 +52,23 @@ public class TaskManager {
 			}
 		}
 		return 0;
+	}
+
+	public static Vector searchAllTask()
+	{
+		Vector resTask = new Vector(10,6);
+		Vector projecList = ProjectManagement.getAllProjectList();
+		for(int i=0;i<projecList.size();i++)
+		{
+			Project tempPro = (Project)projecList.get(i);
+			Vector taskList = tempPro.getTaskList();
+			for(int j=0;j<taskList.size();j++)
+			{
+				Task tempTask = (Task)taskList.get(j);
+				resTask.add(tempTask);
+			}
+		}
+		return resTask;
 	}
 
 }

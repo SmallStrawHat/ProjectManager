@@ -89,7 +89,7 @@
                                 </tr>
                             </thead>
                             
-                            <% MemberInformation.init();
+                            <% 
                             	Vector user = MemberInformation.getUserList();
                             	for(int i=0;i<user.size();i++)
                             	{

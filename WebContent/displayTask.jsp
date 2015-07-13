@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.business.*,java.util.Vector" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,25 +103,58 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- row -->
+                            <%
+                    		Vector projecList = ProjectManagement.getAllProjectList();
+                    		for(int i=0;i<projecList.size();i++)
+                    		{
+                    			Project tempPro = (Project)projecList.get(i);
+                    			Vector taskList = tempPro.getTaskList();
+                    			for(int j=0;j<taskList.size();j++)
+                    			{
+                    				Task tempTask = (Task)taskList.get(j);
+                    				
+                    				%>
+                    				
+                    				 <!-- row -->
                                 <tr class="first">
                                     <td>
-                                    	<a href="taskdetail.jsp" class="name">#459</a>
+                                    	<a href="taskdetail.jsp" class="name"><%=tempTask.getTaskName()%></a>
                                     </td>
                                     <td>
-                                        Jan 03, 2014
+                                        <%=tempTask.getStartTime()%>
                                     </td>
                                     <td>
-                                        Jan 03, 2014
+                                        <%=tempTask.getPlanEndtime()%>
                                     </td>
                                     <td>
-                                        <a href="#">John Smith</a>
+                                        <a href="#"><%=tempPro.getName()%></a>
                                     </td>
                                     <td>
-                                        3%
+                                        <%=tempTask.getRate()%>%
                                     </td>
                                     <td>
-                                        <span class="label label-success">Completed</span>
+                                    	<%
+                                    		if(tempTask.getState().equals("进行中的"))
+                                    		{
+                                    			%>
+                                    			<span class="label label-info">Progress</span>
+                                    			<%
+                                    		}
+                                    		if(tempTask.getState().equals("已经完成"))
+                                			{
+                                    			%>
+                                    			<span class="label label-success">Completed</span>
+                                    			<%
+                                			}
+                                    		if(tempTask.getState().equals("出现问题"))
+                                    		{
+                                    			%>
+                                    			<span class="label label-warning">Warning</span>
+                                    			<%
+                                    		}
+                                    		
+                                    	%>
+                                        
                                     </td>
                                     
                                     <td>
@@ -128,7 +162,13 @@
                                 		<a href="dealwithProblemlog.jsp" class="name">处理跟踪单</a>
                                     </td>
                                 </tr>
-                                
+                    				
+                    				
+                    				<%
+                    			}
+                    		}
+                            
+                            %>
                                
                             </tbody>
                         </table>

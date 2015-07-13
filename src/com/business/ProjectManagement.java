@@ -9,7 +9,7 @@ public class ProjectManagement {
 	
 	public ProjectManagement(){}
 	
-	public static Vector init(){
+	public static int init(){
 		projectlist=new Vector();
 		
 		for(int i=0;i<DataProject.allProject().size();i++)
@@ -25,7 +25,7 @@ public class ProjectManagement {
 			projectlist.add(pro);
 			
 		}
-		return projectlist;
+		return 1;
 		
 	}
 	public static int createProject(String name,String start,String end,float budget,int managerid,
@@ -52,6 +52,10 @@ public class ProjectManagement {
 				break;
 		}
 		return db;		
+	}
+	
+	public static Vector getAllProjectList(){
+		return ProjectManagement.projectlist;		
 	}
 
 	/*public static void main(String[] args)

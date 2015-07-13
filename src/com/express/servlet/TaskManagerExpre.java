@@ -41,22 +41,80 @@ public class TaskManagerExpre extends HttpServlet {
     	
     	if(function.equals("createTask"))
     	{
-    		String projectID = request.getParameter("projectID");
-    		/*
-    		 * 
-    		 * 
-    		 * 
-    		 * 
-    		 * */
+    		String taskName = new String(request.getParameter("taskName").getBytes("ISO-8859-1"),"utf-8");
+    		int projectID = Integer.parseInt(request.getParameter("projectSelect"));
+    		
+    		String state = request.getParameter("taskStateSelect");
+    		
+    		if(state.equals("S001"))
+    		{
+    			state="进行中的";
+    		}
+    		if(state.equals("S002"))
+    		{
+    			state="已经完成";
+    		}
+    		if(state.equals("S003"))
+    		{
+    			state="出现问题";
+    		}
+    		
+    		String levelStr = request.getParameter("taskLevelSelect");
+    		int level = 1;
+    		
+    		if(levelStr.equals("L002"))
+    		{
+    			level = 2;
+    		}
+    		
+    		int milepost = Integer.parseInt(request.getParameter("milepost"));
+    		float rate = Float.parseFloat(request.getParameter("rate"));
+    		String startTime = request.getParameter("startTime");
+    		String[] tempTime = startTime.split("/");
+    		if(tempTime.length==3)
+    		{
+    			startTime = tempTime[2]+"/"+tempTime[0]+"/"+tempTime[1];
+    		}
+    		else
+    		{
+    			startTime = "0/0/0";
+    		}
     		
     		
+    		String endTime = request.getParameter("endTime");
+    		tempTime = endTime.split("/");
+    		if(tempTime.length==3)
+    		{
+    			endTime = tempTime[2]+"/"+tempTime[0]+"/"+tempTime[1];
+    		}
+    		else
+    		{
+    			endTime = "0/0/0";
+    		}
     		
-    		Task task = new Task();
-    		if(com.business.TaskManager.createTask(Integer.parseInt(projectID), task)==1)
+    		String planEndtime = request.getParameter("planEndtime");
+    		tempTime = planEndtime.split("/");
+    		if(tempTime.length==3)
+    		{
+    			planEndtime = tempTime[2]+"/"+tempTime[0]+"/"+tempTime[1];
+    		}
+    		else
+    		{
+    			planEndtime = "0/0/0";
+    		}
+    		
+    		float budget = Float.parseFloat(request.getParameter("budget"));
+    		String[] userSelect = request.getParameterValues("userSelect");
+    		String summary = new String(request.getParameter("summary").getBytes("ISO-8859-1"),"utf-8");
+    		
+
+    		
+    		Task task = new Task(-1,taskName,state,rate,level,milepost,budget,-1,summary,startTime,endTime,planEndtime,"");
+    		if(com.business.TaskManager.createTask(projectID, task,userSelect)==1)
     		{
     			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
     			//dispatch.forward(request, response);
-    			response.sendRedirect("userManager.jsp");
+    			response.sendRedirect("displayTask.jsp");
     			return ;
     		}
     		else

@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.business.*,java.util.Vector" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,67 +54,43 @@
                 <div class="row-fluid form-wrapper">
                     <!-- left column -->
                     <div class="span8 column">
-
+ 					<%Vector project = ProjectManagement.getAllProjectList(); 
+ 						
+ 					%>
                     
-                        <form />
+                        <form action="TaskManagerExpre" method="post" />
+                        	<input name="functionMy" value="createTask" type="hidden" />
+                        	<input name="milepost" id="milepost" value="0" type="hidden" />
                             <div class="field-box">
                                 <label>任务名称:</label>
                                 <input name="taskName" class="span8" type="text" />
                             </div>
                             <div class="field-box">
                                 <label>选择所属项目:</label>
-                                <select style="width:250px" class="select2">
-                                    <option />
-                                    <option value="AK" />Alaska
-                                    <option value="HI" />Hawaii
-                                    <option value="CA" />California
-                                    <option value="NV" />Nevada
-                                    <option value="OR" />Oregon
-                                    <option value="WA" />Washington
-                                    <option value="AZ" />Arizona
-                                    <option value="CO" />Colorado
-                                    <option value="ID" />Idaho
-                                    <option value="MT" />Montana
-                                    <option value="NE" />Nebraska
-                                    <option value="NM" />New Mexico
-                                    <option value="ND" />North Dakota
-                                    <option value="UT" />Utah
-                                    <option value="WY" />Wyoming
-                                    <option value="AL" />Alabama
-                                    <option value="AR" />Arkansas
-                                    <option value="IL" />Illinois
-                                    <option value="IA" />Iowa
-                                    <option value="KS" />Kansas
-                                    <option value="KY" />Kentucky
-                                    <option value="LA" />Louisiana
-                                    <option value="MN" />Minnesota
-                                    <option value="MS" />Mississippi
-                                    <option value="MO" />Missouri
-                                    <option value="OK" />Oklahoma
-                                    <option value="SD" />South Dakota
-                                    <option value="TX" />Texas
-                                    <option value="TN" />Tennessee
-                                    <option value="WI" />Wisconsin
-                                    <option value="CT" />Connecticut
-                                    <option value="DE" />Delaware
-                                    <option value="FL" />Florida
+                                <select style="width:250px" class="select2" name="projectSelect">
+                                	<option />
+                               		<% for(int i=0;i<project.size();i++)
+                               		{	
+                               		%>
+                               		<option value=<%="'"+((Project)project.get(i)).getId()+"'"%> /><%=((Project)project.get(i)).getName()%>
+                               		<%} %>
                                 </select>
                             </div>
                             <div class="span12 field-box">
                             	<label>任务状态:</label>
-                                <div class="ui-select span3">
-                                	<select name="selectRole">
-                                    	<option value="P001" />进行中的
-                                        <option value="P002" />已经完成
-                                        <option value="P003" />出现问题
+                                <div class="ui-select span3" >
+                                	<select name="taskStateSelect">
+                                    	<option value="S001" />进行中的
+                                        <option value="S002" />已经完成
+                                        <option value="S003" />出现问题
                                     </select>
                                 </div>
                                 
                                 <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任务优先级:</label>
                                 <div class="ui-select span3">
-                                	<select name="selectRole">
-                                    	<option value="P001" />正常
-                                        <option value="P002" />最高
+                                	<select name="taskLevelSelect">
+                                    	<option value="L001" />正常
+                                        <option value="L002" />最高
                                     </select>
                                 </div>
                             </div>
@@ -121,7 +98,7 @@
                                     <label>是否是里程碑:</label>
                                     <div class="row ctrls">
 	                            		<div class="slider-frame primary">
-                                			<span data-on-text="YES" data-off-text="NO" class="slider-button">NO</span>
+                                			<span  data-on-text="YES" data-off-text="NO" class="slider-button">NO</span>
                             			</div>
                         			</div>    
                             </div>
@@ -141,21 +118,7 @@
                             <div class="row-fluid header">
                     				<h3>任务详细信息:</h3>
                 			</div>
-                			
-                			
-                			<!--                     	private int taskID;
-	private String taskName;
-	private String state;
-	private float rate;
-	private int level;
-	private int milepost;
-	private float budget;
-	private int fathertaskID;
-	private String summary;
-	private String startTime;
-	private String endTime;
-	private String planEndtime;
-	private String tasklogPath; -->
+
                 			
                 			<!-- 详细信息 -->
                             <div class="field-box">
@@ -164,17 +127,20 @@
                             </div>
                             <div class="field-box">
                                 <label>结束时间:</label>
-                                <input name="endTime" type="text" value="03/29/2014" class="input-large datepicker" />
+                                <input name="endTime" type="text" value="" class="input-large datepicker" />
                             </div>
                             <div class="field-box">
                                 <label>预期的期限:</label>
                                 <input name="planEndtime" type="text" value="03/29/2014" class="input-large datepicker" />
                             </div>
-                             <div class="field-box">
+                             <%-- <div class="field-box">
                                 <label>选择父任务:</label>
-                                <select style="width:250px" class="select2">
+                                <select style="width:250px" class="select2" name="fatherTaskSelect">
                                     <option />
                                     <option value="NONE" />无
+                                    <% Vector task = project.getTaskList();
+                                    
+                                    %>
                                     <option value="AK" />Alaska
                                     <option value="HI" />Hawaii
                                     <option value="CA" />California
@@ -185,7 +151,7 @@
                                     <option value="CO" />Colorado
                                     <option value="ID" />Idaho
                                 </select>
-                            </div>
+                            </div> --%>
                             <div class="field-box">
                                 <label>预算指标:</label>
                                 <div class="input-append">
@@ -195,37 +161,14 @@
                             </div>
                             <div class="field-box">
                                 <label>分配人力资源:</label>
-                                <select style="width:500px" multiple="" class="select2">
+                                <select style="width:500px" multiple="" class="select2" name="userSelect">
                                     <option />
-                                    <option value="AK" />Alaska
-                                    <option value="HI" selected="" />Hawaii
-                                    <option value="CA" />California
-                                    <option value="NV" />Nevada
-                                    <option value="OR" />Oregon
-                                    <option value="WA" />Washington
-                                    <option value="AZ" />Arizona
-                                    <option value="CO" />Colorado
-                                    <option value="ID" />Idaho
-                                    <option value="MT" />Montana
-                                    <option value="NE" />Nebraska
-                                    <option value="NM" />New Mexico
-                                    <option value="ND" />North Dakota
-                                    <option value="UT" />Utah
-                                    <option value="WY" />Wyoming
-                                    <option value="AL" />Alabama
-                                    <option value="AR" />Arkansas
-                                    <option value="IL" />Illinois
-                                    <option value="IA" />Iowa
-                                    <option value="KS" />Kansas
-                                    <option value="KY" />Kentucky
-                                    <option value="LA" />Louisiana
-                                    <option value="MN" />Minnesota
-                                    <option value="MS" />Mississippi
-                                    <option value="MO" />Missouri
-                                    <option value="OK" />Oklahoma
-                                    <option value="SD" />South Dakota
-                                    <option value="TX" />Texas
-                                    <option value="TN" />Tennessee
+                                    <% Vector user = MemberInformation.getUserList();
+                                    	for(int i=0;i<user.size();i++)
+                                    	{
+                                    %>
+                                    <option value=<%="'"+((User)user.get(i)).getUserID()+"'" %> /><%=((User)user.get(i)).getName()%>
+                                    <%} %>
                                 </select>
                             </div>
                             <div class="field-box">
@@ -279,8 +222,10 @@
             $('.slider-button').click(function() {
                 if ($(this).hasClass("on")) {
                     $(this).removeClass('on').html($(this).data("off-text"));   
+                    document.getElementById('milepost').value = '0';
                 } else {
                     $(this).addClass('on').html($(this).data("on-text"));
+                    document.getElementById('milepost').value = '1';
                 }
             });
 
