@@ -117,8 +117,9 @@
 										User user=(User) MemberInformation.seachUser(pro.getManagerid());
 										%>
 										
-                                        <%=user.getName()%>(ID:<%=pro.getManagerid() %>)</a>                                       
-										</td>
+                                      
+                                      <%=user.getName()%>(ID:<%=pro.getManagerid() %>)                                 
+								</td>
 								<td><%if(pro.getState().equals("进行中"))
                                     		{
                                     			%>
