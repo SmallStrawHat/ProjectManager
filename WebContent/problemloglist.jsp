@@ -58,12 +58,12 @@
                     	
                         <div class="pull-right">
                     
-                            <input type="text" class="search order-search" placeholder="输入所属的任务..." />
+                            <input name="search" id="search" onKeyDown="keydownEvent()" type="text" class="search order-search" placeholder="输入所属的任务..." />
                             
                             <div class="btn-group pull-right">
-                                <button class="glow left large">所有的</button>
-                                <button class="glow middle large">接收的</button>
-                                <button class="glow right large">创建的</button>
+                                <button onclick="myfilter('all')" class="glow left large">所有的</button>
+                                <button onclick="myfilter('receive')" class="glow middle large">接收的</button>
+                                <button onclick="myfilter('create')" class="glow right large">创建的</button>
                             </div>
                         </div>
                     </div>
@@ -95,10 +95,47 @@
                             </thead>
                             <tbody>
                            	<%
+                           	String searchCondition = request.getParameter("search");
+                            if(searchCondition !=null && searchCondition.equals("")!=true)
+            				{
+            					searchCondition = new String(searchCondition.getBytes("ISO-8859-1"),"utf-8");
+            				}
+                            
+                            String myfilter = request.getParameter("myfilter");
+                         
                            	Vector problemList = TaskManager.searchAllProblem();
                             		for(int i=0;i<problemList.size();i++)
                             		{
                             			ProblemLog problem = (ProblemLog)problemList.get(i);
+                            			Task tempTask = TaskManager.searchTask(problem.getTaskID());
+                            			String taskName = tempTask.getTaskName();
+                            			if(searchCondition !=null && searchCondition.equals("")!=true)
+                        				{
+                        					if(taskName.indexOf(searchCondition)==-1)
+                        					{
+                        						continue;
+                        					}
+                        				}
+                            			
+                            			if(myfilter !=null && myfilter.equals("")!=true)
+                        				{
+                            				int accountID = Integer.parseInt((String)session.getAttribute("account"));
+                        					if(myfilter.equals("create"))
+                        					{
+                        						if(accountID != problem.getCreateUserID())
+                        						{
+                        							continue;
+                        						}
+                        					}
+                        					
+                        					if(myfilter.equals("receive"))
+                        					{
+                        						if(accountID != problem.getDealUserID())
+                        						{
+                        							continue;
+                        						}
+                        					}
+                        				}
                            	%>
                     				
                     				 <!-- row -->
@@ -107,9 +144,6 @@
                                     	<a href="detailProblemlog.jsp" class="name"><%=problem.getProblemID()%></a>
                                     </td>
                                     <td>
-                                    	<%
-                                    		String taskName = TaskManager.searchTask(problem.getTaskID()).getTaskName();
-                                    	%>
                                         <%=taskName%>
                                     </td>
                                     <td>
@@ -176,6 +210,27 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
+    
+    <script type="text/javascript">
+     
+     	function myfilter(selec)
+     	{
+     		window.location.href="http://localhost:8080/ProjectManager/problemloglist.jsp?myfilter="+selec;
+     	}
+        
+        function keydownEvent() {
+
+            var e = window.event || arguments.callee.caller.arguments[0];
+
+            if (e && e.keyCode == 13 ) {
+
+            	var name = document.getElementById("search").value;
+            	window.location.href="http://localhost:8080/ProjectManager/problemloglist.jsp?search="+name;
+            }
+        }
+    </script>
+    
+    
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
