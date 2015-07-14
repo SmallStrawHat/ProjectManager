@@ -7,6 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+String temp = "hahahahah";
+%>
+<button onclick="select()"> 123</button>
+
+
+<script type="text/javascript">
+        function select()
+        {
+        	alert("<%=temp%>");
+        }
+    </script>
 
 </body>
 </html>

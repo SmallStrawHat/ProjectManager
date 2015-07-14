@@ -59,46 +59,11 @@
                 <div class="row-fluid header">
                     <h3>联系人</h3>
                     <div class="span10 pull-right">
-                        <input type="text" class="span5 search" placeholder="输入联系人的名字..." />
+                        <input name="search" id="search" type="text" class="span5 search" onKeyDown="keydownEvent()" placeholder="输入联系人的名字..." />
                         
                         <!-- custom popup filter -->
                         <!-- styles are located in css/elements.css -->
                         <!-- script that enables this dropdown is located in js/theme.js -->
-                        <div class="ui-dropdown">
-                            <div class="head" data-toggle="tooltip" title="Click me!">
-                               	选择条件
-                                <i class="arrow-down"></i>
-                            </div>  
-                            <div class="dialog">
-                                <div class="pointer">
-                                    <div class="arrow"></div>
-                                    <div class="arrow_border"></div>
-                                </div>
-                                <div class="body">
-                                    <p class="title">
-                                        Show users where:
-                                    </p>
-                                    <div class="form">
-                                        <select>
-                                            <option />Name
-                                            <option />Email
-                                            <option />Number of orders
-                                            <option />Signed up
-                                            <option />Last seen
-                                        </select>
-                                        <select>
-                                            <option />is equal to
-                                            <option />is not equal to
-                                            <option />is greater than
-                                            <option />starts with
-                                            <option />contains
-                                        </select>
-                                        <input type="text" />
-                                        <a class="btn-flat small">Add filter</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <a href="addContacts.jsp" class="btn-flat success pull-right">
                             <span>&#43;</span>
@@ -131,10 +96,23 @@
                         </thead>
                         <tbody>
                         <%
+                        String searchCondition = request.getParameter("search");
+                        if(searchCondition !=null && searchCondition.equals("")!=true)
+        				{
+        					searchCondition = new String(searchCondition.getBytes("ISO-8859-1"),"utf-8");
+        				}
+                        
                         Vector contactList = Contacts.serachContact(Integer.parseInt((String)session.getAttribute("account")));
                         for(int i=0;i<contactList.size();i++)
                         {
                         	User tempUser = MemberInformation.seachUser(((Integer)contactList.get(i)).intValue());
+                        	if(searchCondition !=null && searchCondition.equals("")!=true)
+            				{
+            					if(tempUser.getName().indexOf(searchCondition)==-1)
+            					{
+            						continue;
+            					}
+            				}
                        
                         %>
                         <!-- row -->
@@ -163,7 +141,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="pagination pull-right">
+                <!-- <div class="pagination pull-right">
                     <ul>
                         <li><a href="#">&#8249;</a></li>
                         <li><a class="active" href="#">1</a></li>
@@ -173,7 +151,7 @@
                         <li><a href="#">5</a></li>
                         <li><a href="#">&#8250;</a></li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- end users table -->
             </div>
         </div>
@@ -206,6 +184,17 @@
 	<!-- scripts -->
 	
 	 <script type="text/javascript">
+	 function keydownEvent() {
+
+         var e = window.event || arguments.callee.caller.arguments[0];
+
+         if (e && e.keyCode == 13 ) {
+
+         	var name = document.getElementById("search").value;
+         	window.location.href="http://localhost:8080/ProjectManager/contacts.jsp?search="+name;
+         }
+     }
+	 
 	 var userID = -1;
         function select()
         {

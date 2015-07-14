@@ -58,12 +58,12 @@
                         <div class="pull-right">
                         
                             <a href = "javascript:;" class="btn-flat pull-right success new-product add-user" onclick="aclick();">+ 添加</a>
-                            <input name="searchText" type="text" class="search user-search" placeholder="搜索联系人.." />
+                            <input name="search" id="search" type="text" class="search user-search" onKeyDown="keydownEvent()" placeholder="搜索联系人.." />
                             <div class="ui-select">
-                                <select>
-                                  <option />姓名
-                                  <option />用户角色
-                                  <option />手机号
+                                <select id="filterName">
+                                  <option value="name" />姓名
+                                  <option value="role" />用户角色
+                                  <option value="phone" />手机号
                                 </select>
                             </div>
                         </div>
@@ -93,6 +93,13 @@
                             <form name="formSelect" id="formSelect" action="Contacts" method="post">
                                 <!-- row -->
                                 <% 
+                                String searchCondition = request.getParameter("search");
+                                if(searchCondition !=null && searchCondition.equals("")!=true)
+                				{
+                					searchCondition = new String(searchCondition.getBytes("ISO-8859-1"),"utf-8");
+                				}
+                                String filterMy = request.getParameter("filterMy");
+                                
                                 Vector user = MemberInformation.getUserList();
                                 Vector contactAlready = Contacts.serachContact(Integer.parseInt((String)session.getAttribute("account")));
                             	for(int i=0;i<user.size();i++)
@@ -117,6 +124,35 @@
                             			continue;
                             		}
                             		
+                            		if(searchCondition !=null && searchCondition.equals("")!=true)
+                    				{
+                            			if(filterMy !=null && filterMy.equals("")!=true)
+                        				{
+                            				if(filterMy.equals("name"))
+                            				{
+                            					if(tempUser.getName().indexOf(searchCondition)==-1)
+                            					{
+                            						continue;
+                            					}
+                            				}
+                            				if(filterMy.equals("role"))
+                            				{
+                            					if(tempUser.getUserRole().indexOf(searchCondition)==-1)
+                            					{
+                            						continue;
+                            					}
+                            				}
+                            				if(filterMy.equals("phone"))
+                            				{
+                            					if(tempUser.getPhone().indexOf(searchCondition)==-1)
+                            					{
+                            						continue;
+                            					}
+                            				}
+                        					
+                        				}
+                    				}
+                            		
                             %>
                             <input name="functionMy" value="addContacts" type="hidden" />
                                 <tr class="first">
@@ -124,7 +160,7 @@
                                     <td>
                                     <input type="checkbox" name="userIDList" value="<%=tempUser.getUserID()%>" />
                                         <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                        <a href="user-profile.html" class="name">
+                                        <a href="" class="name">
                                         <%=tempUser.getName()%></a>
                                         <span class="subtext"><%=tempUser.getEmail()%></span>
                                     </td>
@@ -175,6 +211,18 @@
     <script src="js/theme.js"></script>
     
     <script type="text/javascript">
+    function keydownEvent() {
+
+        var e = window.event || arguments.callee.caller.arguments[0];
+
+        if (e && e.keyCode == 13 ) {
+
+        	var name = document.getElementById("search").value;
+        	var filterName = document.getElementById("filterName").value
+        	window.location.href="http://localhost:8080/ProjectManager/addContacts.jsp?search="+name+"&filterMy="+filterName;
+        }
+    }
+    
 	function aclick()
 	{
 		document.getElementById("formSelect").submit();

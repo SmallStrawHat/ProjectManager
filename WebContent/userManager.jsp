@@ -38,14 +38,14 @@
     <div class="content">
         
         <!-- settings changer -->
-        <div class="skins-nav">
+  <!--       <div class="skins-nav">
             <a href="#" class="skin first_nav selected">
                 <span class="icon"></span><span class="text">Default</span>
             </a>
             <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
                 <span class="icon"></span><span class="text">Dark skin</span>
             </a>
-        </div>
+        </div> -->
         
         <div class="container-fluid">
             <div id="pad-wrapper">
@@ -61,7 +61,7 @@
                     <div class="row-fluid filter-block">
                         <div class="pull-right">
                             <a class="btn-flat pull-right success new-product add-user" href="newuser.jsp">+ 添加用户</a>
-                            <input type="text" class="search user-search" placeholder="Search for users.." />
+                            <input name="search" id="search" type="text" class="search user-search" onKeyDown="keydownEvent()" placeholder="输入用户名字.." />
                         </div>
                     </div>
 
@@ -90,10 +90,23 @@
                             </thead>
                             
                             <% 
+                            String searchCondition = request.getParameter("search");
+                            if(searchCondition !=null && searchCondition.equals("")!=true)
+            				{
+            					searchCondition = new String(searchCondition.getBytes("ISO-8859-1"),"utf-8");
+            				}
+                            
                             	Vector user = MemberInformation.getUserList();
                             	for(int i=0;i<user.size();i++)
                             	{
                             		User tempUser = (User)user.get(i);
+                            		if(searchCondition !=null && searchCondition.equals("")!=true)
+                    				{
+                    					if(tempUser.getName().indexOf(searchCondition)==-1)
+                    					{
+                    						continue;
+                    					}
+                    				}
                             %>
                             <tbody>
                                 <!-- row -->
@@ -181,6 +194,17 @@
 	<!-- scripts -->
 	
 	<script type="text/javascript">
+	function keydownEvent() {
+
+        var e = window.event || arguments.callee.caller.arguments[0];
+
+        if (e && e.keyCode == 13 ) {
+
+        	var name = document.getElementById("search").value;
+        	window.location.href="http://localhost:8080/ProjectManager/userManager.jsp?search="+name;
+        }
+    }
+	
 	 var userJsID = -1;
         function select()
         {

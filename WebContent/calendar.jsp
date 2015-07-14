@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.business.*,java.util.Vector" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,20 +36,25 @@
 <body>
 
      <%@include file="boot.jsp"%>
+     
+     <%
+     	Vector taskList = TaskManager.searchAllTask();
+     	//for(int i=0;i<)
+     %>
 
 
 	<!-- main container -->
     <div class="content">
         
         <!-- settings changer -->
-        <div class="skins-nav">
+        <!-- <div class="skins-nav">
             <a href="#" class="skin first_nav selected">
                 <span class="icon"></span><span class="text">Default</span>
             </a>
             <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
                 <span class="icon"></span><span class="text">Dark skin</span>
             </a>
-        </div>
+        </div> -->
 
         <div class="container-fluid">
             <div id="pad-wrapper">
@@ -59,7 +65,7 @@
                         <div id='calendar'></div>
 
                         <!-- edit image pop up -->
-                        <div class="new-event popup">
+                       <!--  <div class="new-event popup">
                             <div class="pointer">
                                 <div class="arrow"></div>
                                 <div class="arrow_border"></div>
@@ -75,7 +81,7 @@
                                 <input type="text" class="event-input" />
                             </div>
                             <input type="submit" value="Create" class="btn-glow primary" />
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

@@ -52,13 +52,13 @@
 	<div class="content">
 
 		<!-- settings changer -->
-		<div class="skins-nav">
+		<!-- 		<div class="skins-nav">
 			<a href="#" class="skin first_nav selected"> <span class="icon"></span><span
 				class="text">Default</span>
 			</a> <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
 				<span class="icon"></span><span class="text">Dark skin</span>
 			</a>
-		</div>
+		</div> -->
 
 		<div class="container-fluid">
 			<div id="pad-wrapper" class="new-user">
@@ -69,12 +69,13 @@
 					<!-- left column -->
 					<div class="span9 with-sidebar">
 						<div class="container">
-							<form class="new_user_form inline-input" action="UserManager"
+							<form class="new_user_form inline-input" action="UserManager" onSubmit="return checkCreateUser();" 
 								method="post" />
 							<input name="functionMy" value="addUser" type="hidden" />
-							<div class="span12 field-box">
-								<label>用户名:</label> <input name="userName" class="span9"
-									type="text" />
+							<div id="nameCss" class="span12 field-box">
+								<label>用户名:</label> <input id="userName" name="userName" class="span8"
+									type="text"  onblur="checkName()" />
+								<span id="nameSpan" style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>用户名不能为空！</span>
 							</div>
 							<div class="span12 field-box">
 								<label>用户类型:</label>
@@ -86,12 +87,16 @@
 								</div>
 							</div>
 							<div class="span12 field-box">
-								<label>密码:</label> <input name="userPassword" class="span9"
+								<label>密码:</label> <input id="userPassword" name="userPassword" class="span8"
 									type="password" />
 							</div>
-							<div class="span12 field-box">
-								<label>确认密码:</label> <input class="span9" type="password" />
+							<div id="ensureCss" class="span12 field-box">
+								<label>确认密码:</label> <input id="ensurePassword" name="ensurePassword" class="span8"
+									type="password"  />
+								<span id="ensureSpan" style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>两次密码要一样！</span>
 							</div>
+							
+							
 							<div class="span12 field-box">
 								<label>用户状态:</label>
 								<div class="ui-select span5">
@@ -103,12 +108,13 @@
 							</div>
 							<div class="span12 field-box">
 								<label>联系方式:</label> <input name="userPhone" class="span9"
-									type="text" />
+									onclick="checkPhone()" type="text" />
 							</div>
 							<div class="span12 field-box">
 								<label>Email:</label> <input name="userEmail" class="span9"
-									type="text" />
+									onclick="checkEmail()" type="text" />
 							</div>
+							
 							<div class="span12 field-box textarea">
 								<label>简介:</label>
 								<textarea name="userSummary" class="span9"></textarea>
@@ -156,6 +162,9 @@
 	<script src="js/jquery.flot.stack.js"></script>
 	<script src="js/jquery.flot.resize.js"></script>
 	<script src="js/theme.js"></script>
+
+
+	<script src="js/checkUser.js" type="text/javascript"></script>
 
 
 
