@@ -126,7 +126,7 @@
                                     <%
                                     	int rateDis = (int)detailTask.getRate();
                                     %>
-      									<div class="bar" style="width: <%=rateDis%>%;"></div>
+      									<div class="bar" style="width: <%=rateDis%>%;"><%=rateDis %>%</div>
     								</div>
                             </div>
                             <ul class="nav nav-list">

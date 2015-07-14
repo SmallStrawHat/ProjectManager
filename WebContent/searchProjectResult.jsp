@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>查看任务</title>
+	<title>搜索结果</title>
     
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
@@ -52,15 +52,10 @@
 
                 <!-- orders table -->
                 <div class="container-fluid">
-			<div id="pad-wrapper" class="displayProject">
+			<div id="pad-wrapper" class="searchProjectResult">
 				<div class="row-fluid header">
-					<h3>查看项目</h3>
+					<h3>搜索结果</h3>
 					<div class="span10 pull-right">
-					<input id="search" name="search" type="text" class="span5 search"  onKeyDown="keydownEvent()" placeholder="输入查找的项目名称..." />
-					<!-- <div class="span11 field-box actions">
-								<input type="submit" name="Submit"
-									class="btn-glow primary active" value="搜索" />
-							</div> -->						
 						<a href="newproject.jsp" class="btn-flat success pull-right">
 							<span>&#43;</span> 新建项目
 						</a>
@@ -76,14 +71,14 @@
 								<th class="span2 sortable"><span class="line"></span>开始时间</th>
 								<th class="span2 sortable"><span class="line"></span>结束时间</th>
 								<th class="span2 sortable"><span class="line"></span>进度</th>
-								<th class="span2 sortable"><span class="line"></span>项目经理</th>
 								<th class="span2 sortable"><span class="line"></span>状态</th>
 							</tr>
 						</thead>
 
 						<% Vector p=new Vector();
-						    p=ProjectManagement.getAllProjectList();                       
-							                 
+					//	String search = response.get
+							String searchName =new String(request.getParameter("searchName").getBytes("ISO-8859-1"),"utf-8");
+				    	p=ProjectManagement.searchProject(searchName);   
 							    for(int i=0;i<p.size();i++)                       
 							    {                       	
 							    	Project pro=(Project)p.get(i); 
@@ -97,7 +92,9 @@
 								<td><img src="img/contact-img.png"
 									class="img-circle avatar hidden-phone" /> <a
 									href=<%="projectdetail.jsp?targetID="+pro.getId()%> class="name"><%=pro.getName() %></a> <span
-									class="subtext">(ID:<%=pro.getId() %>)</span></td>
+									class="subtext">(ID:<%=pro.getId() %>)</span>
+
+									</td>
 								<td><%=pro.getStarttime() %></td>
 								<td><%=pro.getExpectendtime() %></td>
 								
@@ -112,13 +109,6 @@
     								</div>
                             </div>
 								</td>
-								<td>
-										<%
-										User user=(User) MemberInformation.seachUser(pro.getManagerid());
-										%>
-										
-                                        <%=user.getName()%>(ID:<%=pro.getManagerid() %>)</a>                                       
-										</td>
 								<td><%if(pro.getState().equals("进行中"))
                                     		{
                                     			%>
@@ -187,24 +177,6 @@
     <script src="js/bootstrap.datepicker.js"></script>
     <script src="js/jquery.uniform.min.js"></script>
     <script src="js/select2.min.js"></script>
-    
-    <script type="text/javascript">
-        
-        function keydownEvent() {
-
-            var e = window.event || arguments.callee.caller.arguments[0];
-
-            if (e && e.keyCode == 13 ) {
-
-            	var name = document.getElementById("search").value;
-            	window.location.href="http://localhost:8080/ProjectManager/searchProject?search="+name;
-            
-
-            }
-
-        }
-    </script>
-    
     <script type="text/javascript">
         $(function () {
 

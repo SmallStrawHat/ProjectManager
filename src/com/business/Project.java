@@ -45,6 +45,35 @@ public class Project {
     	this.taskList=tasklist;
     	
     }
+    public Project(int id,String name,String start,String end,float budget,int managerid,
+			String state,int priority,float rate,float plantime,String summary)
+    {
+
+    	this.id=id;
+    	this.name=name;
+    	this.starttime=start;
+    	this.expectendtime=end;
+    	this.budget=budget;
+    	this.managerid=managerid;
+    	this.state=state;
+    	this.priority=priority;
+    	this.schedule=rate;
+    	this.plantime=plantime;
+    	this.summary=summary;
+    }
+    public static Project createProject(String name,String start,String end,float budget,int managerid,
+			String state,int priority,float plantime,String summary)
+	{
+    	Project p=null;
+    	int ret=DataProject.insert(name, start, end, budget, managerid, state, priority, plantime, summary);
+		if(ret!=-1)		
+		{
+			float rate=0;
+			p=new Project(ret,name, start, end, budget, managerid, state, priority,rate, plantime, summary);
+			
+		}
+		return p;
+	}
     
     public Vector getTaskList()
     {

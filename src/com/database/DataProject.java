@@ -84,7 +84,8 @@ public class DataProject {
 				bigID = res.getInt(1);
 			}
 			bigID+=1;
-			String sql = "insert into project(project_id,project_name,start_time,suppose_endtime,budget,manager_id,state,level,plan_hour,summary) values("+bigID+",'"+name+"','"+start+"','"+end+"',"+budget+","+managerid+",'"+state+"',"+priority+","+plantime+",'"+summary+"');";
+			float rate=0;
+			String sql = "insert into project(project_id,project_name,start_time,suppose_endtime,budget,manager_id,state,level,rate,plan_hour,summary) values("+bigID+",'"+name+"','"+start+"','"+end+"',"+budget+","+managerid+",'"+state+"',"+priority+","+rate+","+plantime+",'"+summary+"');";
 			stm.execute(sql);
 			res.close();
 			return bigID;

@@ -34,7 +34,8 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
 <body>
 
   <%@ include file="boot.jsp" %>
@@ -255,7 +256,8 @@
             });
         });
     </script>
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540'
+ language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
 

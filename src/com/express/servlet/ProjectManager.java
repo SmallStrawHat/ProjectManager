@@ -48,7 +48,7 @@ public class ProjectManager extends HttpServlet {
     		String pName = new String(request.getParameter("pname").getBytes("ISO-8859-1"),"utf-8");
     		
     		
-    		String time1=new String(request.getParameter("starttime"));
+    		String time1=request.getParameter("starttime");
     		String[] time3=time1.split("/");
     		
     		StringBuffer tb1=new StringBuffer();
@@ -62,7 +62,7 @@ public class ProjectManager extends HttpServlet {
     		time5=tb1.toString();
     		
     		
-    		String time2=new String(request.getParameter("expectendtime"));
+    		String time2=request.getParameter("expectendtime");
     		String[] time4=time2.split("/");
     		   		
     		StringBuffer tb2=new StringBuffer();
@@ -78,23 +78,9 @@ public class ProjectManager extends HttpServlet {
     		float budget = Float.parseFloat(request.getParameter("budget"));
     		String manager = request.getParameter("manager");
     		int managerid=-1;
-    		if(manager.equals("m1"))
-    		{
-    			managerid=Integer.parseInt("111220");
-    		}
-    		else
-    		{
-    			managerid=Integer.parseInt("111220");
-    		}
-    		String state= request.getParameter("state");
-    		if(state.equals("true"))
-    		{
-    			state="开启";
-    		}
-    		else
-    		{
-    			state="暂停";
-    		}
+    		managerid=Integer.parseInt(manager);
+    		String state= "已提议";
+
     		int priority=Integer.parseInt(request.getParameter("priority"));
     		float plantime = Float.parseFloat(request.getParameter("plantime"));
     		String summary=new String(request.getParameter("summary").getBytes("ISO-8859-1"),"utf-8");

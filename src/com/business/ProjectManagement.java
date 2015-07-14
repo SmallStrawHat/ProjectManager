@@ -58,8 +58,10 @@ public class ProjectManagement {
 	{
 		/*String starttime=start.toString();
 		String endtime=end.toString();*/
-		if(DataProject.insert(name, start, end, budget, managerid, state, priority, plantime, summary)!=-1)		
+		Project pro=Project.createProject(name, start, end, budget, managerid, state, priority, plantime, summary);
+		if(pro!=null)
 		{
+			projectlist.add(pro);
 			sum++;
 			return 1;
 		}
@@ -81,6 +83,19 @@ public class ProjectManagement {
 	
 	public static Vector getAllProjectList(){
 		return ProjectManagement.projectlist;		
+	}
+	
+	public static Vector searchProject(String name){
+		Vector result=new Vector();
+		for(int i=0;i<projectlist.size();i++)
+		{
+			Project pro=(Project)projectlist.get(i);
+			if(pro.getName().equals(name))
+			{		
+				result.add(pro);
+			}
+		}
+		return result;
 	}
 
 	/*public static void main(String[] args)

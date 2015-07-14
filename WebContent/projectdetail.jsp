@@ -60,6 +60,7 @@
 				String str=request.getParameter("targetID");
 
 	              Project p=ProjectManagement.searchProject(Integer.parseInt(str));
+	                            
 	              if(p==null)
 	               {
 	               	   response.sendRedirect("error.jsp");
@@ -85,7 +86,7 @@
 							<!-- biography -->
 							<div class="span12 section">
 								<h5>项目概述</h5>
-								<textarea class="span8" type="text"><%=p.getSummary() %></textarea>
+								<textarea class="span9" type="text" readonly="readonly"><%=p.getSummary() %></textarea>
 							</div>
 
 							<h6>项目明细</h6>
@@ -104,20 +105,87 @@
 
 									<tr>
 										<th class="span2">项目预算</th>
-										<td><%=p.getBudget() %></td>
+										<td><%=p.getBudget() %>万元</td>
 									</tr>
 									<tr>
 										<th class="span2">项目经理</th>
-										<td><%=p.getManagerid() %></td>
+										<td>
+										<%
+										User user=(User) MemberInformation.seachUser(p.getManagerid());
+										%>
+										
+										
+                                        <%=user.getName()%>(ID:<%=p.getManagerid() %>)</a>                                       
+										</td>
 									</tr>
 									<tr>
 										<th class="span2">项目开始时间</th>
 										<td><%=p.getStarttime() %></td>
 									</tr>
+									<tr>
+										<th class="span2">预计结束时间</th>
+										<td><%=p.getExpectendtime() %></td>
+									</tr>
+									<tr>
+										<th class="span2">实际结束时间时间</th>
+										<%if(p.getActualendtime()==null)
+										{%>
+											<td>未结束</td>
+										<%}
+										else
+										{%>
+											<td><%=p.getActualendtime() %></td>
+										<%}%>
+										
+										
+									</tr>
 								
 									<tr>
 										<th class="span2">状态</th>
-										<td><%=p.getState() %></td>
+										<td><%if(p.getState().equals("进行中"))
+                                    		{
+                                    			%>
+                                    			<span class="label label-info">进行中</span>
+                                    			<%
+                                    		}
+                                    		if(p.getState().equals("已完成"))
+                                			{
+                                    			%>
+                                    			<span class="label label-success">已完成</span>
+                                    			<%
+                                			} 
+                                    		if(p.getState().equals("已提议"))
+                                			{
+                                    			%>
+                                    			<span class="label label-important">已提议</span>
+                                    			<%
+                                			} 
+                                    		if(p.getState().equals("暂停"))
+                                			{
+                                    			%>
+                                    			<span class="label">暂停</span>
+                                    			<%
+                                			} 
+                                    		if(p.getState().equals("意外终止"))
+                                			{
+                                    			%>
+                                    			<span class="label label-warning">意外终止</span>
+                                    			<%
+                                			} 
+                                			%>
+											</td>
+									</tr>
+									<tr>
+									<div class="field-box">
+                                <label>进度:</label>
+                                    <div class="progress progress-striped active">
+                                    <%
+                                    	int rateDis = (int)p.getSchedule();
+                                    %>
+      									<div class="bar" style="width: <%=rateDis%>%;"><%=rateDis %>%</div>
+    								</div>
+                            </div>
+									
 									</tr>
 									<tr>
 										<th class="span2">优先级</th>
@@ -126,14 +194,14 @@
 
 									<tr>
 										<th class="span2">已工作小时数</th>
-										<td>项目的已工作小时数<%=p.getWorkedtime() %>
+										<td><%=p.getWorkedtime() %>小时
 									<tr>
 										<th class="span2">计划耗时</th>
-										<td><%=p.getPlantime() %></td>
+										<td><%=p.getPlantime() %>小时</td>
 									</tr>
 									<tr>
 										<th class="span2">项目耗时</th>
-										<td><%=p.getActualtime() %></td>
+										<td><%=p.getActualtime() %>小时</td>
 									</tr>
 
 
