@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>System Management</title>
+<title>ProjectZZY - System Management</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -49,123 +49,123 @@
 
 	<%@ include file="boot.jsp"%>
 
+
 	<!-- main container -->
 	<div class="content">
 
 		<!-- settings changer -->
 		<div class="skins-nav">
 			<a href="#" class="skin first_nav selected"> <span class="icon"></span><span
-				class="text">Default skin</span>
+				class="text">Default</span>
 			</a> <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
 				<span class="icon"></span><span class="text">Dark skin</span>
 			</a>
 		</div>
 
 		<div class="container-fluid">
-			<div id="pad-wrapper">
-				<!-- statistics chart built with jQuery Flot -->
-				<div class="row-fluid chart">
-					<h4>
-						设定工时数据<small>管理员设置工作日天数和小时数</small>
-					</h4>
-					<br>
-					<div class="row-fluid form-wrapper">
-						<!-- left column -->
-						<div class="span9 with-sidebar">
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th class="span4">工作日天数</th>
-										<th class="span3"><span class="line"></span>单工作日工作小时数</th>
-										<th class="span2"><span class="line"></span>用户日志</th>
-										<th class="span2"><span class="line"></span>用户日志路径</th>
-										<th class="span3 align-right"><span class="line"></span>问题跟踪单存储路径
-										</th>
-									</tr>
-								</thead>
-								<%
-									WorktimeInfomation.init();
-									Vector worktime = WorktimeInfomation.getWorktimeList();
-									for (int i = 0; i < worktime.size(); i++) {
-										Worktime tempWorktime = (Worktime) worktime.get(i);
-								%>
-								<tbody>
-									<!-- row -->
-									<tr class="first">
-										<td><%=tempWorktime.getWorkdays()%></td>
-										<td><%=tempWorktime.getWorkdayHours()%></td>
-										<td><%=tempWorktime.getUserLog()%></td>
-										<td><%=tempWorktime.getuserLogPath()%></td>
-										<td><%=tempWorktime.getProblemLogPath()%></td>
-									</tr>
-								</tbody>
-								<%
-									}
-								%>
+			<div id="pad-wrapper" class="new-user">
+				<h4>
+					设定工时数据<small>管理员设置工作日天数和小时数</small>
+				</h4>
+				<br>
+				<div class="row-fluid form-wrapper">
+					<!-- left column -->
+					<div class="span9 with-sidebar">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th class="span4">工作日天数</th>
+									<th class="span3"><span class="line"></span>单工作日小时数</th>
+									<th class="span2"><span class="line"></span>用户日志</th>
+									<th class="span2"><span class="line"></span>用户日志路径</th>
+									<th class="span3 align-right"><span class="line"></span>问题跟踪单存储路径
+									</th>
+								</tr>
+							</thead>
+							<%
+								WorktimeInfomation.init();
+								Vector worktime = WorktimeInfomation.getWorktimeList();
+								for (int i = 0; i < worktime.size(); i++) {
+									Worktime tempWorktime = (Worktime) worktime.get(i);
+							%>
+							<tbody>
+								<!-- row -->
+								<tr class="first">
+									<td><%=tempWorktime.getWorkdays()%></td>
+									<td><%=tempWorktime.getWorkdayHours()%></td>
+									<td><%=tempWorktime.getUserLog()%></td>
+									<td><%=tempWorktime.getuserLogPath()%></td>
+									<td><%=tempWorktime.getProblemLogPath()%></td>
+								</tr>
+							</tbody>
+							<%
+								}
+							%>
 
-							</table>
-							<div class="span6 showcase">
-								<form class="new_project_form inline-input"
-									action="WorktimeManager" method="post" />
-								<input name="operation" value="setworktime" type="hidden" />
-								<div class="field-box">
-									<br> <label>设定工作日天数:（单位：日）</label> <input
-										name="workdays" class="span8" type="text" />
-								</div>
-								<div class="field-box">
-									<br> <label>设定单个工作日的小时数:（单位：小时）</label> <input
-										name="workdayhours" class="span8" type="text" />
-								</div>
-								<div class="field-box">
-									<br> <label>请在下方填入用户日志:</label>
-									<!--<input name="userlog" class="span8" type="text" />-->
-									<textarea name="userlog" class="span9"></textarea>
-								</div>
-								<div class="field-box">
-									<br> <label>请在下方填入用户日志路径:</label>
-									<!-- <input name="userlogpath" class="span8" type="text" /> -->
-									<textarea name="userlogpath" class="span9"></textarea>
-								</div>
-								<div class="field-box">
-									<br> <label>请在下方填入问题跟踪单路径:</label>
-									<!-- <input name="problemlogpath" class="span8" type="text" /> -->
-									<textarea name="problemlogpath" class="span9"></textarea>
-								</div>
+						</table>
+						<div class="span12 showcase">
+							<form class="new_project_form inline-input"
+								action="WorktimeManager" method="post" />
+							<input name="operation" value="setworktime" type="hidden" />
+							<div class="field-box">
+								 <label>工作日天数:<br>（单位：日）</label> <input name="workdays"
+									class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								 <label>单工作日小时:<br>（单位：小时）</label> <input
+									name="workdayhours" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								 <label>用户日志:</label>
+								<!--<input name="userlog" class="span8" type="text" />-->
+								<textarea name="userlog" class="span9"></textarea>
+							</div>
+							<div class="field-box">
+								 <label>用户日志路径:</label>
+								<!-- <input name="userlogpath" class="span8" type="text" /> -->
+								<textarea name="userlogpath" class="span9"></textarea>
+							</div>
+							<div class="field-box">
+								 <label>问题跟踪单路径:</label>
+								<!-- <input name="problemlogpath" class="span8" type="text" /> -->
+								<textarea name="problemlogpath" class="span9"></textarea>
+							</div>
 
-								<br>
-								<div class="span11 field-box actions">
-									<input type="submit" name="Submit"
-										class="btn-glow primary active" value="提交" /> <span>OR</span>
-									<input type="reset" value="Cancel" class="reset" />
-								</div>
-								</form>
+							<br>
+							<div class="span11 field-box actions">
+								<input type="submit" name="Submit"
+									class="btn-glow primary active" value="提交" /> <span>OR</span>
+								<input type="reset" value="Cancel" class="reset" />
 							</div>
-						</div>
-
-						<!-- side right column -->
-						<div class="span3 form-sidebar pull-right">
-							<div class="btn-group toggle-inputs hidden-tablet">
-								<button class="glow left active" data-input="inline">线条格式</button>
-								<button class="glow right" data-input="normal">方框格式</button>
-							</div>
-							<div class="alert alert-info hidden-tablet">
-								<i class="icon-lightbulb pull-left"></i> 点击上面的按钮，根据您的喜爱切换输入框的风格。
-							</div>
-							<h6>Sidebar text for instructions</h6>
-							<p>Add multiple users at once</p>
-							<p>Choose one of the following file types:</p>
-							<ul>
-								<li><a href="#">Upload a vCard file</a></li>
-								<li><a href="#">Import from a CSV file</a></li>
-								<li><a href="#">Import from an Excel file</a></li>
-							</ul>
+							</form>
 						</div>
 					</div>
+					
+					<!-- side right column -->
+					<div class="span3 form-sidebar pull-right">
+						<div class="btn-group toggle-inputs hidden-tablet">
+							<button class="glow left active" data-input="inline">线条格式</button>
+							<button class="glow right" data-input="normal">方框格式</button>
+						</div>
+						<div class="alert alert-info hidden-tablet">
+							<i class="icon-lightbulb pull-left"></i> 点击上面的按钮，根据您的喜爱切换输入框的风格。
+						</div>
+						<h6>Sidebar text for instructions</h6>
+						<p>Add multiple users at once</p>
+						<p>Choose one of the following file types:</p>
+						<ul>
+							<li><a href="#">Upload a vCard file</a></li>
+							<li><a href="#">Import from a CSV file</a></li>
+							<li><a href="#">Import from an Excel file</a></li>
+						</ul>
+					</div>
 				</div>
-				<!-- end statistics chart -->
 			</div>
 		</div>
 	</div>
+	<!-- end main container -->
+
+
 
 	<!-- scripts -->
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -179,12 +179,14 @@
 	<script src="js/jquery.flot.resize.js"></script>
 	<script src="js/theme.js"></script>
 
+
+
 	<script type="text/javascript">
 		$(function() {
 
 			// toggle form between inline and normal inputs
 			var $buttons = $(".toggle-inputs button");
-			var $form = $("form.new_user_form");
+			var $form = $("form.new_project_form");
 
 			$buttons.click(function() {
 				var mode = $(this).data("input");
