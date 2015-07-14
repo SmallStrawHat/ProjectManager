@@ -61,7 +61,7 @@ public class Project {
     	this.plantime=plantime;
     	this.summary=summary;
     }
-    public static Project createProject(String name,String start,String end,float budget,int managerid,
+    public  Project createProject(String name,String start,String end,float budget,int managerid,
 			String state,int priority,float plantime,String summary)
 	{
     	Project p=null;

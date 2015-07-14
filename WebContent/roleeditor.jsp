@@ -92,24 +92,24 @@
                             </thead>
                           
 
-                         <% RoleInfomation.init();
-                            	Vector role = RoleInfomation.getUserList();
+                         <%
+                            	Vector role = ((SystemSetting)WorktimeInfomation.getSystemsettinglist().get(0)).getRolelist();
                             	for(int i=0;i<role.size();i++)
                             	{
-                            		Role tempUser = (Role)role.get(i);
+                            		Roleinformation tempUser = (Roleinformation)role.get(i);
                             %>
                             <tbody>
                                 <!-- row -->
                                 <tr class="first">
                                     <td>
-                                        <%=tempUser.getUserRole()%>
+                                        <%=tempUser.getRolename()%>
                                     </td>
                                     <td>
-                                        <%=tempUser.getAuthorization()%>
+                                        <%=tempUser.getPower()%>
                                     </td>
                                     <td>
                                         <ul class="actions">
-                                            <li class="last"><a data-toggle="modal" data-target="#myModal"  href="" onclick=<%="odd('"+tempUser.getUserRole()+"')"%> >删除</a></li>
+                                            <li class="last"><a data-toggle="modal" data-target="#myModal"  href="" onclick=<%="odd('"+tempUser.getRolename()+"')"%> >删除</a></li>
                                         </ul>
                                     </td>
                                 </tr>

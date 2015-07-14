@@ -83,19 +83,20 @@
 								</tr>
 							</thead>
 							<%
-								WorktimeInfomation.init();
-								Vector worktime = WorktimeInfomation.getWorktimeList();
+								
+								Vector worktime = WorktimeInfomation.getSystemsettinglist();
 								for (int i = 0; i < worktime.size(); i++) {
-									Worktime tempWorktime = (Worktime) worktime.get(i);
+									SystemSetting tempWorktime = (SystemSetting) worktime.get(i);
 							%>
 							<tbody>
 								<!-- row -->
 								<tr class="first">
-									<td><%=tempWorktime.getWorkdays()%></td>
-									<td><%=tempWorktime.getWorkdayHours()%></td>
-									<td><%=tempWorktime.getUserLog()%></td>
-									<td><%=tempWorktime.getuserLogPath()%></td>
-									<td><%=tempWorktime.getProblemLogPath()%></td>
+								
+									<td><%=tempWorktime.getWorktimeday()%></td>
+									<td><%=tempWorktime.getWorktimehour()%></td>
+									<td><%=tempWorktime.getUserlogpath()%></td>
+									<td><%=tempWorktime.getTasklogpath()%></td>
+									<td><%=tempWorktime.getProblemlogpath()%></td>
 								</tr>
 							</tbody>
 							<%
@@ -134,8 +135,7 @@
 							<br>
 							<div class="span11 field-box actions">
 								<input type="submit" name="Submit"
-									class="btn-glow primary active" value="提交" /> <span>OR</span>
-								<input type="reset" value="Cancel" class="reset" />
+									class="btn-glow primary active" value="提交" /> 
 							</div>
 							</form>
 						</div>

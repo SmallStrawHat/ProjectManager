@@ -76,9 +76,8 @@
 						</thead>
 
 						<% Vector p=new Vector();
-					//	String search = response.get
 							String searchName =new String(request.getParameter("searchName").getBytes("ISO-8859-1"),"utf-8");
-				    	p=ProjectManagement.searchProject(searchName);   
+				    	p=ProjectManagement.fuzzySearch(searchName);  
 							    for(int i=0;i<p.size();i++)                       
 							    {                       	
 							    	Project pro=(Project)p.get(i); 

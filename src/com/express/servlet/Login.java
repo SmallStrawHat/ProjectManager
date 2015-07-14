@@ -65,6 +65,7 @@ public class Login extends HttpServlet {
         		session.setAttribute("account", account);
         		
         		/*初始化数据到内存*/
+        		WorktimeInfomation.init();
         		MemberInformation.init();
         		ProjectManagement.init();
         		

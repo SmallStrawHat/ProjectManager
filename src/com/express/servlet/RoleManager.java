@@ -42,7 +42,7 @@ public class RoleManager extends HttpServlet {
     	{
     		String userRole = new String(request.getParameter("Role").getBytes("ISO-8859-1"),"utf-8");
     		
-    		if(RoleInfomation.deleteUserRole(userRole)==1)
+    		if(WorktimeInfomation.deleteUserRole(userRole)==1)
     		{
     			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
     			//dispatch.forward(request, response);
@@ -54,6 +54,7 @@ public class RoleManager extends HttpServlet {
     			//
     			//RequestDispatcher dispatch = request.getRequestDispatcher("error.jsp");
     			//dispatch.forward(request, response);
+    			System.out.println("我这没有返回一，是吗？");
     			response.sendRedirect("error.jsp");
     			return ;
     		}
@@ -70,7 +71,8 @@ public class RoleManager extends HttpServlet {
     		String userRole = new String(request.getParameter("userRole").getBytes("ISO-8859-1"),"utf-8");
     		String Authorization = new String(request.getParameter("Authorization").getBytes("ISO-8859-1"),"utf-8");
     		
-    		if(RoleInfomation.addUserRole(userRole, Authorization)==0)
+    		
+    		if(WorktimeInfomation.addUserRole(userRole, Authorization)==0)
     		{
     			response.sendRedirect("error.jsp");
     			return ;

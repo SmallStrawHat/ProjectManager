@@ -1,6 +1,7 @@
 package com.express.servlet;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,6 +56,15 @@ public class WorktimeManager extends HttpServlet {
     		}
     		else
     		{
+    			Vector ss=new Vector();
+    			for(int i=0;i<WorktimeInfomation.getSystemsettinglist().size();i++)
+    			{
+    				SystemSetting s=(SystemSetting)WorktimeInfomation.getSystemsettinglist().get(i);
+    				Vector role=s.getRolelist();
+    				SystemSetting temp=new SystemSetting(workDays, workDayHours,userLog,userLogPath,problemLogPath,role);    				
+    				ss.add(temp);			
+    			}
+    			WorktimeInfomation.setSystemsettinglist(ss);
     			response.sendRedirect("setworktime.jsp");
     			return ;
     		}

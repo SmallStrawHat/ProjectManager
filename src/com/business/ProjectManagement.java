@@ -9,7 +9,6 @@ import com.database.DataUserTask;
 
 public class ProjectManagement {
 	private static Vector projectlist;
-	private static int sum;
 	
 	public ProjectManagement(){}
 	
@@ -58,11 +57,11 @@ public class ProjectManagement {
 	{
 		/*String starttime=start.toString();
 		String endtime=end.toString();*/
-		Project pro=Project.createProject(name, start, end, budget, managerid, state, priority, plantime, summary);
+		Project pro=new Project();
+		pro=pro.createProject(name, start, end, budget, managerid, state, priority, plantime, summary);
 		if(pro!=null)
 		{
 			projectlist.add(pro);
-			sum++;
 			return 1;
 		}
 		else
@@ -91,6 +90,18 @@ public class ProjectManagement {
 		{
 			Project pro=(Project)projectlist.get(i);
 			if(pro.getName().equals(name))
+			{		
+				result.add(pro);
+			}
+		}
+		return result;
+	}
+	public static Vector fuzzySearch(String name){
+		Vector result=new Vector();
+		for(int i=0;i<projectlist.size();i++)
+		{
+			Project pro=(Project)projectlist.get(i);
+			if(pro.getName().indexOf(name)!=-1)
 			{		
 				result.add(pro);
 			}

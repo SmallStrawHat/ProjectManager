@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
-
 import javax.servlet.RequestDispatcher;
+import com.business.*;
+
 
 public class Role {
 	private String userRole;
@@ -25,7 +26,7 @@ public class Role {
 	
 	public static Vector searchAll()
 	{
-		Vector resVec = new Vector(10,6);
+		Vector resVec = new Vector();
 		Role findRes = null;
 		Connection conn = null;
 		try
@@ -33,7 +34,7 @@ public class Role {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
 			Statement stm = conn.createStatement();
-			String sql = "select * from Role";
+			String sql = "select * from role;";
 			ResultSet res = stm.executeQuery(sql);
 			while(res.next())
 			{
@@ -147,7 +148,7 @@ public class Role {
 			String sql = "insert into role values('"+userRole+"','"+Authorization+"');";
 			stm.execute(sql);
 			
-			return 0;
+			return 1;
 		}
 		catch(Exception e)
 		{
@@ -164,7 +165,7 @@ public class Role {
 				System.out.println(e.getMessage());
 			}
 		}
-		return -1;
+		return 0;
 	}
 	
 	public String getUserRole()
