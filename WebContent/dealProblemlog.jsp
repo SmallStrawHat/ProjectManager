@@ -58,7 +58,7 @@
                     	
                         <div class="pull-right">
                     
-                            <input type="text" class="search order-search" placeholder="Search for a task..." />
+                            <!-- <input type="text" class="search order-search" placeholder="Search for a task..." /> -->
                             
                             <!-- <div class="btn-group pull-right">
                                 <button class="glow left large">所有的</button>
@@ -96,9 +96,15 @@
                             <tbody>
                            	<%
                            	Vector problemList = TaskManager.searchAllProblem();
+                            		int accountID = Integer.parseInt((String)session.getAttribute("account"));
                             		for(int i=0;i<problemList.size();i++)
                             		{
                             			ProblemLog problem = (ProblemLog)problemList.get(i);
+                            			int dealUserID = problem.getDealUserID();
+                            			if(accountID != dealUserID)
+                            			{
+                            				continue;
+                            			}
                            	%>
                     				
                     				 <!-- row -->

@@ -82,24 +82,19 @@
                                     	String userName = MemberInformation.seachUser(userID).getName();
                                     %>
                                     <input name="createUserID" class="span9" type="hidden"  value=<%="'"+userID+"'"%>/>
-                                    <input  class="span9" type="text" readonly="readonly" value=<%=userName %> />
+                                    <input  class="span9" type="text" readonly="readonly" value=<%=userName+"：(项目成员)" %> />
                                 </div>
                                 
                                   <div class="span12 field-box">
-                                    <label>选择处理人:</label>
-                                    <div class="ui-select span5">
-                                        <select name="dealUserID" >
-                                        <%Vector userList = MemberInformation.seachUserToRole("项目经理"); 
-                                        	for(int i=0;i<userList.size();i++)
-                                        	{
-                                        		User tempUser = (User)userList.get(i);
-                                        		
-                                        %>
-                                            <option value=<%="'"+tempUser.getUserID()+"'" %> /><%=tempUser.getName() %>
-                                            
-                                            <%} %>
-                                        </select>
-                                    </div>
+                                    <label>处理人:</label>
+                                    <%
+                                    	int managerID = Integer.parseInt((String)request.getParameter("managerID"));
+                                    	String managerName = MemberInformation.seachUser(managerID).getName();
+                                    	
+                                    %>
+                                    <input name="dealUserID" class="span9" type="hidden"  value=<%="'"+managerID+"'"%>/>
+                                    <input  class="span9" type="text" readonly="readonly" value=<%=managerName+"：(项目经理)" %> />
+                                    
                                   </div>
 
                                 <div class="field-box">

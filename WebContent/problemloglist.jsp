@@ -58,7 +58,7 @@
                     	
                         <div class="pull-right">
                     
-                            <input type="text" class="search order-search" placeholder="Search for a task..." />
+                            <input type="text" class="search order-search" placeholder="输入所属的任务..." />
                             
                             <div class="btn-group pull-right">
                                 <button class="glow left large">所有的</button>

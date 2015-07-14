@@ -59,12 +59,12 @@
                         <div class="pull-right">
                         	<a class="btn-flat success new-product" href="newTask.jsp">+ 创建任务</a>
                         	&nbsp;&nbsp;
-                            <input type="text" class="search order-search" placeholder="Search for a task..." />
+                            <input name="search" id="search" type="text" class="search order-search" onKeyDown="keydownEvent()" placeholder="输入项目的名字..." />
                             
                             <div class="btn-group pull-right">
-                                <button class="glow left large">所有的</button>
-                                <button class="glow middle large">参与的</button>
-                                <button class="glow right large">进行中</button>
+                                <button onclick="myfilter('all')" class="glow left large">所有的</button>
+                                <button onclick="myfilter('in')" class="glow middle large">参与的</button>
+                                <button onclick="myfilter('prosess')" class="glow right large">进行中</button>
                             </div>
                         </div>
                     </div>
@@ -107,6 +107,18 @@
                             
                             
                             <%
+                            String searchCondition = request.getParameter("search");
+                            if(searchCondition !=null && searchCondition.equals("")!=true)
+            				{
+            					searchCondition = new String(searchCondition.getBytes("ISO-8859-1"),"utf-8");
+            				}
+                            
+                            String myfilter = request.getParameter("myfilter");
+                            if(myfilter !=null && myfilter.equals("")!=true)
+            				{
+                            	myfilter = new String(myfilter.getBytes("ISO-8859-1"),"utf-8");
+            				}
+                            
                     		Vector projecList = ProjectManagement.getAllProjectList();
                     		for(int i=0;i<projecList.size();i++)
                     		{
@@ -115,6 +127,43 @@
                     			for(int j=0;j<taskList.size();j++)
                     			{
                     				Task tempTask = (Task)taskList.get(j);
+                    				
+                    				if(searchCondition !=null && searchCondition.equals("")!=true)
+                    				{
+                    					if(tempTask.getTaskName().indexOf(searchCondition)==-1)
+                    					{
+                    						continue;
+                    					}
+                    				}
+                    				
+                    				if(myfilter !=null && myfilter.equals("")!=true)
+                    				{
+                    					if(myfilter.equals("in"))
+                    					{
+                    						int accountID = Integer.parseInt((String)session.getAttribute("account"));
+                    						Vector userList = tempTask.getUserList();
+                    						for(int k=0;k<userList.size();k++)
+                    						{
+                    							if(accountID == ((User)userList.get(k)).getUserID())
+                    							{
+                    								accountID = -2;//随意设置的一个负值
+                    							}
+                    						}
+                    						if(accountID != -2)
+                    						{
+                    							continue;
+                    						}
+                    					}
+                    					
+                    					if(myfilter.equals("prosess"))
+                    					{
+                    						String state = tempTask.getState();
+                    						if(!state.equals("进行中的"))
+                    						{
+                    							continue;
+                    						}
+                    					}
+                    				}
                     				
                     				%>
                     				
@@ -167,7 +216,7 @@
                                     </td>
                                     
                                     <td>
-                                        <a href=<%="createProblemlog.jsp?taskID="+tempTask.getTaskID() %> class="name">创建跟踪单</a>    
+                                        <a href=<%="createProblemlog.jsp?taskID="+tempTask.getTaskID()+"&managerID="+tempPro.getManagerid() %> class="name">创建跟踪单</a>    
 
                                     </td>
                                 </tr>
@@ -207,6 +256,27 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
+    
+     <script type="text/javascript">
+     
+     	function myfilter(selec)
+     	{
+     		window.location.href="http://localhost:8080/ProjectManager/displayTask.jsp?myfilter="+selec;
+     	}
+        
+        function keydownEvent() {
+
+            var e = window.event || arguments.callee.caller.arguments[0];
+
+            if (e && e.keyCode == 13 ) {
+
+            	var name = document.getElementById("search").value;
+            	window.location.href="http://localhost:8080/ProjectManager/displayTask.jsp?search="+name;
+            }
+        }
+    </script>
+    
+    
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
