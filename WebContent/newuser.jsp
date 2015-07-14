@@ -69,7 +69,7 @@
 					<!-- left column -->
 					<div class="span9 with-sidebar">
 						<div class="container">
-							<form class="new_user_form inline-input" action="UserManager" onSubmit="return checkCreateUser();" 
+							<form class="new_user_form inline-input" action="UserManager"  
 								method="post" />
 							<input name="functionMy" value="addUser" type="hidden" />
 							<div id="nameCss" class="span12 field-box">
@@ -92,7 +92,7 @@
 							</div>
 							<div id="ensureCss" class="span12 field-box">
 								<label>确认密码:</label> <input id="ensurePassword" name="ensurePassword" class="span8"
-									type="password"  />
+									type="password" onblur="checkPassword()" />
 								<span id="ensureSpan" style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>两次密码要一样！</span>
 							</div>
 							
@@ -106,13 +106,15 @@
 									</select>
 								</div>
 							</div>
-							<div class="span12 field-box">
-								<label>联系方式:</label> <input name="userPhone" class="span9"
-									onclick="checkPhone()" type="text" />
+							<div id="phoneCss" class="span12 field-box">
+								<label>联系方式:</label> <input id="userPhone" name="userPhone" class="span8"
+									onblur="checkPhone()" type="text" />
+								<span id="phoneSpan" style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>格式不正确！</span>
 							</div>
-							<div class="span12 field-box">
-								<label>Email:</label> <input name="userEmail" class="span9"
-									onclick="checkEmail()" type="text" />
+							<div id="emailCss" class="span12 field-box">
+								<label>Email:</label> <input id="userEmail" name="userEmail" class="span8"
+									onblur="checkEmail()" type="text" />
+								<span id="emailSpan" style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>格式不正确！</span>
 							</div>
 							
 							<div class="span12 field-box textarea">
@@ -121,7 +123,7 @@
 								<span class="charactersleft">个人简介最多不超过250个字符！</span>
 							</div>
 							<div class="span11 field-box actions">
-								<input type="submit" class="btn-glow primary" value="创建用户" />
+								<input type="submit" class="btn-glow primary"  value="创建用户" />
 							</div>
 							</form>
 						</div>
@@ -164,11 +166,11 @@
 	<script src="js/theme.js"></script>
 
 
-	<script src="js/checkUser.js" type="text/javascript"></script>
-
+	<script src="js/checkUser.js"></script>
 
 
 	<script type="text/javascript">
+	
 		$(function() {
 
 			// toggle form between inline and normal inputs
