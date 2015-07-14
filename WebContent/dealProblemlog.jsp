@@ -60,11 +60,11 @@
                     
                             <input type="text" class="search order-search" placeholder="Search for a task..." />
                             
-                            <div class="btn-group pull-right">
+                            <!-- <div class="btn-group pull-right">
                                 <button class="glow left large">所有的</button>
                                 <button class="glow middle large">进行中</button>
                                 <button class="glow right large">中断的</button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
@@ -119,7 +119,27 @@
                                         <%=problem.getCreateUserID()%>
                                     </td>
                                     <td>
-                                        <%=problem.getStatus()%>
+                                    	<%
+                                    		if(problem.getStatus()==1)
+                                    		{
+                                    			%>
+                                    			<span class="label label-info">处理中</span>
+                                    			<%
+                                    		}
+                                    		if(problem.getStatus()==2)
+                                			{
+                                    			%>
+                                    			<span class="label label-success">处理完</span>
+                                    			<%
+                                			}
+                                    		if(problem.getStatus()==3)
+                                    		{
+                                    			%>
+                                    			<span class="label label-important">未解决</span>
+                                    			<%
+                                    		}
+                                    		
+                                    	%>
                                     </td>
                                 </tr>
                     				
@@ -132,7 +152,7 @@
                         </table>
                     </div>
                     
-                    <div class="pagination pull-right">
+                   <!--  <div class="pagination pull-right">
                     	<ul>
                         	<li><a href="#">&#8249;</a></li>
                         	<li><a class="active" href="#">1</a></li>
@@ -142,7 +162,7 @@
                        		<li><a href="#">5</a></li>
                         	<li><a href="#">&#8250;</a></li>
                     	</ul>
-                	</div>
+                	</div> -->
                 </div>
                 <!-- end orders table -->
 

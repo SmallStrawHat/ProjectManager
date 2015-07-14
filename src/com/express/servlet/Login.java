@@ -44,6 +44,13 @@ public class Login extends HttpServlet {
     	String password = request.getParameter("password");
     	System.out.println(account+":"+password);
     	
+    	if(account==null|| password==null )
+    	{
+    		RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
+			dispatch.forward(request, response);
+			return ;
+    	}
+    	
     	if(account.equals("")|| password.equals("") )
     	{
     		RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");

@@ -10,23 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.business.*;
-import com.database.Worktime;
+import com.business.MemberInformation;
+import com.business.ProjectManagement;
+import com.database.Myuser;
 
 /**
- * Servlet implementation class RoleManager
+ * Servlet implementation class Logout
  */
-@WebServlet("/WorktimeManager")
-public class WorktimeManager extends HttpServlet {
+@WebServlet("/Logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorktimeManager() {
+    public Logout() {
         super();
         // TODO Auto-generated constructor stub
     }
+    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -37,28 +39,15 @@ public class WorktimeManager extends HttpServlet {
 			dispatch.forward(request, response);
 			return ;
 		}
+		
+		session.setAttribute("account", "");
+		session.invalidate();
+		RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
+		dispatch.forward(request, response);
+		return ;
     	
-    	String operation = request.getParameter("operation");
     	
-    	if(operation.equals("setworktime"))
-    	{
-    		int workDays = Integer.parseInt(request.getParameter("workdays"));
-    		int workDayHours = Integer.parseInt(request.getParameter("workdayhours"));
-    		String userLog = new String(request.getParameter("userlog").getBytes("ISO-8859-1"),"utf-8");
-    		String userLogPath = new String(request.getParameter("userlogpath").getBytes("ISO-8859-1"),"utf-8");
-    		String problemLogPath = new String(request.getParameter("problemlogpath").getBytes("ISO-8859-1"),"utf-8");
-    		
-    		if(Worktime.updateworktime(workDays, workDayHours,userLog,userLogPath,problemLogPath)==0)
-    		{
-    			response.sendRedirect("error.jsp");
-    			return ;
-    		}
-    		else
-    		{
-    			response.sendRedirect("setworktime.jsp");
-    			return ;
-    		}
-    	}
+    	
     }
 
 	/**

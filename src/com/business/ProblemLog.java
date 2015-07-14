@@ -6,6 +6,12 @@ public class ProblemLog {
 	private String createTime;
 	private int createUserID;
 	private int dealUserID;
+	/*
+	 * 状态：
+	 * 1.正在处理
+	 * 2.处理完成
+	 * 3.未解决
+	 * */
 	private int status;
 	private String problemDescreption;
 	private String logpath;

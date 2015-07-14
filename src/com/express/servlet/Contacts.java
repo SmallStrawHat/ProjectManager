@@ -32,9 +32,10 @@ public class Contacts extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
     	HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("account")==null)
+		if(session == null || session.getAttribute("account")==null || session.getAttribute("account").equals(""))
 		{
-			response.sendRedirect("signin.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
+			dispatch.forward(request, response);
 			return ;
 		}
     	

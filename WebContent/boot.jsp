@@ -125,7 +125,7 @@
                     </a>
                 </li>-->
                 <li class="settings hidden-phone">
-                    <a href="signin.html" role="button">
+                    <a href="Logout" role="button">
                         <i class="icon-share-alt"></i>
                     </a>
                 </li>
@@ -149,7 +149,7 @@
             </li>   
             <li>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
+                    <i class="icon-th-large"></i>
                     <span>项目</span>
                     <i class="icon-chevron-down"></i>
                 </a>
@@ -203,14 +203,14 @@
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                	<li><a href="setworktime.jsp">设定工时数据</a></li>
+                	<li><a href="setworktime.jsp">系统参数设定</a></li>
                     <li><a href="roleeditor.jsp">角色管理</a></li>
                 </ul>
             </li>
             
             
             <li>
-                <a href="#">
+                <a href="Logout">
                     <i class="icon-share-alt"></i>
                     <span>退出</span>
                 </a>

@@ -29,7 +29,7 @@ public class RoleManager extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
     	HttpSession session = request.getSession(false);
-		if(session == null || session.getAttribute("account")==null)
+		if(session == null || session.getAttribute("account")==null || session.getAttribute("account").equals(""))
 		{
 			RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
 			dispatch.forward(request, response);

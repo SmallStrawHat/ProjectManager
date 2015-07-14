@@ -63,8 +63,8 @@
                             
                             <div class="btn-group pull-right">
                                 <button class="glow left large">所有的</button>
-                                <button class="glow middle large">进行中</button>
-                                <button class="glow right large">中断的</button>
+                                <button class="glow middle large">参与的</button>
+                                <button class="glow right large">进行中</button>
                             </div>
                         </div>
                     </div>
@@ -85,13 +85,14 @@
                                         	预计结束时间
                                     </th>
                                     <th class="span3">
-                                    	<span class="line"></span>
-                                        	所属项目
-                                    </th>
-                                    <th class="span3">
                                         <span class="line"></span>
                                         	任务进度
                                     </th>
+                                    <th class="span3">
+                                    	<span class="line"></span>
+                                        	所属项目
+                                    </th>
+                                    
                                     <th class="span3">
                                         <span class="line"></span>
                                         	任务状态
@@ -103,6 +104,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            
+                            
                             <%
                     		Vector projecList = ProjectManagement.getAllProjectList();
                     		for(int i=0;i<projecList.size();i++)
@@ -127,11 +130,17 @@
                                         <%=tempTask.getPlanEndtime()%>
                                     </td>
                                     <td>
-                                        <a href=<%="projectdetail.jsp?targetID="+tempPro.getId()%>><%=tempPro.getName()%></a>
+                                    	 <div class="progress progress-striped active">
+                                    		<%
+                                    			int rateDis = (int)tempTask.getRate();
+                                    		%>
+      										<div class="bar" style="width: <%=rateDis%>%;"><%=tempTask.getRate()%>%</div>
+    									</div>
                                     </td>
                                     <td>
-                                        <%=tempTask.getRate()%>%
+                                        <a href=<%="projectdetail.jsp?targetID="+tempPro.getId()%>><%=tempPro.getName()%></a>
                                     </td>
+                                    
                                     <td>
                                     	<%
                                     		if(tempTask.getState().equals("进行中的"))
@@ -174,7 +183,7 @@
                         </table>
                     </div>
                     
-                    <div class="pagination pull-right">
+                    <!-- <div class="pagination pull-right">
                     	<ul>
                         	<li><a href="#">&#8249;</a></li>
                         	<li><a class="active" href="#">1</a></li>
@@ -184,7 +193,7 @@
                        		<li><a href="#">5</a></li>
                         	<li><a href="#">&#8250;</a></li>
                     	</ul>
-                	</div>
+                	</div> -->
                 </div>
                 <!-- end orders table -->
 
