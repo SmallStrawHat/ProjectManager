@@ -198,6 +198,45 @@ public class Myuser {
 		}
 		return 0;
 	}
+	
+	public static int updateLogpath(String logpath)
+	{
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			String sqlSelect = "select user_id from  myuser;";
+			ResultSet res = stm.executeQuery(sqlSelect);
+			while(res.next())
+			{
+				String tempLogpath = logpath+res.getInt(1)+".txt";
+				String sql = "update myuser set userlogpath='"+tempLogpath+"';";
+				stm.execute(sql);
+			}
+			
+			return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+	}
 
 	public static int update(int account,int lag)
 	{

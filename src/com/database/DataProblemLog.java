@@ -51,6 +51,46 @@ public class DataProblemLog {
 		return resVec;
 	}
 	
+	public static int updateLogpath(String logpath)
+	{
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			String sqlSelect = "select problem_id,task_id from  problemlog;";
+			ResultSet res = stm.executeQuery(sqlSelect);
+			while(res.next())
+			{
+				String tempLogpath = logpath+res.getInt(2)+"_"+res.getInt(1)+".txt";
+				String sql = "update problemlog set logpath='"+tempLogpath+"';";
+				stm.execute(sql);
+			}
+			
+			
+			return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+	}
+	
 	public static int insert(int taskID,String createTime,int createUserID,int dealUserID,
 			int status,String problemDescreption,String logpath)
 	{

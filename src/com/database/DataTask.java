@@ -59,6 +59,46 @@ public class DataTask {
 		this.planEndtime = planEndtime;
 		this.tasklogPath = tasklogPath;
 	}
+	
+	public static int updateLogpath(String logpath)
+	{
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			String sqlSelect = "select task_id,project_id from  task;";
+			ResultSet res = stm.executeQuery(sqlSelect);
+			while(res.next())
+			{
+				String tempLogpath = logpath+res.getInt(2)+"_"+res.getInt(1)+".txt";
+				String sql = "update task set tasklog_path='"+tempLogpath+"';";
+				stm.execute(sql);
+			}
+			
+			
+			return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+	}
 
 	public static Vector searchProjectTask(int projectID)
 	{
