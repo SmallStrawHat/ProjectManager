@@ -59,12 +59,13 @@
  						
  					%>
                     
-                        <form action="TaskManagerExpre" method="post" />
+                        <form action="TaskManagerExpre" method="post" onsubmit="return checkFilter();" />
                         	<input name="functionMy" value="createTask" type="hidden" />
                         	<input name="milepost" id="milepost" value="0" type="hidden" />
-                            <div class="field-box">
+                            <div id="taskNameCss" class="field-box">
                                 <label>任务名称:</label>
-                                <input name="taskName" class="span8" type="text" />
+                                <input id="taskName" name="taskName" class="span7" type="text" onblur="checkName()" />
+                                <span id="taskNameSpan"  style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>任务名不能为空！</span>
                             </div>
                             <div class="field-box">
                                 <label>选择所属项目:</label>
@@ -106,8 +107,8 @@
                             <div class="field-box">
                                 <label>任务进度:</label>
                                 
-                                <div class="input-append">
-                                    <input name="rate" class="input-large span5" type="text" placeholder="0" />
+                                <div id="rateCss" class="input-append">
+                                    <input id="rate" name="rate" class="input-large span5" type="text" placeholder="0" value="0" />
                                     <span class="add-on">%</span>
                                 </div>
                             </div>
@@ -124,15 +125,15 @@
                 			<!-- 详细信息 -->
                             <div class="field-box">
                                 <label>开始时间:</label>
-                                <input name="startTime" type="text" value="03/29/2014" class="input-large datepicker" />
+                                <input name="startTime" type="text" value="07/15/2015" class="input-large datepicker" />
                             </div>
-                            <div class="field-box">
+                          <!--   <div class="field-box">
                                 <label>结束时间:</label>
                                 <input name="endTime" type="text" value="" class="input-large datepicker" />
-                            </div>
+                            </div> -->
                             <div class="field-box">
                                 <label>预期的期限:</label>
-                                <input name="planEndtime" type="text" value="03/29/2014" class="input-large datepicker" />
+                                <input name="planEndtime" type="text" value="07/15/2016" class="input-large datepicker" />
                             </div>
                              <%-- <div class="field-box">
                                 <label>选择父任务:</label>
@@ -153,16 +154,17 @@
                                     <option value="ID" />Idaho
                                 </select>
                             </div> --%>
-                            <div class="field-box">
+                            <div id="budgetCss" class="field-box">
                                 <label>预算指标:</label>
                                 <div class="input-append">
-                                    <input name="budget" class="input-large" type="text" placeholder="0" />
+                                    <input id="budget" name="budget" class="input-large" type="text" onblur="checkBudget()" />
                                     <span class="add-on">万元</span>
                                 </div>
+                                <span id="budgetSpan"  style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>只能为数字！</span>
                             </div>
-                            <div class="field-box">
+                            <div id="userSelectCss" class="field-box">
                                 <label>分配人力资源:</label>
-                                <select style="width:500px" multiple="" class="select2" name="userSelect">
+                                <select style="width:400px" multiple="" class="select2" id="userSelect" name="userSelect" >
                                     <option />
                                     <% Vector user = MemberInformation.getUserList();
                                     	for(int i=0;i<user.size();i++)
@@ -214,6 +216,8 @@
     <script src="js/jquery.uniform.min.js"></script>
     <script src="js/select2.min.js"></script>
     <script src="js/theme.js"></script>
+    
+    <script src="js/checkTask.js"></script>
     
     
         <script type="text/javascript">

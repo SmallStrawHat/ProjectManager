@@ -1,9 +1,6 @@
 package com.express.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,36 +10,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.database.*;
-import com.business.*;
+import com.business.MemberInformation;
+import com.business.ProjectManagement;
+import com.business.WorktimeInfomation;
+import com.database.Myuser;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class LogCheck
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/LogCheck")
+public class LogCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public LogCheck() {
         super();
         // TODO Auto-generated constructor stub
     }
     
+    public void destroy()
+    {
+    	super.destroy();
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-    	HttpSession session = request.getSession(false);
-		if(session == null )
-		{
-			RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
-			dispatch.forward(request, response);
-			return ;
-		}
+    /*	response.setContentType("text/xml");
+    	response.setHeader("Cache-Control","no-cache");*/
     	String account = request.getParameter("account");
     	String password = request.getParameter("password");
-    	System.out.println(account+":"+password);
+    	System.out.println(account+":"+password+"4654");
     	
     	if(account==null|| password==null )
     	{
@@ -62,26 +61,25 @@ public class Login extends HttpServlet {
         	Myuser res = Myuser.search(Integer.parseInt(account));
         	if(res == null)
         	{
-        		RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
-    			dispatch.forward(request, response);
+        		System.out.println("account:null");
+        		//StringBuffer sb = new StringBuffer("<type_name>0</type_name>");
+        		response.getWriter().write("0");
+        		response.getWriter().close();
     			return ;
         	}
         	if(password.equals(res.getPassword()))
         	{
-        		session.setAttribute("account", account);
-        		
-        		/*初始化数据到内存*/
-        		WorktimeInfomation.init();
-        		MemberInformation.init();
-        		ProjectManagement.init();
-        		
-        		response.sendRedirect("index.jsp");
+        		System.out.println("account:pass");
+        		response.getWriter().write("1");
+        		response.getWriter().close();
     			return ;
         	}
         	else
         	{
-        		RequestDispatcher dispatch = request.getRequestDispatcher("signin.jsp");
-    			dispatch.forward(request, response);
+        		System.out.println("password:error");
+        		response.getWriter().write("0");
+        		response.getWriter().flush();
+        		response.getWriter().close();
     			return ;
         	}
     	}
@@ -97,7 +95,6 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		processRequest(request,response);
-		
 	}
 
 	/**
@@ -105,7 +102,6 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
 		processRequest(request,response);
 	}
 

@@ -69,15 +69,21 @@
         <div class="span4 box">
             <div class="content-wrap">
                 <h6>Log in</h6>
-                <form action="Login" method="post">
-                <input id="account" name="account" class="span12" type="text" placeholder="Account ID" />
-                <input id="password" name="password" class="span12" type="password" placeholder="Your password" />
+                <form   onSubmit="return check();">
+                <input id="account" name="account" class="span12" type="text" placeholder="Account ID" onblur="noDisplay()" />
+                <input id="password" name="password" class="span12" type="password" placeholder="Your password" onblur="noDisplay()" />
+               
+               <div id="notiseMy" style="display: none" class="alert alert-danger alert-dismissible" role="alert">
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+  					<strong>注意！</strong> 账户ID或密码输入错误。
+				</div>
                
                 <!-- <div class="remember">
                     <input id="remember-me" type="checkbox" />
                     <label for="remember-me">Remember me</label>
                 </div> -->
                 <button class="btn-glow primary login" type="submit">Log in</button>
+                
                 </form>
             </div>
         </div>
@@ -89,6 +95,8 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
+    
+    <script src="ajax/signin.js"></script>
 
     <!-- pre load bg imgs -->
     <script type="text/javascript">

@@ -69,7 +69,7 @@
 					<!-- left column -->
 					<div class="span9 with-sidebar">
 						<div class="container">
-							<form class="new_user_form inline-input" action="UserManager"  
+							<form class="new_user_form inline-input" action="UserManager"  onsubmit="return checkFilter();"
 								method="post" />
 							<input name="functionMy" value="addUser" type="hidden" />
 							<div id="nameCss" class="span12 field-box">

@@ -109,20 +109,11 @@ public class TaskManagerExpre extends HttpServlet {
     		}
     		else
     		{
-    			startTime = "0/0/0";
+    			startTime = "1000/01/01";
     		}
     		
     		
-    		String endTime = request.getParameter("endTime");
-    		tempTime = endTime.split("/");
-    		if(tempTime.length==3)
-    		{
-    			endTime = tempTime[2]+"/"+tempTime[0]+"/"+tempTime[1];
-    		}
-    		else
-    		{
-    			endTime = "0/0/0";
-    		}
+    		String endTime = "1000/01/01";
     		
     		String planEndtime = request.getParameter("planEndtime");
     		tempTime = planEndtime.split("/");
@@ -132,7 +123,7 @@ public class TaskManagerExpre extends HttpServlet {
     		}
     		else
     		{
-    			planEndtime = "0/0/0";
+    			planEndtime = "1000/01/01";
     		}
     		
     		float budget = Float.parseFloat(request.getParameter("budget"));

@@ -56,26 +56,28 @@
                 <div class="row-fluid form-wrapper">
                     <!-- left column -->
                     <div class="span8 column">
- 					<form action="ProjectManager" method="post" />
+ 					<form action="ProjectManager" method="post" onsubmit="return checkFilter();"/>
 							<input name="function" value="createProject" type="hidden" />
-							<div class="field-box">
-								<label>项目名称:</label> <input name="pname" class="span3"type="text" />
+							<div id="pnameCss" class="field-box">
+								<label>项目名称:</label> <input id="pname" name="pname" class="span7" type="text" onblur="checkName()" />
+								<span id="pnameSpan"  style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>项目名不能为空！</span>
 							</div>
 							<div class="field-box">
 								<label>开始时间:</label> 
-								<input name="starttime" type="text" value="03/29/2014" class="input-large datepicker" />
+								<input name="starttime" type="text" value="07/15/2015" class="input-large datepicker" />
 							</div>
 							<div class="field-box">
 								<label>预计结束时间:</label> 
-								<input name="expectendtime" type="text" value="03/24/2014" class="input-large datepicker" />
+								<input name="expectendtime" type="text" value="07/15/2016" class="input-large datepicker" />
 							</div>
-							<div class="field-box">
-								<label>项目预算:</label> <input name="budget" class="span3"
+							<div id="budgetCss" class="field-box">
+								<label>项目预算:</label> <input id="budget" name="budget" class="span4" onblur="checkBudget()"
 									type="text" />万元
+								<span id="budgetSpan"  style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>只能是数字！</span>
 							</div>
 							<div class="field-box">
                                 <label>选择项目经理:</label>
-                                <select style="width:250px" class="select2" name="manager">
+                                <select style="width:225px" class="select2" name="manager">
                                 	<option />
                                		<% for(int i=0;i<p.size();i++)
                                		{
@@ -89,13 +91,19 @@
                                 </select>
                             </div>
 							<div class="field-box">
-								<label>项目优先级:</label> <input name="priority" class="span3"
-									type="text" />
+								<label>项目优先级:</label> 
+								<div class="ui-select span4" >
+                                	<select name="priority">
+                                    	<option value="1" />正常
+                                        <option value="2" />最高
+                                    </select>
+                                </div>
 							</div>
 
-							<div class="field-box">
-								<label>计划耗时:</label> <input name="plantime" class="span3"
+							<div id="plantimeCss" class="field-box">
+								<label>计划耗时:</label> <input id="plantime" name="plantime" class="span4" onblur="checkPlantime()"
 									type="text" />小时
+								<span id="plantimeSpan"  style="display:none;" class="alert-msg"><i class="icon-remove-sign"></i>只能是整数！</span>
 							</div>
 
 							<div class="field-box">
@@ -140,6 +148,8 @@
     <script src="js/jquery.uniform.min.js"></script>
     <script src="js/select2.min.js"></script>
     <script src="js/theme.js"></script>
+    
+    <script src="js/checkProject.js"></script>
     
     
         <script type="text/javascript">
