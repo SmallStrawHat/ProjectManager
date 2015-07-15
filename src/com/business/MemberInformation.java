@@ -41,8 +41,20 @@ public class MemberInformation {
 	public static int addUser(String name,String phone,String email,
 			String userRole,String password,int userState,String summary)
 	{
-		if(Myuser.insert(name, phone, email, userRole, password, userState, summary)!=-1)
+		String  userlogpath=new String();
+		for(int i=0;i<WorktimeInfomation.systemsettinglist.size();i++)
 		{
+			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
+			userlogpath=temp.getUserlogpath();
+		}
+		userlogpath=userlogpath.replaceAll("\\\\", "\\\\\\\\");
+		int userid=Myuser.insert(name, phone, email, userRole, password, userState,userlogpath, summary);
+		
+		if(userid!=-1)
+		{
+			userlogpath=userlogpath+userid+".txt";
+			User temp = new User(userid,name, phone, email, userRole, password, userState,userlogpath, summary);
+			MemberInformation.userList.add(temp);
 			return 1;
 		}
 		else

@@ -17,14 +17,28 @@ public class TaskManager {
 		Task tempTask = TaskManager.searchTask(taskID);
 		if(tempTask != null)
 		{
-			int problemID = DataProblemLog.insert(taskID, createTime, createUserID, dealUserID, status, problemDescreption, "");
+			String  logpath=new String();
+    		for(int i=0;i<WorktimeInfomation.systemsettinglist.size();i++)
+    		{
+    			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
+    			logpath=temp.getProblemlogpath();
+    		}
+    		
+			int problemID = DataProblemLog.insert(taskID, createTime, createUserID, dealUserID, status, problemDescreption,logpath);
+			
+			
+    		String file=Integer.toString(taskID);			
+    		logpath=logpath+file+"_"+problemID+".txt";    		
+    		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
+			
+			
 			if(problemID!=0)
 			{
 				//插入内存
 				/*int problemID,int taskID,String createTime,int createUserID,int dealUserID,
 				int status,String problemDescreption,String logpath*/
 				ProblemLog tempProblem = new ProblemLog(problemID,taskID,createTime,createUserID,
-						dealUserID,status,problemDescreption,"");
+						dealUserID,status,problemDescreption,logpath);
 				tempTask.addProblemLog(tempProblem);
 				return 1;
 			}
@@ -35,27 +49,43 @@ public class TaskManager {
 	public static int createTask(int projectID,Task addTask,String[] userList)
 	{
 		Project project = ProjectManagement.searchProject(projectID);
+		Task task=addTask;
 		if(project != null)
 		{
-			if(project.addTask(addTask)==1)
-			{
-				//data add information
-				String taskName = addTask.getTaskName();
-				String state = addTask.getState();
-				float rate = addTask.getRate();
-				int level = addTask.getLevel();
-				int milepost = addTask.getMilepost();
-				float budget = addTask.getBudget();
-				int fathertaskID = addTask.getFathertaskID();
-				String summary = addTask.getSummary();
-				String startTime = addTask.getStartTime();
-				String endTime = addTask.getEndtime();
-				String planEndtime = addTask.getPlanEndtime();
-				String tasklogPath = addTask.getTasklogPath();
-				
-				int taskID = DataTask.add(taskName, state, rate, level, projectID, milepost, budget, fathertaskID, summary, startTime, endTime, planEndtime, tasklogPath);
+			//data add information
+			String taskName = addTask.getTaskName();
+			String state = addTask.getState();
+			float rate = addTask.getRate();
+			int level = addTask.getLevel();
+			int milepost = addTask.getMilepost();
+			float budget = addTask.getBudget();
+			int fathertaskID = addTask.getFathertaskID();
+			String summary = addTask.getSummary();
+			String startTime = addTask.getStartTime();
+			String endTime = addTask.getEndtime();
+			String planEndtime = addTask.getPlanEndtime();
+			String tasklogPath = addTask.getTasklogPath();
+			
+			String  logpath=new String();
+    		for(int i=0;i<WorktimeInfomation.systemsettinglist.size();i++)
+    		{
+    			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
+    			logpath=temp.getTasklogpath();
+    		}
+    		
+			
+			int taskID = DataTask.add(taskName, state, rate, level, projectID, milepost, budget, fathertaskID, summary, startTime, endTime, planEndtime, logpath);
+			
+			String file=Integer.toString(projectID);			
+    		logpath=logpath+file+"_"+taskID+".txt";    		
+    		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
+    		task.setTaskID(taskID);
+    		task.setTasklogPath(logpath);
+			
+			if(project.addTask(task)==1)
+			{    		
 				if(taskID !=0)
-				{
+				{		
 					if(DataUserTask.insert(taskID, userList)==1)
 					{
 						for(int i=0;i<userList.length;i++)
@@ -64,7 +94,7 @@ public class TaskManager {
 							User temp = MemberInformation.seachUser(userID);
 							addTask.addUser(temp);
 						}
-						return 1;
+						return taskID;
 					}
 				}				
 			}
@@ -138,5 +168,6 @@ public class TaskManager {
 		}
 		return resTask;
 	}
+
 
 }

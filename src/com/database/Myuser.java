@@ -7,7 +7,9 @@ import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 
+import com.business.SystemSetting;
 import com.business.User;
+import com.business.WorktimeInfomation;
 
 public class Myuser {
 	private int userID;
@@ -279,7 +281,7 @@ public class Myuser {
 	}
 	
 	public static int insert(String name,String phone,String email,
-			String userRole,String password,int userState,String summary)
+			String userRole,String password,int userState,String userlogpath,String summary)
 	{
 		Connection conn =null;
 		try
@@ -295,7 +297,10 @@ public class Myuser {
 				bigID = res.getInt(1);
 			}
 			bigID+=1;
-			String sql = "insert into myuser values("+bigID+",'"+name+"','"+phone+"','"+email+"','"+password+"','"+userRole+"',"+userState+",'','"+summary+"');";
+			String file=Integer.toString(bigID);			
+			String path=userlogpath+file+".txt";
+//			path=path.replaceAll("\\\\\", "\\\\\\\\");
+			String sql = "insert into myuser values("+bigID+",'"+name+"','"+phone+"','"+email+"','"+password+"','"+userRole+"',"+userState+",'"+path+"','"+summary+"');";
 			stm.execute(sql);
 			res.close();
 			return bigID;
@@ -367,14 +372,16 @@ public class Myuser {
 	}
 		
 	
-/*	public static void main(String arg[])
+	/*public static void main(String arg[])
 	{
-		Myuser temp = new Myuser();
-    	Vector res = temp.searchAll();
-    	temp = (Myuser)res.get(0);
-    	System.out.println(res.size());
-    	System.out.println(temp.getUserRole());
-		Myuser.insert("发的发顺丰", "156", "afa", "affd", "afaf", 1, "案发当时");
+		WorktimeInfomation.init();
+		Vector temp=WorktimeInfomation.systemsettinglist;
+		SystemSetting ss=(SystemSetting)temp.get(0);
+		String path=ss.getUserlogpath();
+//		String r="D:\\file\\userlog\\";
+		System.out.println(path);
+		path=path.replaceAll("\\\\", "\\\\\\\\");
+		Myuser.insert("999", "456", "fdf", "fd", "df", 1, path, "dasfas");
 	}*/
 	
 }

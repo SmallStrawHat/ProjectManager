@@ -52,6 +52,7 @@ public class TaskManagerExpre extends HttpServlet {
     		String[] tempTime = createTime.split("/");
     		createTime = tempTime[0]+" "+tempTime[1];
     
+    		
 
     		if(com.business.TaskManager.createProblemLog(taskID,createTime,createUserID,dealUserID,
     				status,problemDescreption)==1)
@@ -130,13 +131,23 @@ public class TaskManagerExpre extends HttpServlet {
     		String[] userSelect = request.getParameterValues("userSelect");
     		String summary = new String(request.getParameter("summary").getBytes("ISO-8859-1"),"utf-8");
     		
-
     		
-    		Task task = new Task(-1,taskName,state,rate,level,milepost,budget,-1,summary,startTime,endTime,planEndtime,"");
-    		if(com.business.TaskManager.createTask(projectID, task,userSelect)==1)
+    		/*String  logpath=new String();
+    		for(int i=0;i<WorktimeInfomation.systemsettinglist.size();i++)
     		{
-    			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
-    			//dispatch.forward(request, response);
+    			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
+    			logpath=temp.getUserlogpath();
+    		}
+    		String file=Integer.toString(projectID);			
+    		logpath=logpath+file+"_"+taskID+".txt";
+    		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");*/
+    		
+    		
+
+    		Task task = new Task(-1,taskName,state,rate,level,milepost,budget,-1,summary,startTime,endTime,planEndtime,"");
+    		if(com.business.TaskManager.createTask(projectID, task,userSelect)!=0)
+    		{
+    			
     			response.sendRedirect("displayTask.jsp");
     			return ;
     		}

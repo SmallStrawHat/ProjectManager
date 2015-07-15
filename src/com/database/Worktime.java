@@ -152,9 +152,12 @@ public class Worktime {
 	}
 		
 	
-//	public static void main(String arg[])
-//	{
-//		Worktime.updateworktime(333, 5);
-//	}
+	/*public static void main(String arg[])
+	{
+	//	Vector resVec = new Vector(10,6);
+		Worktime resVec=(Worktime)Worktime.searchAll().get(0);
+		System.out.println(resVec.getUserLog());
+//		Worktime.updateworktime(3, 5,"D:\\\\WorktimeInfomation1\\\\","D:\\\\WorktimeInfomation2\\\\","D:\\\\WorktimeInfomation3\\\\");
+	}*/
 	
 }

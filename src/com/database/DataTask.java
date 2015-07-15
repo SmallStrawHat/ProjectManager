@@ -167,7 +167,12 @@ public class DataTask {
 			String summary,String startTime,String endTime,String planEndtime,String tasklogPath)
 			*/
 			
-			String sql = "insert into task values("+taskID+",'"+taskName+"','"+state+"',"+rate+","+level+","+projectID+","+milepost+","+budget+", "+fathertaskID+", '"+summary+"','"+startTime+"','"+endTime+"','"+planEndtime+"','"+tasklogPath+"');";
+			String  logpath=tasklogPath;
+    		String file=Integer.toString(projectID);			
+    		logpath=logpath+file+"_"+taskID+".txt";
+    		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
+    		
+			String sql = "insert into task values("+taskID+",'"+taskName+"','"+state+"',"+rate+","+level+","+projectID+","+milepost+","+budget+", "+fathertaskID+", '"+summary+"','"+startTime+"','"+endTime+"','"+planEndtime+"','"+logpath+"');";
 			stm.execute(sql);
 			
 			

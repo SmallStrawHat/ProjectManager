@@ -106,7 +106,7 @@
 						</table>
 						<div class="span12 showcase">
 							<form class="new_project_form inline-input"
-								action="WorktimeManager" method="post" />
+								action="WorktimeManager" method="post" onsubmit="return transFor();" />
 							<input name="operation" value="setworktime" type="hidden" />
 							<div class="field-box">
 								 <label>工作日天数:<br>（单位：日）</label> <input name="workdays"
@@ -117,19 +117,16 @@
 									name="workdayhours" class="span8" type="text" />
 							</div>
 							<div class="field-box">
-								 <label>用户日志:</label>
-								<!--<input name="userlog" class="span8" type="text" />-->
-								<textarea name="userlog" class="span9"></textarea>
+								 <label>用户日志路径:</label>
+								<textarea id="userlog" name="userlog" class="span9"></textarea>
 							</div>
 							<div class="field-box">
-								 <label>用户日志路径:</label>
-								<!-- <input name="userlogpath" class="span8" type="text" /> -->
-								<textarea name="userlogpath" class="span9"></textarea>
+								 <label>任务日志路径:</label>
+								<textarea id="taskLogpath" name="taskLogpath" class="span9"></textarea>
 							</div>
 							<div class="field-box">
 								 <label>问题跟踪单路径:</label>
-								<!-- <input name="problemlogpath" class="span8" type="text" /> -->
-								<textarea name="problemlogpath" class="span9"></textarea>
+								<textarea id="problemlogpath" name="problemlogpath" class="span9"></textarea>
 							</div>
 
 							<br>
@@ -182,6 +179,19 @@
 
 
 	<script type="text/javascript">
+		function transFor()
+		{
+			var userlog = document.getElementById("userlog");
+			var taskLogpath = document.getElementById("taskLogpath");
+			var problemlogpath = document.getElementById("problemlogpath");
+			
+			userlog.value=userlog.value.replace(/[\\]/g, "\\\\");
+			taskLogpath.value=taskLogpath.value.replace(/[\\]/g, "\\\\");
+			problemlogpath.value=problemlogpath.value.replace(/[\\]/g, "\\\\");
+			
+			return true;
+		}
+	
 		$(function() {
 
 			// toggle form between inline and normal inputs

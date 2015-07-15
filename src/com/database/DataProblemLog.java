@@ -92,7 +92,7 @@ public class DataProblemLog {
 	}
 	
 	public static int insert(int taskID,String createTime,int createUserID,int dealUserID,
-			int status,String problemDescreption,String logpath)
+			int status,String problemDescreption,String logPath)
 	{
 		Connection conn =null;
 		try
@@ -108,6 +108,12 @@ public class DataProblemLog {
 				bigID = res.getInt(1);
 			}
 			bigID+=1;
+			
+			String logpath=logPath;
+			String file=Integer.toString(taskID);			
+    		logpath=logpath+file+"_"+bigID+".txt";    		
+    		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
+    		
 			String sql = "insert into problemlog values("+bigID+","+taskID+",'"+createTime+"',"+createUserID+","+dealUserID+","+status+",'"+problemDescreption+"','"+logpath+"');";
 			stm.execute(sql);
 			res.close();

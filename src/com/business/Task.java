@@ -83,6 +83,10 @@ public class Task {
 	{
 		return this.tasklogPath;
 	}
+	public void setTasklogPath(String tasklogPath)
+	{
+		this.tasklogPath=tasklogPath;
+	}
 	
 	public String getPlanEndtime()
 	{
@@ -128,6 +132,9 @@ public class Task {
 	public int getTaskID()
 	{
 		return this.taskID;
+	}
+	public void setTaskID(int taskid){
+		this.taskID=taskid;
 	}
 	
 	public String getTaskName()

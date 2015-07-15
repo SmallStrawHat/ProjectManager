@@ -90,5 +90,12 @@ public class WorktimeInfomation {
 	public static void setSystemsettinglist(Vector systemsettinglist) {
 		WorktimeInfomation.systemsettinglist = systemsettinglist;
 	}
+	/*public static void main(String srg[]){
+		WorktimeInfomation.init();
+		Vector temp=WorktimeInfomation.systemsettinglist;
+		SystemSetting ss=(SystemSetting)temp.get(0);
+		String path=ss.getUserlogpath();
+		System.out.println(path);
+	}*/
 	
 }

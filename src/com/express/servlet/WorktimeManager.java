@@ -46,25 +46,36 @@ public class WorktimeManager extends HttpServlet {
     		int workDays = Integer.parseInt(request.getParameter("workdays"));
     		int workDayHours = Integer.parseInt(request.getParameter("workdayhours"));
     		String userLog = new String(request.getParameter("userlog").getBytes("ISO-8859-1"),"utf-8");
-    		String userLogPath = new String(request.getParameter("userlogpath").getBytes("ISO-8859-1"),"utf-8");
+    		String taskLogpath = new String(request.getParameter("taskLogpath").getBytes("ISO-8859-1"),"utf-8");
     		String problemLogPath = new String(request.getParameter("problemlogpath").getBytes("ISO-8859-1"),"utf-8");
     		
-    		if(Worktime.updateworktime(workDays, workDayHours,userLog,userLogPath,problemLogPath)==0)
+    		
+
+    		
+    		
+    		if(Worktime.updateworktime(workDays, workDayHours,userLog,taskLogpath,problemLogPath)==0)
     		{
     			response.sendRedirect("error.jsp");
     			return ;
     		}
     		else
     		{
+    			/*userLog=userLog.replaceAll("\\\\", "\\\\\\\\");
+    			System.out.println(userLog);
     			Vector ss=new Vector();
     			for(int i=0;i<WorktimeInfomation.getSystemsettinglist().size();i++)
     			{
     				SystemSetting s=(SystemSetting)WorktimeInfomation.getSystemsettinglist().get(i);
     				Vector role=s.getRolelist();
-    				SystemSetting temp=new SystemSetting(workDays, workDayHours,userLog,userLogPath,problemLogPath,role);    				
+    				SystemSetting temp=new SystemSetting(workDays, workDayHours,userLog,taskLogpath,problemLogPath,role);    				
     				ss.add(temp);			
     			}
-    			WorktimeInfomation.setSystemsettinglist(ss);
+    			WorktimeInfomation.setSystemsettinglist(ss);*/
+    			WorktimeInfomation.init();
+    			MemberInformation.init();
+        		ProjectManagement.init();
+    			
+    			
     			response.sendRedirect("setworktime.jsp");
     			return ;
     		}
