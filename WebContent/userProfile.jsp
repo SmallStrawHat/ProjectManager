@@ -186,7 +186,7 @@
                             </table>
                       
                       <%
-                        	User loginUser = MemberInformation.seachUser(accountID);
+                        	User loginUser = MemberInformation.seachUser(Integer.parseInt(request.getParameter("targetID")));
                       		String logInformation = FileOperation.ReadFileToString(loginUser.getUserLogpath());
                         %>
                             <!-- new comment form -->
