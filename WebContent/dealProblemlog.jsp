@@ -110,7 +110,7 @@
                     				 <!-- row -->
                                 <tr class="first">
                                     <td>
-                                    	<a href="detailProblemlog.jsp" class="name"><%=problem.getProblemID()%></a>
+                                    	<a href=<%="detailProblemlog.jsp?targetID="+problem.getProblemID()%> class="name"><%=problem.getProblemID()%></a>
                                     </td>
                                     <td>
                                     	<%

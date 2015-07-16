@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="com.business.*,java.util.Vector"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,6 +54,7 @@
             </a>
         </div>
         
+        
         <div class="container-fluid">
             <div id="pad-wrapper" class="new-user">
                 <div class="row-fluid header">
@@ -63,60 +65,61 @@
                     <!-- left column -->
                     <div class="span9 with-sidebar">
                         <div class="container">
-                            <form class="new_user_form inline-input" />
+        <%
+            String str=request.getParameter("targetID");
+            int problemID=Integer.parseInt(str);
+            Vector problemList = TaskManager.searchAllProblem();
+            
+            for(int i=0;i<problemList.size();i++)
+            {
+               ProblemLog problem = (ProblemLog)problemList.get(i);
+               int problemid = problem.getProblemID();
+               if(problemID == problemid)
+               {                           
+          %>
+                            <form action="DealwithProblemlog" method="post" class="new_user_form inline-input" />
                             <div class="span12 field-box">
                                     <label>处理问题单ID:</label>
-                                    <input class="span9" type="text" />
+                                    <input name="dealID"class="span9" type="text" />
                                 </div>
                                 <div class="span12 field-box">
                                     <label>问题单ID:</label>
-                                    <input class="span9" type="text" readonly="readonly" value="匹配任务ID（只读）"/>
+                                    <input name="problemID"class="span9" type="text" readonly="readonly" value=<%="'"+problem.getProblemID()+"'" %>/><span><%=problem.getProblemID() %></span>
                                 </div>
                                 <div class="span12 field-box">
                                     <label>问题单路径:</label>
-                                     <input class="span9" type="text" readonly="readonly" value="匹配任务ID（只读）"/>                                 
+                                     <input name="path"class="span9" type="text" readonly="readonly" value=<%=problem.getLogPath() %>/><span><%=problem.getLogPath() %></span>                                 
                                 </div>
                                 <div class="span12 field-box">
                                     <label>处理人ID:</label>
-                                    <div class="dropdown"> 
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">                                     
-                                        选择处理人 
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">选择1</a></li>
-                                        <li><a href="#">选择2</a></li> 
-                                        <li><a href="#">选择3</a></li>  
-                                        <li><a href="#">Separated link</a></li> 
-                                    </ul>
-                                </div>
+                                    <input name="dealuserID"class="span9" type="text" readonle="readonly"value=<%="'"+problem.getDealUserID()+"'"%>/>
                                 </div>
                                  <div class="span12 field-box">
                                     <label>创建人ID:</label>
-                                    <input class="span9" type="text" /> 
+                                    <input name="createrID"class="span9" type="text" readonle="readonly"value=<%="'"+problem.getDealUserID()+"'" %>/> 
                                 </div>
                                 <div class="span12 field-box">
                                     <label>任务ID:</label>
-                                     <input class="span8 inline-input" type="text" readonly="readonly" value="匹配任务ID（只读）" />
+                                     <input name="taskID"class="span8 inline-input" type="text" readonly="readonly" value=<%="'"+problem.getTaskID()+"'" %> />
                                 </div>      
                                 <div class="field-box">
                                 <label>问题概述:</label>
-                                <textarea class="span8" type="text"  readonly="readonly">只读</textarea>    
+                                <textarea name="summary"class="span8" type="text"  readonly="readonly" value=<%=problem.getProblemDescreption() %>></textarea>    
                                  </div> 
                             <div class="field-box">
                                 <label>处理问题方法描述:</label>
-                                <textarea class="span8" type="text">处理这个问题的诶办法就是、、、、、</textarea>    
+                                <textarea name="dealmethod"class="span8" type="text"></textarea>    
                                  </div>  
                                 <div class="span11 field-box actions">
                                     <input type="button" class="btn-glow primary" value="提交" />
-                                    <span>OR</span>
-                                    <input type="reset" value="Cancel" class="reset" />
                                 </div>
                             
                             </form>
+                                                <%} %>
+                    
+<%} %>
                         </div>
                     </div>
-                    
 
                     <!-- side right column -->
                     <div class="span3 form-sidebar pull-right">

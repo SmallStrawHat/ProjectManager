@@ -18,7 +18,7 @@ public class FileOperation {
 			ioe.printStackTrace();
 		} finally {
 			try {
-				fw.flush();
+//				fw.flush();
 				fw.close();
 			} catch (IOException ex) {
 				ex.printStackTrace();

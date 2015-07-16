@@ -1,6 +1,8 @@
 package com.express.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,13 +54,44 @@ public class TaskManagerExpre extends HttpServlet {
     		String[] tempTime = createTime.split("/");
     		createTime = tempTime[0]+" "+tempTime[1];
     
-    		
 
-    		if(com.business.TaskManager.createProblemLog(taskID,createTime,createUserID,dealUserID,
-    				status,problemDescreption)==1)
+    		int problemID=com.business.TaskManager.createProblemLog(taskID,createTime,createUserID,dealUserID,
+    				status,problemDescreption);
+
+    		if(problemID!=0)
     		{
-    			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
-    			//dispatch.forward(request, response);
+    			//写入任务日志
+    			String  logpath=new String();
+        		for(int i=0;i<WorktimeInfomation.systemsettinglist.size();i++)
+        		{
+        			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
+        			logpath=temp.getProblemlogpath();
+        		}
+        		String file=Integer.toString(taskID);			
+        		logpath=logpath+file+"_"+"3"+".txt";
+//        		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
+        		System.out.println(logpath);
+    			
+    			Date date=new Date();
+    	        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	        String realDate = format.format(date); 
+    	        /*String[] temp = realDate.split(" ");
+    	        realDate = temp[0]+"/"+temp[1];*/
+
+    	        String creater=(String)session.getAttribute("account");
+    	        User user=MemberInformation.seachUser(Integer.parseInt(creater));
+    	        
+//    	        Project project=ProjectManagement.searchProject(projectID);
+    	        Task task=TaskManager.searchTask(taskID);
+    	        
+    	        String data="日志创建时间"+" "+realDate+"\r\n"+"创建人"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+"所属项目"+" "+taskID+" "+task.getTaskName()+"\r\n";   	          	        
+    	        FileOperation.saveAsFileWriter(logpath, data);
+    	        
+    	        
+    	        User user1=MemberInformation.seachUser(dealUserID);
+    	        String data1="发送方"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+"接收方"+" "+dealUserID+" "+user1.getName()+"\r\n";
+    	        FileOperation.saveAsFileWriter(logpath, data1);
+    	        
     			response.sendRedirect("displayTask.jsp");
     			return ;
     		}
@@ -131,22 +164,35 @@ public class TaskManagerExpre extends HttpServlet {
     		String[] userSelect = request.getParameterValues("userSelect");
     		String summary = new String(request.getParameter("summary").getBytes("ISO-8859-1"),"utf-8");
     		
-    		
-    		/*String  logpath=new String();
-    		for(int i=0;i<WorktimeInfomation.systemsettinglist.size();i++)
-    		{
-    			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
-    			logpath=temp.getUserlogpath();
-    		}
-    		String file=Integer.toString(projectID);			
-    		logpath=logpath+file+"_"+taskID+".txt";
-    		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");*/
-    		
-    		
-
     		Task task = new Task(-1,taskName,state,rate,level,milepost,budget,-1,summary,startTime,endTime,planEndtime,"");
-    		if(com.business.TaskManager.createTask(projectID, task,userSelect)!=0)
+    		int id=com.business.TaskManager.createTask(projectID, task,userSelect);
+    		if(id!=0)
     		{
+    			//写入任务日志
+    			String  logpath=new String();
+        		for(int i=0;i<WorktimeInfomation.systemsettinglist.size();i++)
+        		{
+        			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
+        			logpath=temp.getTasklogpath();
+        		}
+        		String file=Integer.toString(projectID);			
+        		logpath=logpath+file+"_"+id+".txt";
+//        		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
+    			
+    			Date date=new Date();
+    	        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	        String realDate = format.format(date); 
+    	        /*String[] temp = realDate.split(" ");
+    	        realDate = temp[0]+"/"+temp[1];*/
+    	        String creater=(String)session.getAttribute("account");
+    	        User user=MemberInformation.seachUser(Integer.parseInt(creater));
+    	        Project project=ProjectManagement.searchProject(projectID);
+    	        
+    	        String data="日志创建时间"+" "+realDate+"\r\n"+"创建人"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+"所属项目"+" "+projectID+" "+project.getName()+"\r\n";
+    	        
+//    	        System.out.println(data);
+    	        
+    	        FileOperation.saveAsFileWriter(logpath, data);
     			
     			response.sendRedirect("displayTask.jsp");
     			return ;
@@ -178,5 +224,6 @@ public class TaskManagerExpre extends HttpServlet {
 		// TODO Auto-generated method stub
 		processRequest(request,response);
 	}
+	
 
 }
