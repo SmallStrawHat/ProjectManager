@@ -59,15 +59,17 @@ public class DataProblemLog {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
 			Statement stm = conn.createStatement();
+			Statement stmSql = conn.createStatement();
 			String sqlSelect = "select problem_id,task_id from  problemlog;";
-			ResultSet res = stm.executeQuery(sqlSelect);
+			ResultSet res = stmSql.executeQuery(sqlSelect);
 			while(res.next())
 			{
 				String tempLogpath = logpath+res.getInt(2)+"_"+res.getInt(1)+".txt";
-				String sql = "update problemlog set logpath='"+tempLogpath+"';";
+				String sql = "update problemlog set logpath='"+tempLogpath+"' where problem_id="+res.getInt(1)+";";
 				stm.execute(sql);
 			}
 			
+		
 			
 			return 1;
 			
@@ -137,9 +139,10 @@ public class DataProblemLog {
 		return 0;
 	}
 
-	/*public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		DataProblemLog.updateLogpath("d:\\\\test\\\\");
 	}*/
 
 }

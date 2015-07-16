@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.business.*;
+import com.database.DataProblemLog;
+import com.database.DataTask;
+import com.database.Myuser;
 import com.database.Worktime;
 
 /**
@@ -60,17 +63,12 @@ public class WorktimeManager extends HttpServlet {
     		}
     		else
     		{
-    			/*userLog=userLog.replaceAll("\\\\", "\\\\\\\\");
-    			System.out.println(userLog);
-    			Vector ss=new Vector();
-    			for(int i=0;i<WorktimeInfomation.getSystemsettinglist().size();i++)
-    			{
-    				SystemSetting s=(SystemSetting)WorktimeInfomation.getSystemsettinglist().get(i);
-    				Vector role=s.getRolelist();
-    				SystemSetting temp=new SystemSetting(workDays, workDayHours,userLog,taskLogpath,problemLogPath,role);    				
-    				ss.add(temp);			
-    			}
-    			WorktimeInfomation.setSystemsettinglist(ss);*/
+    			Myuser.updateLogpath(userLog);
+    			DataTask.updateLogpath(taskLogpath);
+    			DataProblemLog.updateLogpath(problemLogPath);
+    			
+    			
+    			
     			WorktimeInfomation.init();
     			MemberInformation.init();
         		ProjectManagement.init();

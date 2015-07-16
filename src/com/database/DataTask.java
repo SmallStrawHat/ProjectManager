@@ -67,16 +67,17 @@ public class DataTask {
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stmSql = conn.createStatement();
 			Statement stm = conn.createStatement();
 			String sqlSelect = "select task_id,project_id from  task;";
-			ResultSet res = stm.executeQuery(sqlSelect);
+			ResultSet res = stmSql.executeQuery(sqlSelect);
 			while(res.next())
 			{
 				String tempLogpath = logpath+res.getInt(2)+"_"+res.getInt(1)+".txt";
-				String sql = "update task set tasklog_path='"+tempLogpath+"';";
+				String sql = "update task set tasklog_path='"+tempLogpath+"' where task_id="+res.getInt(1)+";";
 				stm.execute(sql);
 			}
-			
+			res.close();
 			
 			return 1;
 			
@@ -197,10 +198,10 @@ public class DataTask {
 		return 0;
 	}
 	
-	
-/*	public static void main(String[] args) {
+/*	
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		DataTask.add("test","wenti",50.23,1,1,1,20.23,-1,"zongjie",,String endTime,String planEndtime,String tasklogPath);
+		DataTask.updateLogpath("d:\\\\test\\\\");
 	}*/
 
 }

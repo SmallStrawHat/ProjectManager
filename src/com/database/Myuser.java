@@ -208,16 +208,19 @@ public class Myuser {
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stmSql = conn.createStatement();
 			Statement stm = conn.createStatement();
 			String sqlSelect = "select user_id from  myuser;";
-			ResultSet res = stm.executeQuery(sqlSelect);
+			ResultSet res = stmSql.executeQuery(sqlSelect);
 			while(res.next())
 			{
+				System.out.println(res.getInt(1));
 				String tempLogpath = logpath+res.getInt(1)+".txt";
-				String sql = "update myuser set userlogpath='"+tempLogpath+"';";
+				System.out.println(tempLogpath);
+				String sql = "update myuser set userlogpath='"+tempLogpath+"' where user_id="+res.getInt(1)+" ;";
 				stm.execute(sql);
 			}
-			
+			res.close();
 			return 1;
 			
 		}
@@ -372,16 +375,9 @@ public class Myuser {
 	}
 		
 	
-	/*public static void main(String arg[])
+/*	public static void main(String arg[])
 	{
-		WorktimeInfomation.init();
-		Vector temp=WorktimeInfomation.systemsettinglist;
-		SystemSetting ss=(SystemSetting)temp.get(0);
-		String path=ss.getUserlogpath();
-//		String r="D:\\file\\userlog\\";
-		System.out.println(path);
-		path=path.replaceAll("\\\\", "\\\\\\\\");
-		Myuser.insert("999", "456", "fdf", "fd", "df", 1, path, "dasfas");
+		Myuser.updateLogpath("d:\\\\fafa\\\\");
 	}*/
 	
 }

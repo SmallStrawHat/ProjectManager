@@ -94,8 +94,7 @@
 
 
 							<tr class="first">
-								<td><img src="img/contact-img.png"
-									class="img-circle avatar hidden-phone" /> <a
+								<td> <a
 									href=<%="projectdetail.jsp?targetID="+pro.getId()%> class="name"><%=pro.getName() %></a> <span
 									class="subtext">(ID:<%=pro.getId() %>)</span></td>
 								<td><%=pro.getStarttime() %></td>
@@ -120,7 +119,22 @@
                                       
                                       <%=user.getName()%>(ID:<%=pro.getManagerid() %>)                                 
 								</td>
-								<td><%if(pro.getState().equals("进行中"))
+								<td><%
+											if(pro.getState() == null)
+											{
+												%>
+                                    			null
+                                    			<%
+											}
+											
+											if(pro.getState().equals(""))
+											{
+												%>
+                                    			nothing
+                                    			<%
+											}
+								
+											if(pro.getState().equals("进行中"))
                                     		{
                                     			%>
                                     			<span class="label label-info">进行中</span>
@@ -158,7 +172,7 @@
 					</table>
 				</div>
                     
-                    <div class="pagination pull-right">
+                    <!-- <div class="pagination pull-right">
                     	<ul>
                         	<li><a href="#">&#8249;</a></li>
                         	<li><a class="active" href="#">1</a></li>
@@ -168,7 +182,7 @@
                        		<li><a href="#">5</a></li>
                         	<li><a href="#">&#8250;</a></li>
                     	</ul>
-                	</div>
+                	</div> -->
                 </div>
                 <!-- end orders table -->
 
