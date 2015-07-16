@@ -75,8 +75,6 @@ public class TaskManager {
     			logpath=temp.getTasklogpath();
     		}
     		
-    		System.out.println(logpath);
-    		
 			
 			int taskID = DataTask.add(taskName, state, rate, level, projectID, milepost, budget, fathertaskID, summary, startTime, endTime, planEndtime, logpath);
 			
@@ -85,8 +83,7 @@ public class TaskManager {
     		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
     		task.setTaskID(taskID);
     		task.setTasklogPath(logpath);
-    		
-    				
+
 			if(project.addTask(task)==1)
 			{    		
 				if(taskID !=0)
@@ -189,6 +186,7 @@ public class TaskManager {
 	
 	
 	
+
 
 
 }

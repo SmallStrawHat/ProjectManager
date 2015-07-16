@@ -68,7 +68,7 @@ public class WorktimeManager extends HttpServlet {
     			DataProblemLog.updateLogpath(problemLogPath);
     			
     			
-    			
+
     			WorktimeInfomation.init();
     			MemberInformation.init();
         		ProjectManagement.init();

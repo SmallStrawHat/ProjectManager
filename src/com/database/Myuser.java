@@ -375,9 +375,8 @@ public class Myuser {
 	}
 		
 	
-/*	public static void main(String arg[])
+	/*public static void main(String arg[])
 	{
-		Myuser.updateLogpath("d:\\\\fafa\\\\");
 	}*/
 	
 }
