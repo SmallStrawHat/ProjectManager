@@ -3,6 +3,7 @@ package com.express.servlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -106,6 +107,112 @@ public class TaskManagerExpre extends HttpServlet {
     		}
     	}
     	
+    	if(function.equals("editTask"))
+    	{
+    		String levelStr = request.getParameter("level");
+    		int level = 1;
+    		if(levelStr.equals("L002"))
+    		{
+    			level = 2;
+    		}
+    		
+    		int fatherTaskID;
+    		String father = (String)request.getParameter("fatherTask");
+    		
+    		if(father ==null || father.equals(""))
+    		{
+    			fatherTaskID = -1;
+    		}
+    		else
+    		{
+    			fatherTaskID = Integer.parseInt(father);
+    		}
+    		
+    		String[] userSelect = request.getParameterValues("userSelect");
+    		Vector userList = new Vector(10,6);
+    		for(int i=0;i<userSelect.length;i++)
+    		{
+    			userList.add(userSelect[i]);
+    		}
+    		
+    		
+    		String planEndtime = request.getParameter("planEndTime");
+    		
+    		float budget = Float.parseFloat(request.getParameter("budget"));
+    		String summary = new String(request.getParameter("summary").getBytes("ISO-8859-1"),"utf-8");
+    		int projectID = Integer.parseInt(request.getParameter("projectID"));
+    		int taskID = Integer.parseInt(request.getParameter("taskID"));
+    		
+    		
+    		String stopSelect = request.getParameter("stopSelect");
+    		
+    		
+    		String state="进行中的";
+    		float rate = Float.parseFloat(request.getParameter("rate"));;
+    		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+    		String endTime ="1000/01/01";
+    		if(stopSelect.equals("S1"))
+    		{
+    			state="进行中的";
+    		}
+    		if(stopSelect.equals("S2"))
+    		{
+    			state="已经完成";
+    			rate = (float)100.00;
+    			endTime = df.format(new Date());
+    		}
+    		if(stopSelect.equals("S3"))
+    		{
+    			state="出现问题";
+    			rate = (float)100.00;
+    			endTime = df.format(new Date());
+    		}
+    		
+    		int res=com.business.TaskManager.editTask(projectID,taskID,level,fatherTaskID,userList,planEndtime,budget,summary,state,rate,endTime);
+    		if(res!=0)
+    		{
+    			//写入任务日志
+    			String  logpath=new String();
+        		for(int i=0;i<WorktimeInfomation.systemsettinglist.size();i++)
+        		{
+        			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
+        			logpath=temp.getTasklogpath();
+        		}		
+        		String pID = projectID+"";
+        		String tID = taskID+"";
+        		logpath=logpath+pID+"_"+tID+".txt";
+    			
+    			Date date=new Date();
+    	        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	        String realDate = format.format(date); 
+    	        String creater=(String)session.getAttribute("account");
+    	        User user=MemberInformation.seachUser(Integer.parseInt(creater));
+    	        Project project=ProjectManagement.searchProject(projectID);
+    	        String infor = "任务编辑时间";
+    	        if(!state.equals("进行中的"))
+    	        {
+    	        	infor = "任务结束时间";
+    	        }
+    	        
+    	        String data=infor+" "+realDate+"\r\n"+"操作人"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+"所属项目"+" "+pID+" "+project.getName()+"\r\n";
+    	        
+//    	        System.out.println(data);
+    	        
+    	        FileOperation.saveAsFileWriter(logpath, data);
+
+    			response.sendRedirect("taskdetail.jsp?taskID="+taskID+"&projectID="+projectID);
+    			return ;
+    		}
+    		else
+    		{
+    			//
+    			//RequestDispatcher dispatch = request.getRequestDispatcher("error.jsp");
+    			//dispatch.forward(request, response);
+    			response.sendRedirect("error.jsp");
+    			return ;
+    		}
+    	}
+    	
     	if(function.equals("createTask"))
     	{
     		String taskName = new String(request.getParameter("taskName").getBytes("ISO-8859-1"),"utf-8");
@@ -190,7 +297,7 @@ public class TaskManagerExpre extends HttpServlet {
     	        User user=MemberInformation.seachUser(Integer.parseInt(creater));
     	        Project project=ProjectManagement.searchProject(projectID);
     	        
-    	        String data="日志创建时间"+" "+realDate+"\r\n"+"创建人"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+"所属项目"+" "+projectID+" "+project.getName()+"\r\n";
+    	        String data="任务创建时间"+" "+realDate+"\r\n"+"创建人"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+"所属项目"+" "+projectID+" "+project.getName()+"\r\n";
     	        
 //    	        System.out.println(data);
     	        

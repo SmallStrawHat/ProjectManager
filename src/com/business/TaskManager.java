@@ -48,6 +48,47 @@ public class TaskManager {
 		return 0;
 	}
 	
+	/*projectID,taskID,level,fatherTaskID,userList,planEndtime,budget,summary,state,rate,endTime*/
+	public static int editTask(int projectID,int taskID,int level,int fatherTaskID,Vector userList,String planEndtime,
+			float budget,String summary,String state,float rate,String endTime)
+	{
+		Project project = ProjectManagement.searchProject(projectID);
+		
+		if(project != null)
+		{
+			//data add information
+			Task tempTask = TaskManager.searchTask(taskID);
+			tempTask.setLevel(level);
+			tempTask.setFatherID(fatherTaskID);
+			tempTask.setPlanEndTime(planEndtime);
+			tempTask.setBudget(budget);
+			tempTask.setSummary(summary);
+			tempTask.setState(state);
+			tempTask.setRate(rate);
+			tempTask.setEndTime(endTime);
+			
+			Vector tempUserList = new Vector(10,6);
+			for(int i=0;i<userList.size();i++)
+			{
+				User tempUser = MemberInformation.seachUser(Integer.parseInt((String)userList.get(i)));
+				tempUserList.add(tempUser);
+			}
+			tempTask.setUserList(tempUserList);
+			
+			if(DataUserTask.update(taskID, userList)!=1)
+				return 0;
+			
+			
+			if(DataTask.update(taskID,level, fatherTaskID, planEndtime, budget, summary, state, rate, endTime)!=1)
+				return 0;
+			
+
+			return 1;
+		
+		}
+		return 0;
+	}
+	
 	public static int createTask(int projectID,Task addTask,String[] userList)
 	{
 		Project project = ProjectManagement.searchProject(projectID);

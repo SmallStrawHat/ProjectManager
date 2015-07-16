@@ -170,7 +170,7 @@
                     				 <!-- row -->
                                 <tr class="first">
                                     <td>
-                                    	<a href=<%="taskdetail.jsp?taskID="+tempTask.getTaskID()+"&projName="+tempPro.getName()%> class="name"><%=tempTask.getTaskName()%></a>
+                                    	<a href=<%="taskdetail.jsp?taskID="+tempTask.getTaskID()+"&projectID="+tempPro.getId()%> class="name"><%=tempTask.getTaskName()%></a>
                                     </td>
                                     <td>
                                         <%=tempTask.getStartTime()%>

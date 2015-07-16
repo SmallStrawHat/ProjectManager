@@ -100,6 +100,41 @@ public class DataTask {
 		
 		return 0;
 	}
+	
+	
+	public static int update(int taskID,int level,int fatherTaskID,String planEndtime,
+			float budget,String summary,String state,float rate,String endTime)
+	{
+		Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+			
+			String sql = "update task set state='"+state+"',rate="+rate+",level="+level+",budget="+budget+",fathertask_id="+fatherTaskID+",summary='"+summary+"',end_time='"+endTime+"',plan_endtime='"+planEndtime+"' where task_id="+taskID+";";
+			stm.execute(sql);
+			return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+	}
 
 	public static Vector searchProjectTask(int projectID)
 	{

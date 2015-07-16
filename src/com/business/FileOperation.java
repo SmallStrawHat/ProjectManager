@@ -37,7 +37,8 @@ public class FileOperation {
 			}
 			fr.close();
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			//ioe.printStackTrace();
+			System.out.println("文件没有找到！");
 		} finally {
 		}
 		return data;

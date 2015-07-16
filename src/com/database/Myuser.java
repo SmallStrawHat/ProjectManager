@@ -3,6 +3,8 @@ package com.database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
@@ -375,8 +377,10 @@ public class Myuser {
 	}
 		
 	
-	/*public static void main(String arg[])
+/*	public static void main(String arg[])
 	{
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
 	}*/
 	
 }

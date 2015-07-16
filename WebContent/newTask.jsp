@@ -92,7 +92,7 @@
                                 <div class="ui-select span3">
                                 	<select name="taskLevelSelect">
                                     	<option value="L001" />正常
-                                        <option value="L002" />最高
+                                        <option value="L002" />优先
                                     </select>
                                 </div>
                             </div>

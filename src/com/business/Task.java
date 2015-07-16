@@ -73,6 +73,11 @@ public class Task {
 		return this.userList;
 	}
 	
+	public void setUserList(Vector userList)
+	{
+		this.userList = userList;
+	}
+	
 	public int addUser(User temp)
 	{
 		this.userList.add(temp);
@@ -93,6 +98,11 @@ public class Task {
 		return this.planEndtime;
 	}
 	
+	public void setPlanEndTime(String planEndtime)
+	{
+		this.planEndtime = planEndtime;
+	}
+	
 	public String getStartTime()
 	{ 
 		return this.startTime;
@@ -103,9 +113,19 @@ public class Task {
 		return this.endTime;
 	}
 	
+	public void setEndTime(String endTime)
+	{
+		this.endTime = endTime;
+	}
+	
 	public String getSummary()
 	{
 		return this.summary;
+	}
+	
+	public void setSummary(String summary)
+	{
+		this.summary = summary;
 	}
 	
 	public int getFathertaskID()
@@ -113,9 +133,19 @@ public class Task {
 		return this.fathertaskID;
 	}
 	
+	public void setFatherID(int fathertaskID)
+	{
+		this.fathertaskID = fathertaskID;
+	}
+	
 	public float getBudget()
 	{
 		return this.budget;
+	}
+	
+	public void setBudget(float budget)
+	{
+		this.budget = budget;
 	}
 	
 	public int getMilepost()
@@ -127,6 +157,12 @@ public class Task {
 	{
 		return this.level;
 	}
+	
+	public void setLevel(int level)
+	{
+		this.level = level;
+	}
+	
 	
 	
 	public int getTaskID()
@@ -147,9 +183,19 @@ public class Task {
 		return this.state;
 	}
 	
+	public void setState(String state)
+	{
+		this.state = state;
+	}
+	
 	public float getRate()
 	{
 		return this.rate;
+	}
+	
+	public void setRate(float rate)
+	{
+		this.rate = rate;
 	}
     
 }
