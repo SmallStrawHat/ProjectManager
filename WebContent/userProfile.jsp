@@ -90,146 +90,133 @@
                                 <thead>
                                     <tr>
                                         <th class="span2">
-                                            Order ID
+                                            	任务
                                         </th>
                                         <th class="span3">
                                             <span class="line"></span>
-                                            Date
+                                            	开始时间
                                         </th>
                                         <th class="span3">
                                             <span class="line"></span>
-                                            Items
+                                            	预计结束时间
                                         </th>
                                         <th class="span3">
                                             <span class="line"></span>
-                                            Total amount
+                                            	所属项目
+                                        </th>
+                                        <th class="span3">
+                                            <span class="line"></span>
+                                            	状态
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                
+                         <%
+                         
+                        
+                         
+                 		Vector projecList = ProjectManagement.getAllProjectList();
+                        int accountID = Integer.parseInt((String)session.getAttribute("account"));
+                 		for(int i=0;i<projecList.size();i++)
+                 		{
+                 			Project tempPro = (Project)projecList.get(i);
+                 			Vector taskList = tempPro.getTaskList();
+                 			for(int j=0;j<taskList.size();j++)
+                 			{
+                 				Task tempTask = (Task)taskList.get(j);
+                 				Vector userList = tempTask.getUserList();
+                    			
+                    			int k;
+        						for(k=0;k<userList.size();k++)
+        						{
+        							if(accountID == ((User)userList.get(k)).getUserID())
+        							{
+        								break;
+        							}
+        						}
+        						if(k == userList.size())
+        						{
+        							continue;
+        						}
+                    			
+        					
+                    %>
                                     <!-- row -->
                                     <tr class="first">
                                         <td>
-                                            <a href="#">#459</a>
+                                            <a href=<%="taskdetail.jsp?taskID="+tempTask.getTaskID()+"&projName="+tempPro.getName()%> ><%=tempTask.getTaskName()%></a>
                                         </td>
                                         <td>
-                                            Jan 03, 2014
+                                            <%=tempTask.getStartTime()%>
                                         </td>
                                         <td>
-                                            3
+                                           <%=tempTask.getPlanEndtime()%>
                                         </td>
                                         <td>
-                                            $ 3,500.00
+                                            <a href=<%="projectdetail.jsp?targetID="+tempPro.getId()%>><%=tempPro.getName()%></a>
+                                        </td>
+                                        <td>
+                                           <%
+                                    		if(tempTask.getState().equals("进行中的"))
+                                    		{
+                                    			%>
+                                    			<span class="label label-info">Progress</span>
+                                    			<%
+                                    		}
+                                    		if(tempTask.getState().equals("已经完成"))
+                                			{
+                                    			%>
+                                    			<span class="label label-success">Completed</span>
+                                    			<%
+                                			}
+                                    		if(tempTask.getState().equals("出现问题"))
+                                    		{
+                                    			%>
+                                    			<span class="label label-warning">Warning</span>
+                                    			<%
+                                    		}
+                                    		
+                                    	%>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#">#510</a>
-                                        </td>
-                                        <td>
-                                            Feb 22, 2014
-                                        </td>
-                                        <td>
-                                            5
-                                        </td>
-                                        <td>
-                                            $ 800.00
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#">#618</a>
-                                        </td>
-                                        <td>
-                                            Jan 03, 2014
-                                        </td>
-                                        <td>
-                                            8
-                                        </td>
-                                        <td>
-                                            $ 3,499.99
-                                        </td>
-                                    </tr>
+                                   
+                                   <%} }%>
                                 </tbody>
                             </table>
-                            <!-- end orders table -->
-                            
-                        <h6>用户日志</h6>
-                        <br />
                       
-                        <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th class="span2">
-                                            LoginID
-                                        </th>
-                                        <th class="span3">
-                                            <span class="line"></span>
-                                            LoginDate
-                                        </th>
-                                        <th class="span3">
-                                            <span class="line"></span>
-                                            LogoutDate
-                                        </th>
-                                        <th class="span3">
-                                            <span class="line"></span>
-                                            Detailed operation
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- row -->
-                                    <tr class="first">
-                                        <td>
-                                            112001
-                                        </td>
-                                        <td>
-                                            Jan 03, 2014
-                                        </td>
-                                        <td>
-                                            Jan 03, 2014
-                                        </td>
-                                        <td>
-                                            $ 3,500.00
-                                        </td>
-                                    </tr>
-                                    
-                                    
-                                </tbody>
-                            </table>
-                            
-                            <!-- end log table -->
-                      
+                      <%
+                        	User loginUser = MemberInformation.seachUser(accountID);
+                      		String logInformation = FileOperation.ReadFileToString(loginUser.getUserLogpath());
+                        %>
                             <!-- new comment form -->
                             <div class="span12 section comment">
-                                <h6>Add a quick note</h6>
-                                <p>Add a note about this user to keep a history of your interactions.</p>
-                                <textarea></textarea>
-                                <a href="#">Attach files</a>
-                                <div class="span12 submit-box pull-right">
-                                    <input type="submit" class="btn-glow primary" value="Add Note" />
-                                    <span>OR</span>
-                                    <input type="reset" value="Cancel" class="reset" />
-                                </div>
+                                <h6>用户日志</h6>
+                                
+                                <textarea><%=logInformation %></textarea>
+                                <p>记录了对此用户的所有操作。</p>
+                              
                             </div>
                         </div>
                     </div>
 
                     <!-- side address column -->
                     <div class="span3 address pull-right">
-                        <h6>Address</h6>
+                        <h6>基本信息</h6>
                         
                         <ul>
-                            <li>2301 East Lamar Blvd. Suite 140. </li>
-                            <li>City, Arlington. United States,</li>
-                            <li>Zip Code, TX 76006.</li>
+                            <li class="ico-li">
+                                <i class="icon-user"></i>
+                                <%=loginUser.getUserRole() %>
+                            </li>
+                            
                             <li class="ico-li">
                                 <i class="ico-phone"></i>
-                                1817 274 2933
+                                 <%=loginUser.getPhone() %>
                             </li>
                              <li class="ico-li">
                                 <i class="ico-mail"></i>
-                                <a href="#">alejandra@detailcanvas.com</a>
+                                <a href="#"> <%=loginUser.getEmail() %></a>
                             </li>
                         </ul>
                     </div>

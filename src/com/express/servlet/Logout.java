@@ -1,6 +1,8 @@
 package com.express.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.business.FileOperation;
 import com.business.MemberInformation;
 import com.business.ProjectManagement;
+import com.business.User;
 import com.database.Myuser;
 
 /**
@@ -39,6 +43,13 @@ public class Logout extends HttpServlet {
 			dispatch.forward(request, response);
 			return ;
 		}
+		
+		String operation = (String)session.getAttribute("account");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String dateLogout = df.format(new Date());// new Date()为获取当前系统时间
+		User operationUser = MemberInformation.seachUser(Integer.parseInt(operation));
+		
+		FileOperation.saveAsFileWriter(operationUser.getUserLogpath(),"登出时间 "+dateLogout+"\r\n");
 		
 		session.setAttribute("account", "");
 		session.invalidate();

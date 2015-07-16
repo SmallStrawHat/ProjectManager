@@ -55,7 +55,7 @@ public class MemberInformation {
 			userlogpath=userlogpath+userid+".txt";
 			User temp = new User(userid,name, phone, email, userRole, password, userState,userlogpath, summary);
 			MemberInformation.userList.add(temp);
-			return 1;
+			return userid;
 		}
 		else
 		{
@@ -183,7 +183,6 @@ public class MemberInformation {
 	
 	public static int searchUserLog(String logPath)
 	{
-		//ͨ��·����ֱ�Ӷ�ȡ���ݿ⡣
 		return 1;
 	}
 	

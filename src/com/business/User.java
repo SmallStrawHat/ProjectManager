@@ -80,5 +80,10 @@ public class User extends Userpublic{
 		return this.summary;
 	}
 	
+	public String getUserLogpath()
+	{
+		return this.logPath;
+	}
+	
 
 }

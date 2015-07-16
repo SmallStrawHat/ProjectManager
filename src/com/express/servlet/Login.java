@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -74,6 +76,14 @@ public class Login extends HttpServlet {
         		WorktimeInfomation.init();
         		MemberInformation.init();
         		ProjectManagement.init();
+        		
+        		String operation = (String)session.getAttribute("account");
+    			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+    			String datelogin = df.format(new Date());// new Date()为获取当前系统时间
+    			User operationUser = MemberInformation.seachUser(Integer.parseInt(operation));
+    			
+    			FileOperation.saveAsFileWriter(operationUser.getUserLogpath(),"登录时间 "+datelogin+"\r\n");
+        		
         		
         		response.sendRedirect("index.jsp");
     			return ;

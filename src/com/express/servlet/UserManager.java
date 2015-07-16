@@ -2,6 +2,9 @@ package com.express.servlet;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,10 +47,24 @@ public class UserManager extends HttpServlet {
     	if(function.equals("deleteUser"))
     	{
     		String userID = request.getParameter("accountID");
+    		String operation = (String)session.getAttribute("account");
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+			String dateEdit = df.format(new Date());// new Date()为获取当前系统时间
+			User operationUser = MemberInformation.seachUser(Integer.parseInt(operation));
+			User editUser = MemberInformation.seachUser(Integer.parseInt(userID));
+			String operationName = operationUser.getUserID()+" "+operationUser.getName();
+			String path = editUser.getUserLogpath();
+			
     		if(MemberInformation.deleteUser(Integer.parseInt(userID))==1)
     		{
     			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
     			//dispatch.forward(request, response);
+    			
+    			FileOperation.saveAsFileWriter(path,"用户删除时间 "+dateEdit+"\r\n");
+    			//System.out.println("创建时间 "+dateCreate);
+    			FileOperation.saveAsFileWriter(path,"操作人 "+operationName+"\r\n");
+    			
+    			
     			response.sendRedirect("userManager.jsp");
     			return ;
     		}
@@ -68,6 +85,18 @@ public class UserManager extends HttpServlet {
     		{
     			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
     			//dispatch.forward(request, response);
+    			String operation = (String)session.getAttribute("account");
+    			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+    			String dateEdit = df.format(new Date());// new Date()为获取当前系统时间
+    			User operationUser = MemberInformation.seachUser(Integer.parseInt(operation));
+    			User editUser = MemberInformation.seachUser(Integer.parseInt(userID));
+    			
+    			String operationName = operationUser.getUserID()+" "+operationUser.getName();
+    			FileOperation.saveAsFileWriter(editUser.getUserLogpath(),"状态暂停时间 "+dateEdit+"\r\n");
+    			//System.out.println("创建时间 "+dateCreate);
+    			FileOperation.saveAsFileWriter(editUser.getUserLogpath(),"状态编辑人 "+operationName+"\r\n");
+    			
+    			
     			response.sendRedirect("userManager.jsp");
     			return ;
     		}
@@ -88,6 +117,17 @@ public class UserManager extends HttpServlet {
     		{
     			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
     			//dispatch.forward(request, response);
+    			String operation = (String)session.getAttribute("account");
+    			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+    			String dateEdit = df.format(new Date());// new Date()为获取当前系统时间
+    			User operationUser = MemberInformation.seachUser(Integer.parseInt(operation));
+    			User editUser = MemberInformation.seachUser(Integer.parseInt(userID));
+    			
+    			String operationName = operationUser.getUserID()+" "+operationUser.getName();
+    			FileOperation.saveAsFileWriter(editUser.getUserLogpath(),"状态启动时间 "+dateEdit+"\r\n");
+    			//System.out.println("创建时间 "+dateCreate);
+    			FileOperation.saveAsFileWriter(editUser.getUserLogpath(),"状态编辑人 "+operationName+"\r\n");
+    			
     			response.sendRedirect("userManager.jsp");
     			return ;
     		}
@@ -134,6 +174,18 @@ public class UserManager extends HttpServlet {
     		{
     			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
     			//dispatch.forward(request, response);
+    			String operation = (String)session.getAttribute("account");
+    			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+    			String dateEdit = df.format(new Date());// new Date()为获取当前系统时间
+    			User operationUser = MemberInformation.seachUser(Integer.parseInt(operation));
+    			User editUser = MemberInformation.seachUser(userID);
+    			
+    			String operationName = operationUser.getUserID()+" "+operationUser.getName();
+    			FileOperation.saveAsFileWriter(editUser.getUserLogpath(),"信息编辑时间 "+dateEdit+"\r\n");
+    			//System.out.println("创建时间 "+dateCreate);
+    			FileOperation.saveAsFileWriter(editUser.getUserLogpath(),"信息编辑人 "+operationName+"\r\n");
+    			
+    			
     			response.sendRedirect("editUserDetail.jsp?actionID="+userID);
     			return ;
     		}
@@ -180,10 +232,22 @@ public class UserManager extends HttpServlet {
     			dispatch.forward(request, response);
     			return ;
     		}*/
-    		if(MemberInformation.addUser(userName, userPhone, userEmail, selectRole, userPassword, state, userSummary)==1)
+    		int userReturnID = MemberInformation.addUser(userName, userPhone, userEmail, selectRole, userPassword, state, userSummary);
+    		if(userReturnID !=0)
     		{
     			//RequestDispatcher dispatch = request.getRequestDispatcher("userManager.jsp");
     			//dispatch.forward(request, response);
+    			String operation = (String)session.getAttribute("account");
+    			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+    			String dateCreate = df.format(new Date());// new Date()为获取当前系统时间
+    			User operationUser = MemberInformation.seachUser(Integer.parseInt(operation));
+    			User createUser = MemberInformation.seachUser(userReturnID);
+    			
+    			String operationName = operationUser.getUserID()+" "+operationUser.getName();
+    			FileOperation.saveAsFileWriter(createUser.getUserLogpath(),"创建时间 "+dateCreate+"\r\n");
+    			//System.out.println("创建时间 "+dateCreate);
+    			FileOperation.saveAsFileWriter(createUser.getUserLogpath(),"操作人 "+operationName+"\r\n");
+    			//System.out.println("txt sucsee");
     			response.sendRedirect("userManager.jsp");
     			return ;
     		}
