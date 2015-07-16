@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.business.*;
+import com.database.DataProblemLog;
 
 /**
  * Servlet implementation class TaskManager
@@ -70,20 +71,18 @@ public class TaskManagerExpre extends HttpServlet {
         			logpath=temp.getProblemlogpath();
         		}
         		String file=Integer.toString(taskID);			
-        		logpath=logpath+file+"_"+"3"+".txt";
+        		logpath=logpath+file+"_"+problemID+".txt";
 //        		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
         		System.out.println(logpath);
     			
     			Date date=new Date();
     	        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	        String realDate = format.format(date); 
-    	        /*String[] temp = realDate.split(" ");
-    	        realDate = temp[0]+"/"+temp[1];*/
+
 
     	        String creater=(String)session.getAttribute("account");
     	        User user=MemberInformation.seachUser(Integer.parseInt(creater));
     	        
-//    	        Project project=ProjectManagement.searchProject(projectID);
     	        Task task=TaskManager.searchTask(taskID);
     	        
     	        String data="日志创建时间"+" "+realDate+"\r\n"+"创建人"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+"所属项目"+" "+taskID+" "+task.getTaskName()+"\r\n";   	          	        
@@ -91,8 +90,11 @@ public class TaskManagerExpre extends HttpServlet {
     	        
     	        
     	        User user1=MemberInformation.seachUser(dealUserID);
-    	        String data1="发送方"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+"接收方"+" "+dealUserID+" "+user1.getName()+"\r\n";
+    	        String data1="发送方"+" "+session.getAttribute("account")+" "+user.getName()+"\r\n"+problemDescreption+"\r\n"+"接收方"+" "+dealUserID+" "+user1.getName()+"\r\n";
     	        FileOperation.saveAsFileWriter(logpath, data1);
+    	        
+    	        int a=DataProblemLog.updateSenduserid(problemID, createUserID);
+        		
     	        
     			response.sendRedirect("displayTask.jsp");
     			return ;

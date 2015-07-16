@@ -65,8 +65,12 @@
                     <!-- left column -->
                     <div class="span9 with-sidebar">
                         <div class="container">
-        <%
+       
+                            <form action="DealwithProblemlog" method="post" class="new_user_form inline-input" />
+           <%
             String str=request.getParameter("targetID");
+     //      System.out.println("*********");
+     //      System.out.println(str);
             int problemID=Integer.parseInt(str);
             Vector problemList = TaskManager.searchAllProblem();
             
@@ -75,28 +79,29 @@
                ProblemLog problem = (ProblemLog)problemList.get(i);
                int problemid = problem.getProblemID();
                if(problemID == problemid)
-               {                           
+               {
+            	   System.out.println("******问题列表找到的问题单路径**********");
+            	   System.out.println(problem.getLogPath());
           %>
-                            <form action="DealwithProblemlog" method="post" class="new_user_form inline-input" />
                             <div class="span12 field-box">
                                     <label>处理问题单ID:</label>
                                     <input name="dealID"class="span9" type="text" />
                                 </div>
                                 <div class="span12 field-box">
                                     <label>问题单ID:</label>
-                                    <input name="problemID"class="span9" type="text" readonly="readonly" value=<%="'"+problem.getProblemID()+"'" %>/><span><%=problem.getProblemID() %></span>
+                                    <input name="problemID"class="span9" type="text" readonly="readonly" value=<%="'"+problem.getProblemID()+"'" %>/>
                                 </div>
                                 <div class="span12 field-box">
                                     <label>问题单路径:</label>
-                                     <input name="path"class="span9" type="text" readonly="readonly" value=<%=problem.getLogPath() %>/><span><%=problem.getLogPath() %></span>                                 
+                                     <input name="path" class="span9" type="text" readonly="readonly" value=<%=problem.getLogPath()%>/>                               
                                 </div>
                                 <div class="span12 field-box">
-                                    <label>处理人ID:</label>
-                                    <input name="dealuserID"class="span9" type="text" readonle="readonly"value=<%="'"+problem.getDealUserID()+"'"%>/>
+                                    <label>处理人ID:</label> 
+                                    <input name="dealuserID"class="span9" type="text" readonly="readonly" value=<%="'"+problem.getDealUserID()+"'"%>/>
                                 </div>
                                  <div class="span12 field-box">
                                     <label>创建人ID:</label>
-                                    <input name="createrID"class="span9" type="text" readonle="readonly"value=<%="'"+problem.getDealUserID()+"'" %>/> 
+                                    <input name="createrID"class="span9" type="text" readonly="readonly" value=<%="'"+problem.getCreateUserID()+"'" %>/> 
                                 </div>
                                 <div class="span12 field-box">
                                     <label>任务ID:</label>
@@ -104,20 +109,41 @@
                                 </div>      
                                 <div class="field-box">
                                 <label>问题概述:</label>
-                                <textarea name="summary"class="span8" type="text"  readonly="readonly" value=<%=problem.getProblemDescreption() %>></textarea>    
+                                <textarea name="summary"class="span8" type="text"  readonly="readonly" value=<%=problem.getProblemDescreption() %>><%=FileOperation.ReadFileToString(problem.getLogPath()) %></textarea>    
                                  </div> 
+                                 <%
+                                 String s=(String)session.getAttribute("account");
+                                if(problem.getDealUserID()==Integer.parseInt(s)&&problem.getStatus()==1) 
+                                {
+                                 %>
+                                 <div>
+                                 
+                                 </div>
+                                 <div class="field-box">
+                                 <label>问题进展：</label>
+                                   <div class="ui-select span3">
+                                	<select name="selectstate">
+                                    	<option value="L001" />发送
+                                        <option value="L002" />结束
+                                        <option value="L002" />意外终止
+                                    </select>
+                                </div>
+                                 </div>
+                            
                             <div class="field-box">
                                 <label>处理问题方法描述:</label>
                                 <textarea name="dealmethod"class="span8" type="text"></textarea>    
-                                 </div>  
+                                 </div>
+                             
                                 <div class="span11 field-box actions">
-                                    <input type="button" class="btn-glow primary" value="提交" />
-                                </div>
-                            
+								<input type="submit" name="Submit"
+									class="btn-glow primary active" value="提交" />
+							</div>
+							<%} 
+                               }                    
+                       } %>
                             </form>
-                                                <%} %>
-                    
-<%} %>
+
                         </div>
                     </div>
 

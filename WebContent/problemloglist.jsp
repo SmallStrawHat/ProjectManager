@@ -141,7 +141,7 @@
                     				 <!-- row -->
                                 <tr class="first">
                                     <td>
-                                    	<a href="detailProblemlog.jsp" class="name"><%=problem.getProblemID()%></a>
+                                    	<a href=<%="detailProblemlog.jsp?targetID="+problem.getProblemID()%> class="name"><%=problem.getProblemID()%></a>
                                     </td>
                                     <td>
                                         <%=taskName%>
@@ -163,13 +163,13 @@
                                     		if(problem.getStatus()==2)
                                 			{
                                     			%>
-                                    			<span class="label label-success">处理完</span>
+                                    			<span class="label label-success">结束</span>
                                     			<%
                                 			}
                                     		if(problem.getStatus()==3)
                                     		{
                                     			%>
-                                    			<span class="label label-important">未解决</span>
+                                    			<span class="label label-important">意外终止</span>
                                     			<%
                                     		}
                                     		

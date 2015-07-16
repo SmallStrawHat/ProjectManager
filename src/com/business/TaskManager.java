@@ -212,22 +212,6 @@ public class TaskManager {
 		return resTask;
 	}
 	
-	/*public static int creatTasklog(int taskID,int projectID,String path){
-		//写入任务日志
-		Date date=new Date();
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String realDate = format.format(date); 
-        String[] temp = realDate.split(" ");
-        realDate = temp[0]+"/"+temp[1];
-        String data=realDate+"\n"+taskID+"\n"+projectID+"\n";
-        FileOperation.saveAsFileWriter(path, data);
-		
-		return 1;
-	}*/
-	
-	
-	
-
 
 
 }

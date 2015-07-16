@@ -57,10 +57,18 @@ public class ProblemLog {
 	{
 		return this.status;
 	}
+	public void setStatus(int state)
+	{
+		this.status=state;
+	}
 	
 	public int getDealUserID()
 	{
 		return this.dealUserID;
+	}
+	public void setDealUserID(int id)
+	{
+		this.dealUserID=id;
 	}
 	
 	public int getCreateUserID()
