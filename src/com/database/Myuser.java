@@ -377,10 +377,21 @@ public class Myuser {
 	}
 		
 	
-/*	public static void main(String arg[])
+	/*public static void main(String arg[])
 	{
+<<<<<<< Updated upstream
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
 		System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+=======
+		WorktimeInfomation.init();
+		Vector temp=WorktimeInfomation.systemsettinglist;
+		SystemSetting ss=(SystemSetting)temp.get(0);
+		String path=ss.getUserlogpath();
+//		String r="D:\\file\\userlog\\";
+		System.out.println(path);
+		path=path.replaceAll("\\\\", "\\\\\\\\");
+		Myuser.insert("999", "456", "fdf", "fd", "df", 1, path, "dasfas");
+>>>>>>> Stashed changes
 	}*/
 	
 }

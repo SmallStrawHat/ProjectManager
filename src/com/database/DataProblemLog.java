@@ -111,7 +111,7 @@ public class DataProblemLog {
 			}
 			bigID+=1;
 			
-			
+
 			String logpath=logPath;
 			String file=Integer.toString(taskID);			
     		logpath=logpath+file+"_"+bigID+".txt";    		
@@ -119,6 +119,7 @@ public class DataProblemLog {
     		int senduserid=0;
     		
 			String sql = "insert into problemlog values("+bigID+","+taskID+",'"+createTime+"',"+createUserID+","+dealUserID+","+status+",'"+problemDescreption+"','"+logpath+"','"+senduserid+"');";
+
 			stm.execute(sql);
 			res.close();
 			System.out.print("bigid是：");

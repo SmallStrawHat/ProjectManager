@@ -56,8 +56,6 @@ public class TaskManagerExpre extends HttpServlet {
     		String[] tempTime = createTime.split("/");
     		createTime = tempTime[0]+" "+tempTime[1];
     
-    		
-
     		int problemID=com.business.TaskManager.createProblemLog(taskID,createTime,createUserID,dealUserID,
     				status,problemDescreption);
 
@@ -304,6 +302,7 @@ public class TaskManagerExpre extends HttpServlet {
 //    	        System.out.println(data);
     	        
     	        FileOperation.saveAsFileWriter(logpath, data);
+
 
     			response.sendRedirect("displayTask.jsp");
     			return ;

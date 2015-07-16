@@ -53,7 +53,6 @@ public class TaskManager {
 			float budget,String summary,String state,float rate,String endTime)
 	{
 		Project project = ProjectManagement.searchProject(projectID);
-		
 		if(project != null)
 		{
 			//data add information
@@ -124,7 +123,7 @@ public class TaskManager {
     		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
     		task.setTaskID(taskID);
     		task.setTasklogPath(logpath);
-
+    		
 			if(project.addTask(task)==1)
 			{    		
 				if(taskID !=0)
@@ -212,6 +211,7 @@ public class TaskManager {
 		return resTask;
 	}
 	
+
 
 
 }
