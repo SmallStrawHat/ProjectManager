@@ -13,7 +13,7 @@ public class Worktime {
 	private int workDays;
 	private int workDayHours;
 	private String userLog;
-	private String userLogPath;
+	private String taskLogpath;
 	private String problemLogPath;
 	
 	public Worktime()
@@ -21,16 +21,16 @@ public class Worktime {
 		this.workDays = -1;
 		this.workDayHours = -1;
 		this.userLog = null;
-		this.userLogPath = null;
+		this.taskLogpath = null;
 		this.problemLogPath = null;
 	}
 	
-	public Worktime(int workDays,int workDayHours,String userLog,String userLogPath,String problemLogPath)
+	public Worktime(int workDays,int workDayHours,String userLog,String taskLogpath,String problemLogPath)
 	{
 		this.workDays = workDays;
 		this.workDayHours = workDayHours;
 		this.userLog = userLog;
-		this.userLogPath = userLogPath;
+		this.taskLogpath = taskLogpath;
 		this.problemLogPath = problemLogPath;
 	}
 	
@@ -75,7 +75,7 @@ public class Worktime {
 			int workDays,
 			int workDayHours,
 			String userLog,
-			String userLogPath,
+			String taskLogpath,
 			String problemLogPath)
 	{
 		Connection conn =null;
@@ -99,7 +99,7 @@ public class Worktime {
 					"update worktime set workdays='"+workDays
 					+"',workdayhours='"+workDayHours
 					+"',userlog='"+userLog
-					+"',userlogpath='"+userLogPath
+					+"',tasklogpath='"+taskLogpath
 					+"',problemlogpath='"+problemLogPath
 					+"' where workdays='"+oldDataWorkDays +"';";
 			stm.execute(sql2);
@@ -143,7 +143,7 @@ public class Worktime {
 
 	public String getuserLogPath()
 	{
-		return userLogPath;
+		return taskLogpath;
 	}
 	
 	public String getProblemLogPath()
