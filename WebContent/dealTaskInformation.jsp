@@ -53,7 +53,6 @@
 		Project tempProject = ProjectManagement.searchProject(projectID);
 		Vector taskList = tempProject.getTaskList();
 		Task detailTask = TaskManager.searchTask(taskID);
-		
 	%>
 	<!-- main container -->
 	<div class="content">
@@ -73,11 +72,11 @@
 				<div class="row-fluid form-wrapper">
 					<!-- left column -->
 					<div class="span8 column">
-						<form action="TaskManagerExpre" method="post"  />
-						<input name="functionMy" value="editTask" type="hidden" />
-						<input name="taskID" value=<%=detailTask.getTaskID()%> type="hidden" />
-						<input name="projectID" value=<%=projectID%> type="hidden" />
-						<input name="rate" value=<%=detailTask.getRate()%> type="hidden" />
+						<form action="TaskManagerExpre" method="post" />
+						<input name="functionMy" value="editTask" type="hidden" /> <input
+							name="taskID" value=<%=detailTask.getTaskID()%> type="hidden" />
+						<input name="projectID" value=<%=projectID%> type="hidden" /> <input
+							name="rate" value=<%=detailTask.getRate()%> type="hidden" />
 						<div class="field-box">
 							<label>任务名称:</label> <input class="inline-input span8"
 								readonly="readonly" type="text"
@@ -105,24 +104,21 @@
 							</div>
 						</div>
 						<div class="field-box">
-							<label>选择父任务:</label> <select style="width: 225px" 
-								class="select2" id="fatherTask" name="fatherTask" >
+							<label>选择父任务:</label> <select style="width: 225px"
+								class="select2" id="fatherTask" name="fatherTask">
 								<option />
 								<%
-									for(int k=0;k<taskList.size();k++)
-									{
-										Task tk = ((Task)taskList.get(k));
-										if(detailTask.getTaskID() == tk.getTaskID())
-										{
+									for (int k = 0; k < taskList.size(); k++) {
+										Task tk = ((Task) taskList.get(k));
+										if (detailTask.getTaskID() == tk.getTaskID()) {
 											continue;
 										}
-										
-										%>
-										<option value=<%=tk.getTaskID() %> /><%=tk.getTaskName() %>
-										<%
+								%>
+								<option value=<%=tk.getTaskID()%> /><%=tk.getTaskName()%>
+								<%
 									}
 								%>
-								
+
 							</select>
 						</div>
 						<div id="userSelectCss" class="field-box">
@@ -150,24 +146,28 @@
 									value=<%="'" + ((User) user.get(i)).getUserID() + "'"%> /><%=((User) user.get(i)).getName()%>
 								<%
 									}
-								
+
 									}
 								%>
 							</select>
 						</div>
 						<div class="field-box">
-							<label>任务开始时间:</label> <input type="text" value=<%=detailTask.getStartTime() %>
-								readonly="readonly" class="input-large datepicker" />
+							<label>任务开始时间:</label> <input type="text"
+								value=<%=detailTask.getStartTime()%> readonly="readonly"
+								class="input-large datepicker" />
 						</div>
 						<div class="field-box">
-							<label>任务预计结束时间:</label> <input id="planEndTime" name="planEndTime" type="text" value=<%=detailTask.getPlanEndtime() %>
+							<label>任务预计结束时间:</label> <input id="planEndTime"
+								name="planEndTime" type="text"
+								value=<%=detailTask.getPlanEndtime()%>
 								class="input-large datepicker" />
 						</div>
 						<div id="budgetCss" class="field-box">
 							<label>修改预算:</label>
 							<div class="input-append">
-								<input id="budget" name="budget" class="input-large" type="text" value=<%=detailTask.getBudget() %>
-									onblur="checkBudget()" /> <span class="add-on">万元</span>
+								<input id="budget" name="budget" class="input-large" type="text"
+									value=<%=detailTask.getBudget()%> onblur="checkBudget()" /> <span
+									class="add-on">万元</span>
 							</div>
 							<span id="budgetSpan" style="display: none;" class="alert-msg"><i
 								class="icon-remove-sign"></i>只能为数字！</span>
@@ -175,7 +175,7 @@
 						<div class="field-box">
 							<label>是否结束:</label>
 							<div class="ui-select">
-								<select id="stopSlect" name="stopSelect" >
+								<select id="stopSlect" name="stopSelect">
 									<option value="S1" selected="" />正常进行
 									<option value="S2" />正常结束
 									<option value="S3" />意外终止
@@ -184,7 +184,7 @@
 						</div>
 						<div class="field-box">
 							<label>任务简介:</label>
-							<textarea id="summary" name="summary" class="span8" rows="4"><%=detailTask.getSummary() %></textarea>
+							<textarea id="summary" name="summary" class="span8" rows="4"><%=detailTask.getSummary()%></textarea>
 						</div>
 						<button type="submit" class="btn btn-primary">确认修改</button>
 
@@ -192,19 +192,53 @@
 						</form>
 					</div>
 
+				
 					<!-- right column -->
 					<div class="span4 column pull-right">
-						<form   />
+						<form />
 						<div class="field-box">
-							<input class="search span9" type="text"
-								placeholder="输入任务名搜索已有任务信息.." />
+							<input class="search span9" type="text" name="search" id="search"
+								onKeyDown="keydownEvent()" placeholder="输入任务名搜索已有任务信息.." />
 						</div>
+							<%
+						String searchCondition = request.getParameter("search");
+						if (searchCondition != null && searchCondition.equals("") != true) {
+							searchCondition = new String(searchCondition.getBytes("ISO-8859-1"), "utf-8");
+						}
+						for (int i = 0; i < taskList.size(); i++) {
+							Task tempSearch = (Task) taskList.get(i);
+							if (searchCondition != null && searchCondition.equals("") != true) {
+								if (!tempSearch.getTaskName().equals(searchCondition)) {
+									continue;
+								}
+							
+					%>
+						
 						<div class="field-box">
-							<label>开始时间:</label> <input type="text" value="03/29/2014"
+							<label>开始时间:</label> <input type="text" value=<%=tempSearch.getStartTime() %> 
 								class="input-large datepicker" />
 						</div>
 						<div class="field-box">
-							<label>结束时间:</label> <input type="text" value="03/29/2014"
+							<label>结束时间:</label> <input type="text" value=<%=tempSearch.getEndtime() %>
+								class="input-large datepicker" />
+						</div>
+						<div class="field-box">
+							<label>任务简介:</label>
+							<textarea class="span9 " rows="5"><%=tempSearch.getSummary() %></textarea>
+
+
+						</div>
+						<%
+							}
+							else
+							{
+								%>
+								<div class="field-box">
+							<label>开始时间:</label> <input type="text" value="" 
+								class="input-large datepicker" />
+						</div>
+						<div class="field-box">
+							<label>结束时间:</label> <input type="text" value=""
 								class="input-large datepicker" />
 						</div>
 						<div class="field-box">
@@ -213,7 +247,10 @@
 
 
 						</div>
-
+								<%
+							}
+							}
+						%>
 
 						</form>
 					</div>
@@ -235,6 +272,17 @@
 
 	<!-- call this page plugins -->
 	<script type="text/javascript">
+		function keydownEvent() {
+
+			var e = window.event || arguments.callee.caller.arguments[0];
+
+			if (e && e.keyCode == 13) {
+
+				var name = document.getElementById("search").value;
+				window.location.href = "http://localhost:8080/ProjectManager/dealTaskInformation.jsp?taskID="+<%=taskID%>+"&projectID="+<%=projectID%>+"&search="+name;
+			}
+		}
+
 		$(function() {
 
 			// add uniform plugin styles to html elements

@@ -65,7 +65,7 @@
 					<h3>任务基本信息</h3>
 
 			<%
-				if(!detailTask.getState().equals("已经完成"))
+				if(detailTask.getState().equals("进行中的"))
 				{
 					%>
 						<a class="btn-flat icon large pull-right edit"
@@ -212,16 +212,16 @@
 					<div class="span3 column form-sidebar pull-right">
 
 						<div class="alert alert-info hidden-tablet">
-							<i class="icon-lightbulb pull-left"></i> 点击上面的按钮，根据您的喜爱切换输入框的风格。
+							<i class="icon-lightbulb pull-left"></i> 此处保留了任务的所有日志信息。
 						</div>
-						<h6>Sidebar text for instructions</h6>
-						<p>Add multiple users at once</p>
-						<p>Choose one of the following file types:</p>
-						<ul>
-							<li><a href="#">Upload a vCard file</a></li>
-							<li><a href="#">Import from a CSV file</a></li>
-							<li><a href="#">Import from an Excel file</a></li>
-						</ul>
+						<%
+							String logpath = detailTask.getTasklogPath();
+							String data = FileOperation.ReadFileToString(logpath);
+						%>
+						<div class="field-box">
+							<label>日志信息:</label>
+							<textarea class="span12" rows="10" ><%=data %></textarea>
+						</div>
 					</div>
 				</div>
 			</div>
