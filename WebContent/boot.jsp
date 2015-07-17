@@ -177,12 +177,12 @@
                     <span>联系人</span>
                 </a>
             </li>
-             <li>
+             <!-- <li>
                 <a href="calendar.jsp">
                     <i class="icon-calendar-empty"></i>
                     <span>日程表</span>
                 </a>
-            </li>    
+            </li>     -->
             <li>
                 <a class="dropdown-toggle" >
                     <i class="icon-user"></i>

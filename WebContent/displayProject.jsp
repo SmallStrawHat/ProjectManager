@@ -82,7 +82,7 @@
 						</thead>
 
 						<% Vector p=new Vector();
-						ProjectManagement.changeProjectState();
+//						ProjectManagement.changeProjectState();
 						
 						    p=ProjectManagement.getAllProjectList();                       
 							                 
