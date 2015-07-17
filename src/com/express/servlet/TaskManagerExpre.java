@@ -169,6 +169,7 @@ public class TaskManagerExpre extends HttpServlet {
     		}
     		
     		int res=com.business.TaskManager.editTask(projectID,taskID,level,fatherTaskID,userList,planEndtime,budget,summary,state,rate,endTime);
+    		
     		if(res!=0)
     		{
     			//写入任务日志

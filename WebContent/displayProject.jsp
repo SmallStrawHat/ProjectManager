@@ -82,6 +82,8 @@
 						</thead>
 
 						<% Vector p=new Vector();
+						ProjectManagement.changeProjectState();
+						
 						    p=ProjectManagement.getAllProjectList();                       
 							                 
 							    for(int i=0;i<p.size();i++)                       

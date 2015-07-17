@@ -105,6 +105,8 @@
                             			{
                             				continue;
                             			}
+                            			if(problem.getStatus()==1)
+                            			{
                            	%>
                     				
                     				 <!-- row -->
@@ -151,6 +153,7 @@
                     				
                     				
                     				<%
+                            			}
                     			}
                             %>
                                

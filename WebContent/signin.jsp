@@ -69,7 +69,7 @@
         <div class="span4 box">
             <div class="content-wrap">
                 <h6>Log in</h6>
-                <form   onSubmit="return check();">
+                <form   method="post"onSubmit="return check();">
                 <input id="account" name="account" class="span12" type="text" placeholder="Account ID" onblur="noDisplay()" />
                 <input id="password" name="password" class="span12" type="password" placeholder="Your password" onblur="noDisplay()" />
                

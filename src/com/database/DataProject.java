@@ -3,6 +3,7 @@ package com.database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 import com.business.*;
@@ -145,6 +146,101 @@ public class DataProject {
 		}
     	return temp;   	
     }
+    public static int updateState(int projectid,String state){
+    	Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+		    String sql = "update project set state='"+state+"' where project_id="+projectid+";";
+			stm.execute(sql);
+		    return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+    	
+    }
+    
+    public static int updateEndtime(int projectid,String endtime){
+    	Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+		    String sql = "update project set real_endtime='"+endtime+"' where project_id="+projectid+";";
+			stm.execute(sql);
+		    return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+    	
+    }
+    
+    public static int updateRate(int projectid,float rate){
+    	Connection conn =null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","201576");
+			Statement stm = conn.createStatement();
+		    String sql = "update project set rate="+rate+" where project_id="+projectid+";";
+			stm.execute(sql);
+		    return 1;
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return 0;
+    	
+    }
     
    /* public static DataProject searchProject(int id){
     	DataProject dp=null;
@@ -280,11 +376,14 @@ public class DataProject {
 	
 	/*public static void main(String[] args)
 	{
-		DataProject temp =new DataProject();
-    	Vector res = temp.allProject();
-    	temp = (DataProject)res.get(0);
-    	System.out.println(res.size());
-    	System.out.println(temp.getName());
+    	int n=DataProject.updateState(1, "已完成");
+    	Date date=new Date();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String realDate = format.format(date); 
+        String[] time = realDate.split(" ");
+    	int m=DataProject.updateEndtime(2, time[0]);
+    	System.out.println("更新状态的方法："+n);
+    	System.out.println("更新时间的方法："+m);
     	//DataProject.insert("软件工程344","2015/09/25","2015/11/25", 22, 112222, "开启", 1, (float)12.7,"很有意思啊");
 	}*/
 		

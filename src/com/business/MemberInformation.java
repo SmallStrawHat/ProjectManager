@@ -127,8 +127,8 @@ public class MemberInformation {
 	public static User seachUser(int userID)
 	{
 		User res = null;
-		int i;
-		for(i=0;i<MemberInformation.userList.size();i++)
+	//	int i;
+		for(int i=0;i<MemberInformation.userList.size();i++)
 		{
 			int tempUserID = ((User)MemberInformation.userList.get(i)).getUserID();
 			if(tempUserID == userID)
@@ -137,6 +137,7 @@ public class MemberInformation {
 			}
 			
 		}
+		
 		return res;
 	}
 	

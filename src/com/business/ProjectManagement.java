@@ -1,5 +1,6 @@
 package com.business;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.database.DataProblemLog;
@@ -46,6 +47,7 @@ public class ProjectManagement {
 			projectlist.add(pro);
 			
 		}
+//		ProjectManagement.changeProjectState();
 		return 1;
 		
 	}
@@ -108,14 +110,96 @@ public class ProjectManagement {
 		}
 		return result;
 	}
+	public static void changeProjectState(){
+		Vector temp=ProjectManagement.projectlist;
+		for(int i=0;i<temp.size();i++)
+		{
+			Project pro=(Project)ProjectManagement.projectlist.get(i);
+			Vector tas=pro.getTaskList();
+			int tasked=0;
+			int tasking=0;
+			int endtime[]=new int[tas.size()];
+			for(int k=0;k<endtime.length;k++)
+			{
+				endtime[k]=0;
+			}
+			for(int j=0;j<tas.size();j++)
+			{
+				Task task=(Task)pro.getTaskList().get(j);
+				/*Date date=new Date();
+		        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		        String realDate = format.format(date); 
+		        String[] time = realDate.split(" ");
+		        time[0]=time[0].replaceAll("-", "");
+		        String start=task.getStartTime().replaceAll("-", "");
+		        System.out.println("字符串start是："+start);*/
+//		        int q=Integer.parseInt(start);
+//		        System.out.println(q);
+				System.out.println(task.getState());
+		        if(task.getState().equals("进行中的"))
+		        {
+		        	System.out.println("******任务进行中******");
+		        	
+		        	tasking++;
+//		        	break;
+		        }
+		        if(task.getState().equals("已经完成"))
+		        {
+		        	System.out.println("******已经完成******");
+		        	String end=task.getEndtime().replaceAll("-", "");
+		        	System.out.println(end);
+		        	endtime[j]=Integer.parseInt(end);
+		        	tasked++;
+		        }
+			}
+			float rate=0;
+			rate=(float)((float)tasked/(float)tas.size());
+			rate=(float)rate*100;
+			if(tasking!=0)
+			{
+				pro.setState("进行中");
+	        	pro.setSchedule(rate);
+	        	DataProject.updateState(pro.getId(), "进行中");
+	        	DataProject.updateRate(pro.getId(), rate);
+			}
+			if(tasked==tas.size())
+			{
+				pro.setState("已完成");
+				pro.setSchedule(rate);
+				int projectendtime=ProjectManagement.max(endtime);				
+				pro.setActualendtime(String.valueOf(projectendtime));
+				DataProject.updateState(pro.getId(), "已完成");
+				DataProject.updateRate(pro.getId(), rate);
+				DataProject.updateEndtime(pro.getId(), String.valueOf(projectendtime));
+			}
+		}
+	}
+	public static int max(int a[])
+	{
+		int n=a.length;
+		int max=a[0];
+		for(int i=1;i<n;i++)
+		{
+			if(a[i]>max)
+			{
+				max=a[i];
+			}
+		}
+		return max;
+	}
 
 	/*public static void main(String[] args)
 	{
+		MemberInformation.init();
 	    ProjectManagement.init(); 
 	    Project p=ProjectManagement.searchProject(Integer.parseInt("2"));
 	    System.out.println(p.getName());
-	    
-
+		Date date=new Date();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String realDate = format.format(date); 
+        String[] time = realDate.split(" ");
+        
+        ProjectManagement.changeProjectState();
    	}*/
 	
 	
