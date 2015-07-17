@@ -47,7 +47,7 @@ public class ProjectManagement {
 			projectlist.add(pro);
 			
 		}
-//		ProjectManagement.changeProjectState();
+		ProjectManagement.changeProjectState();
 		return 1;
 		
 	}
@@ -57,8 +57,6 @@ public class ProjectManagement {
 	public static int createProject(String name,String start,String end,float budget,int managerid,
 			String state,int priority,float plantime,String summary)
 	{
-		/*String starttime=start.toString();
-		String endtime=end.toString();*/
 		Project pro=new Project();
 		pro=pro.createProject(name, start, end, budget, managerid, state, priority, plantime, summary);
 		if(pro!=null)
@@ -126,15 +124,6 @@ public class ProjectManagement {
 			for(int j=0;j<tas.size();j++)
 			{
 				Task task=(Task)pro.getTaskList().get(j);
-				/*Date date=new Date();
-		        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		        String realDate = format.format(date); 
-		        String[] time = realDate.split(" ");
-		        time[0]=time[0].replaceAll("-", "");
-		        String start=task.getStartTime().replaceAll("-", "");
-		        System.out.println("字符串start是："+start);*/
-//		        int q=Integer.parseInt(start);
-//		        System.out.println(q);
 				System.out.println(task.getState());
 		        if(task.getState().equals("进行中的"))
 		        {
@@ -161,12 +150,14 @@ public class ProjectManagement {
 	        	pro.setSchedule(rate);
 	        	DataProject.updateState(pro.getId(), "进行中");
 	        	DataProject.updateRate(pro.getId(), rate);
+	        	break;
 			}
 			if(tasked==tas.size())
 			{
 				pro.setState("已完成");
 				pro.setSchedule(rate);
-				int projectendtime=ProjectManagement.max(endtime);				
+				int projectendtime=ProjectManagement.maxtime(endtime);
+				System.out.println("这里是最大时间的返回"+projectendtime);
 				pro.setActualendtime(String.valueOf(projectendtime));
 				DataProject.updateState(pro.getId(), "已完成");
 				DataProject.updateRate(pro.getId(), rate);
@@ -174,9 +165,17 @@ public class ProjectManagement {
 			}
 		}
 	}
-	public static int max(int a[])
+	public static int maxtime(int a[])
 	{
 		int n=a.length;
+		if(n==1)
+		{
+			return a[0];
+		}
+		if(n==0)
+		{
+			return 100;
+		}
 		int max=a[0];
 		for(int i=1;i<n;i++)
 		{
@@ -188,7 +187,7 @@ public class ProjectManagement {
 		return max;
 	}
 
-	/*public static void main(String[] args)
+	public static void main(String[] args)
 	{
 		MemberInformation.init();
 	    ProjectManagement.init(); 
@@ -200,10 +199,6 @@ public class ProjectManagement {
         String[] time = realDate.split(" ");
         
         ProjectManagement.changeProjectState();
-   	}*/
-	
-	
-	
-	
+   	}
 	
 }

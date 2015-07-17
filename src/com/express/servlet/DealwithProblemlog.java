@@ -114,7 +114,7 @@ public class DealwithProblemlog extends HttpServlet {
 		System.out.println(logpath);
 		
 		
-        response.sendRedirect("displayTask.jsp");
+        response.sendRedirect("problemloglist.jsp");
 
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

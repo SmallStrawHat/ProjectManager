@@ -83,10 +83,10 @@
             	   System.out.println("******问题列表找到的问题单路径**********");
             	   System.out.println(problem.getLogPath());
           %>
-                            <div class="span12 field-box">
+                           <!--  <div class="span12 field-box">
                                     <label>处理问题单ID:</label>
                                     <input name="dealID"class="span9" type="text" />
-                                </div>
+                                </div> -->
                                 <div class="span12 field-box">
                                     <label>问题单ID:</label>
                                     <input name="problemID"class="span9" type="text" readonly="readonly" value=<%="'"+problem.getProblemID()+"'" %>/>

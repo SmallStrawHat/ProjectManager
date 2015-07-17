@@ -122,14 +122,14 @@
                             <i class="icon-lightbulb pull-left"></i>
                             	点击上面的按钮，根据您的喜爱切换输入框的风格。
                         </div>                        
-                        <h6>Sidebar text for instructions</h6>
+                        <!-- <h6>Sidebar text for instructions</h6>
                         <p>Add multiple users at once</p>
                         <p>Choose one of the following file types:</p>
                         <ul>
                             <li><a href="#">Upload a vCard file</a></li>
                             <li><a href="#">Import from a CSV file</a></li>
                             <li><a href="#">Import from an Excel file</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>

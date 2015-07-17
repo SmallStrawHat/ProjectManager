@@ -37,8 +37,6 @@ public class TaskManager {
 			if(problemID!=0)
 			{
 				//插入内存
-				/*int problemID,int taskID,String createTime,int createUserID,int dealUserID,
-				int status,String problemDescreption,String logpath*/
 				ProblemLog tempProblem = new ProblemLog(problemID,taskID,createTime,createUserID,
 						dealUserID,status,problemDescreption,logpath);
 				tempTask.addProblemLog(tempProblem);
@@ -48,7 +46,6 @@ public class TaskManager {
 		return 0;
 	}
 	
-	/*projectID,taskID,level,fatherTaskID,userList,planEndtime,budget,summary,state,rate,endTime*/
 	public static int editTask(int projectID,int taskID,int level,int fatherTaskID,Vector userList,String planEndtime,
 			float budget,String summary,String state,float rate,String endTime)
 	{
@@ -80,7 +77,6 @@ public class TaskManager {
 			
 			if(DataTask.update(taskID,level, fatherTaskID, planEndtime, budget, summary, state, rate, endTime)!=1)
 				return 0;
-			
 
 			return 1;
 		
@@ -114,8 +110,7 @@ public class TaskManager {
     			SystemSetting temp=(SystemSetting)WorktimeInfomation.systemsettinglist.get(i);    
     			logpath=temp.getTasklogpath();
     		}
-    		
-			
+		
 			int taskID = DataTask.add(taskName, state, rate, level, projectID, milepost, budget, fathertaskID, summary, startTime, endTime, planEndtime, logpath);
 			
 			String file=Integer.toString(projectID);			
@@ -123,9 +118,10 @@ public class TaskManager {
     		logpath=logpath.replaceAll("\\\\", "\\\\\\\\");
     		task.setTaskID(taskID);
     		task.setTasklogPath(logpath);
-    		
+	
 			if(project.addTask(task)==1)
-			{    		
+			{
+				ProjectManagement.changeProjectState();
 				if(taskID !=0)
 				{		
 					if(DataUserTask.insert(taskID, userList)==1)
@@ -211,7 +207,4 @@ public class TaskManager {
 		return resTask;
 	}
 	
-
-
-
 }

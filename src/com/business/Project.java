@@ -41,7 +41,6 @@ public class Project {
     	this.plantime=plantime;
     	this.actualtime=actualtime;
     	this.summary=summary;
-    	this.taskList=new Vector();
     	this.taskList=tasklist;
     	
     }
@@ -60,6 +59,7 @@ public class Project {
     	this.schedule=rate;
     	this.plantime=plantime;
     	this.summary=summary;
+    	this.taskList = new Vector(10,6);
     }
     public  Project createProject(String name,String start,String end,float budget,int managerid,
 			String state,int priority,float plantime,String summary)

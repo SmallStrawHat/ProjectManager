@@ -94,7 +94,7 @@ public class TaskManagerExpre extends HttpServlet {
     	        int a=DataProblemLog.updateSenduserid(problemID, createUserID);
         		
     	        
-    			response.sendRedirect("displayTask.jsp");
+    			response.sendRedirect("problemloglist.jsp");
     			return ;
     		}
     		else
@@ -169,7 +169,7 @@ public class TaskManagerExpre extends HttpServlet {
     		}
     		
     		int res=com.business.TaskManager.editTask(projectID,taskID,level,fatherTaskID,userList,planEndtime,budget,summary,state,rate,endTime);
-    		
+    		ProjectManagement.changeProjectState();
     		if(res!=0)
     		{
     			//写入任务日志

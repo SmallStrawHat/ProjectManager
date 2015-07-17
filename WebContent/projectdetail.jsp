@@ -45,13 +45,13 @@
 	<div class="content">
 
 		<!-- settings changer -->
-		<div class="skins-nav">
+		<!-- <div class="skins-nav">
 			<a href="#" class="skin first_nav selected"> <span class="icon"></span><span
 				class="text">Default</span>
 			</a> <a href="#" class="skin second_nav" data-file="css/skins/dark.css">
 				<span class="icon"></span><span class="text">Dark skin</span>
 			</a>
-		</div>
+		</div> -->
 
 		<div class="container-fluid">
 			<div id="pad-wrapper" class="user-profile">
@@ -73,10 +73,10 @@
 						<br>
 						<h4 class="name">(ID:<%=p.getId() %>)</h4>
 					</div>
-					<a class="btn-flat icon pull-right delete-user"
+					<!-- <a class="btn-flat icon pull-right delete-user"
 						data-toggle="tooltip" title="Delete user" data-placement="top">
 						<i class="icon-trash"></i>
-					</a> <a class="btn-flat icon large pull-right edit"> 编辑项目 </a>
+					</a> <a class="btn-flat icon large pull-right edit"> 编辑项目 </a> -->
 				</div>
 
 				<div class="row-fluid profile">
@@ -178,7 +178,7 @@
 									<tr>
 									<div class="field-box">
                                 <label>进度:</label>
-                                    <div class="progress progress-striped active">
+                                    <div class="progress progress-striped active span9">
                                     <%
                                     	int rateDis = (int)p.getSchedule();
                                     %>
@@ -224,7 +224,7 @@
 						</div>
 					</div>
 					<!-- side right column -->
-					<div class="span3 form-sidebar pull-right">
+					<!-- <div class="span3 form-sidebar pull-right">
 						<div class="btn-group toggle-inputs hidden-tablet">
 							<button class="glow left active" data-input="inline">线条格式</button>
 							<button class="glow right" data-input="normal">方框格式</button>
@@ -240,7 +240,7 @@
 							<li><a href="#">Import from a CSV file</a></li>
 							<li><a href="#">Import from an Excel file</a></li>
 						</ul>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
